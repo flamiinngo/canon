@@ -9,7 +9,9 @@ REGISTRY="${1:-canon-bootstate.testnet}"
 FUNDER="${2:-canon-bootstate-demo.testnet}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-exists() { near account view-account-summary "$1" network-config testnet now >/dev/null 2>&1; }
+exists() {
+  curl -s -m 20 -X POST https://test.rpc.fastnear.com -H 'content-type: application/json'     -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" | grep -q '"amount"'
+}
 
 for acc in "$REGISTRY" "$FUNDER"; do
   if exists "$acc"; then
