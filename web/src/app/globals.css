@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────── Tokens ───────────────────────── */
+:root {
+  --paper: oklch(0.985 0.004 85);
+  --paper-2: oklch(0.965 0.006 85);
+  --surface: oklch(1 0 0);
+  --ink: oklch(0.19 0.012 270);
+  --ink-2: oklch(0.42 0.012 270);
+  --ink-3: oklch(0.58 0.01 270);
+  --line: oklch(0.9 0.006 85);
+  --line-strong: oklch(0.82 0.008 85);
+
+  --accent: oklch(0.64 0.205 36);
+  --accent-ink: oklch(0.99 0.01 36);
+  --accent-soft: oklch(0.95 0.04 40);
+
+  --gen-0: oklch(0.64 0.205 36);
+  --gen-1: oklch(0.56 0.2 288);
+  --gen-2: oklch(0.62 0.12 190);
+  --gen-3: oklch(0.72 0.15 75);
+
+  --ok: oklch(0.6 0.14 155);
+  --ok-soft: oklch(0.95 0.04 155);
+  --warn: oklch(0.72 0.15 75);
+  --warn-soft: oklch(0.96 0.05 85);
+  --bad: oklch(0.58 0.2 20);
+  --bad-soft: oklch(0.95 0.035 20);
+
+  --shadow-card: 0 1px 2px oklch(0.2 0.02 270 / 0.06), 0 8px 24px -12px oklch(0.2 0.02 270 / 0.14);
+  --shadow-float: 0 2px 4px oklch(0.2 0.02 270 / 0.06), 0 24px 48px -16px oklch(0.2 0.02 270 / 0.22);
+  color-scheme: light;
+}
+
+.dark {
+  --paper: oklch(0.155 0.008 270);
+  --paper-2: oklch(0.185 0.009 270);
+  --surface: oklch(0.205 0.01 270);
+  --ink: oklch(0.96 0.005 85);
+  --ink-2: oklch(0.76 0.008 85);
+  --ink-3: oklch(0.6 0.008 270);
+  --line: oklch(0.28 0.01 270);
+  --line-strong: oklch(0.36 0.012 270);
+
+  --accent: oklch(0.7 0.19 38);
+  --accent-ink: oklch(0.16 0.02 36);
+  --accent-soft: oklch(0.3 0.07 36);
+
+  --gen-0: oklch(0.72 0.18 38);
+  --gen-1: oklch(0.7 0.16 288);
+  --gen-2: oklch(0.75 0.11 190);
+  --gen-3: oklch(0.8 0.14 80);
+
+  --ok: oklch(0.74 0.15 155);
+  --ok-soft: oklch(0.3 0.06 155);
+  --warn: oklch(0.8 0.14 80);
+  --warn-soft: oklch(0.32 0.06 80);
+  --bad: oklch(0.7 0.17 20);
+  --bad-soft: oklch(0.3 0.07 20);
+
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px -12px oklch(0 0 0 / 0.5);
+  --shadow-float: 0 2px 4px oklch(0 0 0 / 0.4), 0 24px 48px -16px oklch(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-gen-0: var(--gen-0);
+  --color-gen-1: var(--gen-1);
+  --color-gen-2: var(--gen-2);
+  --color-gen-3: var(--gen-3);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-float: var(--shadow-float);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Hairline paper grid used behind hero figures */
+.ledger-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  border-radius: inherit;
+}
+.dark .grain::after {
+  mix-blend-mode: screen;
+  opacity: 0.05;
+}
+
+/* ───────────────────────── Character motion ───────────────────────── */
+@keyframes canon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes canon-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes canon-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes canon-ping {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.anim-float { animation: canon-float 3.2s ease-in-out infinite; transform-box: fill-box; }
+.anim-blink { animation: canon-blink 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.anim-sway { animation: canon-sway 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 0% 100%; }
+.anim-ping { animation: canon-ping 1.2s var(--ease-out-quint) forwards; transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-float, .anim-blink, .anim-sway, .anim-ping { animation: none; }
+  html { scroll-behavior: auto; }
+}
