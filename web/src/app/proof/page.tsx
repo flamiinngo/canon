@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { Label } from "@/components/ui";
+import { LEDGER, REGISTRY_ACCOUNT } from "@/lib/ledger";
 
 export const metadata: Metadata = { title: "Proof · Canon" };
 
@@ -27,8 +28,8 @@ export default function ProofPage() {
       </Label>
       <h1 className="display mt-5 max-w-[16ch] text-[48px] text-fg sm:text-[72px]">Every way a seller could try to keep the money.</h1>
       <p className="mt-5 max-w-2xl text-fg-2">
-        This is the threat model the contracts are built against. Every row is covered by a unit test in the registry contract or
-        by a refused testnet transaction, and after deployment each refusal is reproduced as a testnet transaction.
+        This is the threat model the contracts are built against. Every row is covered by a unit test in the registry contract, and
+        the attacks that can be sent as transactions were sent on testnet and refused.
       </p>
 
       <div className="panel noise mt-12 overflow-hidden">
@@ -54,8 +55,8 @@ export default function ProofPage() {
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         {[
           ["Registry unit tests", "33 passing", "text-ok"],
-          ["Testnet transactions", "After deploy", "text-fg-2"],
-          ["Admin keys", "0", "text-ok"],
+          ["Attacks refused on testnet", `${LEDGER.filter((r) => r.refused).length} of ${LEDGER.filter((r) => r.refused).length}`, "text-ok"],
+          ["Keys on the registry and vaults", "0", "text-ok"],
         ].map(([k, v, c]) => (
           <div key={k} className="panel p-5">
             <p className="text-xs text-fg-3">{k}</p>
@@ -63,6 +64,32 @@ export default function ProofPage() {
           </div>
         ))}
       </div>
+
+      <section className="mt-20">
+        <Label>Recorded on NEAR testnet</Label>
+        <h2 className="display mt-5 text-[36px] text-fg sm:text-[48px]">The whole story, as transactions.</h2>
+        <p className="mt-4 max-w-2xl text-fg-2">
+          Registry{" "}
+          <a href={`https://testnet.nearblocks.io/address/${REGISTRY_ACCOUNT}`} target="_blank" rel="noreferrer" className="font-mono text-[14px] text-fg underline decoration-line-3 underline-offset-4 hover:decoration-fg">
+            {REGISTRY_ACCOUNT}
+          </a>
+          . Every row links to the block explorer. Shielded rows are attacks the contract refused.
+        </p>
+        <ol className="panel mt-8 overflow-hidden">
+          {LEDGER.map((r, i) => (
+            <li key={r.hash} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-line px-4 py-3 last:border-b-0 sm:px-6">
+              <span className="w-6 font-mono text-[11px] text-fg-3">{String(i + 1).padStart(2, "0")}</span>
+              <span className="min-w-0">
+                <span className={`block truncate text-sm ${r.refused ? "text-fg" : "text-fg-2"}`}>{r.step}</span>
+                {r.refused && <span className="font-mono text-[11px] text-bad">refused · {r.expected}</span>}
+              </span>
+              <a href={`https://testnet.nearblocks.io/txns/${r.hash}`} target="_blank" rel="noreferrer" className="shrink-0 font-mono text-[11px] text-fg-3 hover:text-fg">
+                {r.hash.slice(0, 8)}… ↗
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
     </div>
   );
 }

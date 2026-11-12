@@ -5,7 +5,9 @@
 Built at NEAR HACKATHON 2026 · Track 10 *NFTs That Do Something* · by Bootstate.
 
 - Live app: https://canon.bootstate.xyz
-- Registry contract (NEAR testnet): `REGISTRY_ACCOUNT` *(filled in at deploy, see [JUDGES.md](JUDGES.md))*
+- Registry contract (NEAR testnet): [`canon-bootstate.testnet`](https://testnet.nearblocks.io/address/canon-bootstate.testnet) — 0 access keys
+- Vault code (NEP-591 global contract, by hash): `8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH` (3.4 KB)
+- Verifiable ledger: [JUDGES.md](JUDGES.md) — 38 testnet transactions, including 11 refused attacks
 - Threat model: [THREAT_MODEL.md](THREAT_MODEL.md)
 
 ## What it is
@@ -79,17 +81,17 @@ token's `media` field, or kept by the creator with only its SHA-256 on-chain).
 ## Run it
 
 ```bash
-# Web app (preview mode with demo data if no contract is set)
+# Web app: reads and writes the live testnet registry by default
 cd web && pnpm install && pnpm dev            # http://localhost:3000
-# Live mode
-echo "NEXT_PUBLIC_CANON_CONTRACT=<registry>.testnet" > web/.env.local
+# Point at another registry, or set it to "" for preview mode with demo data
+echo 'NEXT_PUBLIC_CANON_CONTRACT=<registry>.testnet' > web/.env.local
 
 # Contracts (Linux/macOS/WSL)
 cd contracts && cargo test -p canon-registry   # 33 unit tests
 (cd vault && RUSTUP_TOOLCHAIN=1.86.0 cargo near build non-reproducible-wasm --no-abi)   # 3.4 KB
 (cd registry && cargo near build non-reproducible-wasm)
-# Deploy + seed the demo lineage + record judge transactions
-bash scripts/deploy.sh <registry>.testnet <funder>.testnet
+# Create faucet accounts, deploy, seed the demo lineage, record JUDGES.md, delete registry keys
+bash scripts/setup-all.sh <registry>.testnet <funder>.testnet
 ```
 
 ## Disclosure

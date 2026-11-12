@@ -8,8 +8,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<"/works/[id]">): Promise<Metadata> {
   const { id } = await props.params;
-  const w = getWork(id);
-  return { title: w ? `${w.title} · Canon` : `${id} · Canon`, description: w?.description };
+  const w = getWork(id) ?? getWork(id, DEMO_WORKS);
+  const pretty = id.split("-").map((p) => p[0]?.toUpperCase() + p.slice(1)).join(" ");
+  return { title: `${w?.title ?? pretty} · Canon`, description: w?.description };
 }
 
 export default async function WorkPage(props: PageProps<"/works/[id]">) {

@@ -9,7 +9,7 @@ import { Button, Chip, Label } from "@/components/ui";
 import { useWallet } from "@/components/wallet";
 import { PALETTES, type Genome, type PaletteName, type Style, type Transform } from "@/lib/art";
 import { WORKS, getWork } from "@/lib/data";
-import { EXPLORER, LIVE, encodeGenome, nearToYocto } from "@/lib/near";
+import { CONTRACT, EXPLORER, LIVE, encodeGenome, nearToYocto } from "@/lib/near";
 import { cn } from "@/lib/cn";
 
 interface SplitRow {
@@ -190,7 +190,7 @@ export function RegisterForm() {
           <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={mode === "derivative" && parent ? `${parent.title} — ${TRANSFORMS.find((t) => t.id === transform)?.label}` : "Title, e.g. Ember Field"} className={input} maxLength={80} />
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Short description (optional)" rows={2} className={cn(input, "mt-2 h-auto py-3")} maxLength={280} />
           <p className={cn("mt-2 font-mono text-[11px]", slugTaken ? "text-bad" : "text-fg-3")}>
-            {slugTaken ? `“${slug}” is already registered. Choose another title.` : `token ${slug} · vault ${slug}.${process.env.NEXT_PUBLIC_CANON_CONTRACT || "canon.near"} · 0 access keys`}
+            {slugTaken ? `“${slug}” is already registered. Choose another title.` : `token ${slug} · vault ${slug}.${CONTRACT || "canon.near"} · 0 access keys`}
           </p>
         </Field>
 

@@ -118,6 +118,8 @@ export function computeClearance(workId: string, src: Work[] = WORKS): Clearance
 }
 
 export function formatNear(n: number, digits = 2) {
+  // Whole-number formatting never hides a fractional price (1.5 stays 1.5, not 2).
+  if (digits === 0 && !Number.isInteger(n)) return n.toLocaleString("en-US", { maximumFractionDigits: 3 });
   return n.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 }
 

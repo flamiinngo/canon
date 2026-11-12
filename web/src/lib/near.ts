@@ -5,7 +5,8 @@
 import type { Genome, PaletteName, Style, Transform } from "./art";
 import type { HistoryEvent, Work } from "./types";
 
-export const CONTRACT = process.env.NEXT_PUBLIC_CANON_CONTRACT || "";
+/** Deployed registry. Set NEXT_PUBLIC_CANON_CONTRACT="" to run in preview mode with demo data. */
+export const CONTRACT = process.env.NEXT_PUBLIC_CANON_CONTRACT ?? "canon-bootstate.testnet";
 export const NETWORK_ID = (process.env.NEXT_PUBLIC_NEAR_NETWORK as "testnet" | "mainnet") || "testnet";
 export const RPC_URL = process.env.NEXT_PUBLIC_NEAR_RPC || (NETWORK_ID === "mainnet" ? "https://rpc.mainnet.fastnear.com" : "https://test.rpc.fastnear.com");
 export const LIVE = CONTRACT.length > 0;

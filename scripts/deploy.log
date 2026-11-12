@@ -1,0 +1,2300 @@
+── Publish vault code as NEP-591 global contract `8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH`
+├  Wasm code hash: 8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH[0m
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate-demo.testnet
+│    actions:   -- deploy code <8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH> as a global hash
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:2SkTnvPkBE4FPWHAGoz8V6wtTiZRY6PYyXc84N8NUBU5yrBtwyF3NbS4N6HkH4TEvkjsrJqwJ13xQk1EBxDGQ5fR
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 1.1 Tgas
+│    Transaction fee: 0.3419848274143581 NEAR
+│    Transaction ID: DykHfH3rM3UfdtkWz87FfGBZVZGxVj1TNZMmriWe4U4d
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/DykHfH3rM3UfdtkWz87FfGBZVZGxVj1TNZMmriWe4U4d
+│     [0m
+
+Global contract has been successfully deployed.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract deploy-as-global use-file /home/kingzeye/canon-target/near/canon_vault/canon_vault.wasm as-global-hash canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── Deploy registry to `canon-bootstate.testnet` and initialise with the vault hash
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- deploy code <61c9KUQHX8hPVnJBPS4RExdPrPBE1z3GTC8QTNxqHF6i> to a account <canon-bootstate.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "vault_code_hash": "8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HZ3WK4XqSivX7uZaA13QQa5D8Aate55BtE6Z4uAuxEzW
+│    Signature:  ed25519:2uY3gmw8xB2jBniS55m51qESNc5hoxooa6ixqvk5x4CTg6tAzrzUsUbPPibd92VERKMiuVZ5EQWEH67NcH1eWXGC
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 29.1 Tgas
+│    Transaction fee: 0.0028790415509619 NEAR
+│    Transaction ID: 3CZKvxw4WF9FdCcTpwjAbQjkDMYQueRcUPBQ3AywSoYs
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3CZKvxw4WF9FdCcTpwjAbQjkDMYQueRcUPBQ3AywSoYs
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <canon-bootstate.testnet> on behalf of <canon-bootstate.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract deploy canon-bootstate.testnet use-file /home/kingzeye/canon-target/near/canon_registry/canon_registry.wasm with-init-call new json-args '{"vault_code_hash":"8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' network-config testnet sign-with-legacy-keychain send[39m
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  ada.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      ada.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:2Y4bNnU2YkUVz8a5o2xBiwMJDXrKrTxoMupvd67JbWXLAe1DcuQABw4ckoGbxgmdRKuQ1qZzP2VGsKhp9776bEwQ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: FPSencUGEu5Xuxth6Np7RvXjMxC3FcmSNcbsRqxH6Fw8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FPSencUGEu5Xuxth6Np7RvXjMxC3FcmSNcbsRqxH6Fw8
+│     [0m
+
+
+New account <ada.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <ada.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22 to ada.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ada.canon-bootstate-demo.testnet/ed25519_GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ada.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ada.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  ben.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      ben.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:wYWpRGaaV8uVGtaSUvtSxeEewKYaA4hHRRASbZZxZb1WLmAmYsC18sZPPKr3343hLTaG6QiA44DAtGBVryBjBAY
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: FWXyWPqQtt6H74ecTQzey4XNnJcPy1kZbukr1FzhiBR4
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FWXyWPqQtt6H74ecTQzey4XNnJcPy1kZbukr1FzhiBR4
+│     [0m
+
+
+New account <ben.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <ben.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW to ben.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ben.canon-bootstate-demo.testnet/ed25519_5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ben.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ben.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  cy.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      cy.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:3YAHGA9q6aC698Ljoa1FkxMwHheSvmpGKGNdAQv2s82S
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:2WGLpyKTcTwqkdoFn1GsJD3AVaJbrqyMnwCGDEtixK2E6ZH3C7Qm1usg1Y2Q8cNYx2NoVzkQ3SbW5xxmsaJQiDam
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: FQsk4tjBWoi3r4Rr6VpSyScj9J1pmP5amadCLrXRhGEf
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FQsk4tjBWoi3r4Rr6VpSyScj9J1pmP5amadCLrXRhGEf
+│     [0m
+
+
+New account <cy.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <cy.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:3YAHGA9q6aC698Ljoa1FkxMwHheSvmpGKGNdAQv2s82S to cy.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/cy.canon-bootstate-demo.testnet/ed25519_3YAHGA9q6aC698Ljoa1FkxMwHheSvmpGKGNdAQv2s82S.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/cy.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself cy.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  dee.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      dee.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:RwuEZziadC4NbYsze8tszZHJ8s5yixTRQEy6tuT5fiQ
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:2bLBm9mD2Awz8fg9VeoAB38dpNm2Zdkk3NM14iyPycTdNFV9G7GdpF5GiNKH1wFXoem7Lg4jAA5Kv9L1Jf83HX93
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 2QRAfpqJGq7nS9rcJtnmrHPpTdFkZZo4LDZN3LSmHkcq
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2QRAfpqJGq7nS9rcJtnmrHPpTdFkZZo4LDZN3LSmHkcq
+│     [0m
+
+
+New account <dee.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <dee.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:RwuEZziadC4NbYsze8tszZHJ8s5yixTRQEy6tuT5fiQ to dee.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/dee.canon-bootstate-demo.testnet/ed25519_RwuEZziadC4NbYsze8tszZHJ8s5yixTRQEy6tuT5fiQ.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/dee.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself dee.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  fay.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      fay.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:HjAddSCPNdDE5T2ToiQVsKFpbYr45gBBGUSZoQXuWTFB
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:xDSMVAinouB43EY2JQJh69C494Hy87QZkftaNojBdREc3ReHJoavL7LV3jd18JLRZt9HppcMjDZd866bExAuazo
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: FzeYYLsyEmy9dSMFPNYwYYDi1X3jZFsY38Q2TVdzxXn4
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FzeYYLsyEmy9dSMFPNYwYYDi1X3jZFsY38Q2TVdzxXn4
+│     [0m
+
+
+New account <fay.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <fay.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:HjAddSCPNdDE5T2ToiQVsKFpbYr45gBBGUSZoQXuWTFB to fay.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/fay.canon-bootstate-demo.testnet/ed25519_HjAddSCPNdDE5T2ToiQVsKFpbYr45gBBGUSZoQXuWTFB.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/fay.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself fay.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  gil.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      gil.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:8G82WtojNaxAGnMk9XUUy244EpHaYMH6zyUFbdRmyoaz
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:4hJALVMoM74DimZzsEe4WfVMTp2wkoV5ZesQHaFPv15Y2MX96AQTnGREf3yVCQLXzpWxkax3vyY4MCtpGoyyJfeb
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: Ck5ZirMbonTgMSj6EzthPBVNvQLnDF2AuXnANvFNk2FX
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Ck5ZirMbonTgMSj6EzthPBVNvQLnDF2AuXnANvFNk2FX
+│     [0m
+
+
+New account <gil.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <gil.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:8G82WtojNaxAGnMk9XUUy244EpHaYMH6zyUFbdRmyoaz to gil.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/gil.canon-bootstate-demo.testnet/ed25519_8G82WtojNaxAGnMk9XUUy244EpHaYMH6zyUFbdRmyoaz.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/gil.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself gil.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  hal.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      hal.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:A8FHHtkuNKAZmaVXcLqR9PQVvo5knoU9L21X1k1KrenT
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:3Xr7feANxYhAd5gdTSvm7urKArUHMm5zzsxYRCPV4C6qbfRLKhY3eGusAzhJpq2rx8XMVXkBuEdteTQN2fexEeFN
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 8mALytP8kSZa46fRbYdvvLyn9KjwroWzkAGvniL6qA27
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/8mALytP8kSZa46fRbYdvvLyn9KjwroWzkAGvniL6qA27
+│     [0m
+
+
+New account <hal.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <hal.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:A8FHHtkuNKAZmaVXcLqR9PQVvo5knoU9L21X1k1KrenT to hal.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/hal.canon-bootstate-demo.testnet/ed25519_A8FHHtkuNKAZmaVXcLqR9PQVvo5knoU9L21X1k1KrenT.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/hal.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself hal.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  ivy.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      ivy.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:3KaEkh5eea5wThzCaihBCxP2fBBBMQmSXS9dfnF2dHhT
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:9w6gMPtECuhcCfdNifj6LHUm1ByZxPuLZbyyfgzcZtcC1VKtkQJnnmQRuDJBzsJLXEwU7QTQ8RnFE2og39dtbzV
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 8m5owjupstsrghBJKEWqxFLnMEGpAvmJRvz6UmZQ3bd8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/8m5owjupstsrghBJKEWqxFLnMEGpAvmJRvz6UmZQ3bd8
+│     [0m
+
+
+New account <ivy.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <ivy.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:3KaEkh5eea5wThzCaihBCxP2fBBBMQmSXS9dfnF2dHhT to ivy.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ivy.canon-bootstate-demo.testnet/ed25519_3KaEkh5eea5wThzCaihBCxP2fBBBMQmSXS9dfnF2dHhT.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ivy.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ivy.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  jun.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      jun.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:ETyFTCbB84qA67NNa8JRWZM9qBEtG9cyKm6L6WAjC4Dg
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:3QjNAhZJRvSsdP7zgMuEARqKN1FzbKKNbW8BpXdxZCG3rgQxqj7FUPx9jU3gAKLfKwf84sUenK8NF2RU5JZRrSh5
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 27v4Ev2kKMcSrChDWGtgy6mH7bAxcMumyAxrYWg1rC2U
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/27v4Ev2kKMcSrChDWGtgy6mH7bAxcMumyAxrYWg1rC2U
+│     [0m
+
+
+New account <jun.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <jun.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:ETyFTCbB84qA67NNa8JRWZM9qBEtG9cyKm6L6WAjC4Dg to jun.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/jun.canon-bootstate-demo.testnet/ed25519_ETyFTCbB84qA67NNa8JRWZM9qBEtG9cyKm6L6WAjC4Dg.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/jun.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself jun.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  lea.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      lea.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:cjdzZRJWdzmPsiMUg26FeRL8SzDs4qQyFcBtte5HLkVVYb8AiGbzARoPqm94EnrYSoTdwTgf5CZ1mgJWg9udgBk
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 4gmNHGVZMfm5Gje1xc2KZZb1PDcY9TgMPVQWmxjYPifC
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4gmNHGVZMfm5Gje1xc2KZZb1PDcY9TgMPVQWmxjYPifC
+│     [0m
+
+
+New account <lea.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <lea.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs to lea.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/lea.canon-bootstate-demo.testnet/ed25519_4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/lea.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself lea.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  max.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      max.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:BMZJc3EzBrAq3NFPbGJWqwaymsQyVgBpmQpZniYUc9J4
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:DGHWQZDjEqcxXpMCpEEWZo2Frimb2tRiv2LWQmByu8g9qeNTn6M95drnxnRxrANgDWVekxFXeifttJJN16fAZzw
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: B8fDJFYF14oqAg7tsCMqXAGu1nJANcogRkTN1FgnRrT3
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/B8fDJFYF14oqAg7tsCMqXAGu1nJANcogRkTN1FgnRrT3
+│     [0m
+
+
+New account <max.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <max.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:BMZJc3EzBrAq3NFPbGJWqwaymsQyVgBpmQpZniYUc9J4 to max.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/max.canon-bootstate-demo.testnet/ed25519_BMZJc3EzBrAq3NFPbGJWqwaymsQyVgBpmQpZniYUc9J4.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/max.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself max.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  nox.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      nox.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:Fuai7TTfpaPa5EKzPDdzbPNG4z4ujiZtvUp7QakWEccB
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:3dE3wV7SBNv6nWg4QdyxqAowXLqoCvSJD6scofZgr3i6gmxAR4juXGTxYHvHcMSsse1WTbia8qzBQtmh1oUXKYaf
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 4oqGu4mwQh1HEnZwXnnuuzPsoQjF9CeqieqcKGeP33zt
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4oqGu4mwQh1HEnZwXnnuuzPsoQjF9CeqieqcKGeP33zt
+│     [0m
+
+
+New account <nox.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <nox.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:Fuai7TTfpaPa5EKzPDdzbPNG4z4ujiZtvUp7QakWEccB to nox.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/nox.canon-bootstate-demo.testnet/ed25519_Fuai7TTfpaPa5EKzPDdzbPNG4z4ujiZtvUp7QakWEccB.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/nox.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself nox.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  kai.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      kai.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:F1Ts4QZ2cp1tuzSjqdVDZvpnH3bRJE5vg3HStspNPzDa
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:4FkuKbC6rTJMVXWDmPwUUAnkFjDHJ8722WvubeRp5rGt36My2z2HTHaCJ32LkhzA5dMKLjAGCTNnLZiBr7j7SB5q
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 4EsjdM9JyGspoVP2etEngEsMS1SjsBic4FEZ3wyTSwuw
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4EsjdM9JyGspoVP2etEngEsMS1SjsBic4FEZ3wyTSwuw
+│     [0m
+
+
+New account <kai.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <kai.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:F1Ts4QZ2cp1tuzSjqdVDZvpnH3bRJE5vg3HStspNPzDa to kai.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/kai.canon-bootstate-demo.testnet/ed25519_F1Ts4QZ2cp1tuzSjqdVDZvpnH3bRJE5vg3HStspNPzDa.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/kai.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself kai.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  eve.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      eve.canon-bootstate-demo.testnet
+│       -- transfer deposit:    0.35 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:3DWrNaHjGuFMug1gC4m8oHrPeUFszALoUggPPwX8KmEoA77HCmbE2UNooWqdETzHZeEAad8FwpSszzB9uAERD4De
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: Cu22udyesR6vJB3bVypAdsyRfvirSKs7L8sipnoPu37z
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Cu22udyesR6vJB3bVypAdsyRfvirSKs7L8sipnoPu37z
+│     [0m
+
+
+New account <eve.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 0.35 NEAR to <eve.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE to eve.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/eve.canon-bootstate-demo.testnet/ed25519_2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/eve.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself eve.canon-bootstate-demo.testnet '0.35 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate-demo.testnet
+│    receiver_id:  studio.canon-bootstate-demo.testnet
+│    actions:
+│       -- create account:      studio.canon-bootstate-demo.testnet
+│       -- transfer deposit:    3 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9XzqX86vtk6SrwigFzQJxU6tfnCvYq1JouAfCstpBMx4
+│    Signature:  ed25519:2SGLGCA5naJqZtsR1me9jRcL2naiKozkAUgjsTsA298xXDEYXz1xWQufQ7Vb3nrqcTTep2uH48WiFNEvcrMu5hAw
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 4qHvihmyUNEd91kh2J9huzyon5goYtziNKq8qDhJDYZA
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4qHvihmyUNEd91kh2J9huzyon5goYtziNKq8qDhJDYZA
+│     [0m
+
+
+New account <studio.canon-bootstate-demo.testnet> has been successfully created.
+<canon-bootstate-demo.testnet> has transferred 3 NEAR to <studio.canon-bootstate-demo.testnet> successfully.
+Added access key = ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs to studio.canon-bootstate-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/studio.canon-bootstate-demo.testnet/ed25519_2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/studio.canon-bootstate-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself studio.canon-bootstate-demo.testnet '3 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+── ada registers **Ember Field**
+├  Unsigned transaction:
+│    signer_id:    ada.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A generative flow field of 1,100 strokes, released for licensed derivatives.",
+│                                       "file_hash": "genome:ember",
+│                                       "media": "canon:genome/4127/flow/ember/-?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "400000000000000000000000",
+│                                         "upstream_bps": 2000
+│                                       },
+│                                       "title": "Ember Field",
+│                                       "token_id": "ember"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│    Signature:  ed25519:hsQZL4z6JdtciEd9DBDru2BgVRpKmDFGSEqWXAxDtNf3rbhq7aGRYjYQZnvynx2EgDLcF7iWAzDT4zahNqpWajm
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 16.5 Tgas
+│    Transaction fee: 0.007840269039954 NEAR
+│    Transaction ID: DWBG8aKhjZnNCXMu9SuS2cPnWQ6T8TQxXVT2jtAcUmww
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/DWBG8aKhjZnNCXMu9SuS2cPnWQ6T8TQxXVT2jtAcUmww
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"register","data":[{"token_id":"ember","owner_id":"ada.canon-bootstate-demo.testnet","parent":null,"vault_id":"ember.canon-bootstate.testnet"}]}
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <ada.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"ember","title":"Ember Field","description":"A generative flow field of 1,100 strokes, released for licensed derivatives.","media":"canon:genome/4127/flow/ember/-?kind=Original%20artwork","file_hash":"genome:ember","terms":{"derivatives":true,"commercial":true,"upstream_bps":2000,"price":"400000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ada.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── ben registers **Ember Field — Relief** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "cy.canon-bootstate-demo.testnet",
+│                                           "bps": 3000,
+│                                           "role": "Materials"
+│                                         }
+│                                       ],
+│                                       "description": "The flow field rebuilt as sculpted relief.",
+│                                       "file_hash": "genome:ember-relief",
+│                                       "media": "canon:genome/4127/flow/ember/relief?kind=3D%20relief",
+│                                       "owner_bps": 7000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "1000000000000000000000000",
+│                                         "upstream_bps": 2500
+│                                       },
+│                                       "title": "Ember Field — Relief",
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:2sy3oE7J7YZocPTb8fCadJffHQm5trNsyg1dVUM6MbHvKcccWCUDE37rYXzkQU1BfJ3NdwGadrCcb45S6Cdacztn
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 17.2 Tgas
+│    Transaction fee: 0.0079080409738154 NEAR
+│    Transaction ID: AqU1VLtdpNke9QSjhzRZ3Gu2bKtf7HNH8Y6kgqNvyMtN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AqU1VLtdpNke9QSjhzRZ3Gu2bKtf7HNH8Y6kgqNvyMtN
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"ember-relief","owner_id":"ben.canon-bootstate-demo.testnet","parent":"ember","vault_id":"ember-relief.canon-bootstate.testnet"}]}
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-relief.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <ben.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"ember-relief","title":"Ember Field — Relief","description":"The flow field rebuilt as sculpted relief.","media":"canon:genome/4127/flow/ember/relief?kind=3D%20relief","file_hash":"genome:ember-relief","terms":{"derivatives":true,"commercial":true,"upstream_bps":2500,"price":"1000000000000000000000000"},"owner_bps":7000,"contributors":[{"account_id":"cy.canon-bootstate-demo.testnet","role":"Materials","bps":3000}],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── ada approves Relief into canon
+├  Unsigned transaction:
+│    signer_id:    ada.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│    Signature:  ed25519:Cr6qPBDawXiHNy2xytg89uTiApEzDuVGgPwEn3VDJudbdg336FppYm89DMRa6GFBcE9j3bwqqmj73EmvFkJLszj
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.000224660762629 NEAR
+│    Transaction ID: BJUfFT4qCaymLsP54tJtM1uLQKVQMJ1G8FChTk8DiPtN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BJUfFT4qCaymLsP54tJtM1uLQKVQMJ1G8FChTk8DiPtN
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"approve","data":[{"token_id":"ember-relief","parent":"ember","by":"ada.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "approve" call to <canon-bootstate.testnet> on behalf of <ada.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"ember-relief"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── dee registers **Ember Field — Motion** as a derivative of `ember-relief`
+├  Unsigned transaction:
+│    signer_id:    dee.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "fay.canon-bootstate-demo.testnet",
+│                                           "bps": 2000,
+│                                           "role": "Score"
+│                                         }
+│                                       ],
+│                                       "description": "The relief set in motion, with an original score.",
+│                                       "file_hash": "genome:ember-motion",
+│                                       "media": "canon:genome/4127/flow/ember/relief+motion?kind=Motion%20loop",
+│                                       "owner_bps": 8000,
+│                                       "parent_id": "ember-relief",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "1500000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Ember Field — Motion",
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:RwuEZziadC4NbYsze8tszZHJ8s5yixTRQEy6tuT5fiQ
+│    Signature:  ed25519:56eh32o4zfxnmWTUwYrk89hnB8JVtMpDWoYVj26eLec5xqcdc4ujuTthuvcmZPLN6djuN4YpR2dNXcVxHxMZ9m2a
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 18.5 Tgas
+│    Transaction fee: 0.0080349154652634 NEAR
+│    Transaction ID: 7sntFJbwnUCs8svAa5zWqY7m5qyLCewVvso1DAjcuV36
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7sntFJbwnUCs8svAa5zWqY7m5qyLCewVvso1DAjcuV36
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"ember-motion","owner_id":"dee.canon-bootstate-demo.testnet","parent":"ember-relief","vault_id":"ember-motion.canon-bootstate.testnet"}]}
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-motion.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <dee.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"ember-motion","title":"Ember Field — Motion","description":"The relief set in motion, with an original score.","media":"canon:genome/4127/flow/ember/relief+motion?kind=Motion%20loop","file_hash":"genome:ember-motion","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"1500000000000000000000000"},"owner_bps":8000,"contributors":[{"account_id":"fay.canon-bootstate-demo.testnet","role":"Score","bps":2000}],"parent_id":"ember-relief"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as dee.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ ada (not the parent's owner) tries to approve Motion
+├  Unsigned transaction:
+│    signer_id:    ada.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│    Signature:  ed25519:4eX5q7UmrX4i3jYK7jjdbkHbE7D8oAU1o3QNZX3q5kehqvX76PMcQwQjWkuFy6GnFr3yQPJEJr6DaurRgVvnmRLD
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.0001865153588859 NEAR
+│    Transaction ID: EPa2WsTM7bUhEZVQQF2ZDTTSavFzatuY3oPHEwJmxrT7
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EPa2WsTM7bUhEZVQQF2ZDTTSavFzatuY3oPHEwJmxrT7
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"ember-motion"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_PARENT_OWNER")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ studio tries to license Motion before it is approved
+├  Unsigned transaction:
+│    signer_id:    studio.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "ember-motion",
+│                                       "use_case": "Games & interactive"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      1.6 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│    Signature:  ed25519:5R2HGsTYcfDWKBdekPEfMtzr4mTEjQPvmnLJJ9T5oFxZuArbKGxeK8AnG81qrEvDQsLHvZef33xYx3HzWy9vEiwq
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0001978604709493 NEAR
+│    Transaction ID: 947NfYdnrtym2eeozWJwWi3BMvzK2g1gHhTRwXow931e
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/947NfYdnrtym2eeozWJwWi3BMvzK2g1gHhTRwXow931e
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet buy_license json-args '{"token_id":"ember-motion","use_case":"Games & interactive"}' prepaid-gas '150.0 Tgas' attached-deposit '1.6 NEAR' sign-as studio.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_CLEARED")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── ben approves Motion into canon
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:63QxZFbapP1SiWF3V9qu7ByTQgiFgLR6vZfYeHEAc7ZuELUoTYHyfJZ26RPqu3jhina4G4e4hazbfXQk4WXJzuYw
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002254139815881 NEAR
+│    Transaction ID: HC556mCGMHYpHBCLRkvDz3DJaVrHZN1ddmi5ZfuQPAuf
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/HC556mCGMHYpHBCLRkvDz3DJaVrHZN1ddmi5ZfuQPAuf
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"approve","data":[{"token_id":"ember-motion","parent":"ember-relief","by":"ben.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "approve" call to <canon-bootstate.testnet> on behalf of <ben.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"ember-motion"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── gil registers **Ember Field — Nocturne** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    gil.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "The same field at night.",
+│                                       "file_hash": "genome:ember-nocturne",
+│                                       "media": "canon:genome/4127/flow/nocturne/recolor?kind=Colourway",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "300000000000000000000000",
+│                                         "upstream_bps": 1000
+│                                       },
+│                                       "title": "Ember Field — Nocturne",
+│                                       "token_id": "ember-nocturne"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8G82WtojNaxAGnMk9XUUy244EpHaYMH6zyUFbdRmyoaz
+│    Signature:  ed25519:2Svtd52k6jCEt1p7eiQeAgRtTF1doBF7G3HBhLZpLRum5t5GjttdGS4eBSg9CxujoXXzY92kHnqAgu7spjwNk44f
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 17.8 Tgas
+│    Transaction fee: 0.0079617224386993 NEAR
+│    Transaction ID: EgPQ6wueGvw6CkE5iNeCD7RZMNUXxovzvhBQbPAN5LEQ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EgPQ6wueGvw6CkE5iNeCD7RZMNUXxovzvhBQbPAN5LEQ
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"ember-nocturne","owner_id":"gil.canon-bootstate-demo.testnet","parent":"ember","vault_id":"ember-nocturne.canon-bootstate.testnet"}]}
+│    [36mLogs [gil.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [gil.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-nocturne.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [gil.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [gil.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [gil.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <gil.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"ember-nocturne","title":"Ember Field — Nocturne","description":"The same field at night.","media":"canon:genome/4127/flow/nocturne/recolor?kind=Colourway","file_hash":"genome:ember-nocturne","terms":{"derivatives":true,"commercial":true,"upstream_bps":1000,"price":"300000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as gil.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── ada approves Nocturne
+├  Unsigned transaction:
+│    signer_id:    ada.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-nocturne"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│    Signature:  ed25519:5To1bCmSdeiQNqJkfs8swbcxbB5iaDVdVZVpndXXa6GdHcN5iimd929iq7Mv6QQo7ebxiHa5Z6MNmNUxiCcDHoPp
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002237311844278 NEAR
+│    Transaction ID: A1AbyED1JYQLxZ58FH5wXRSaU9skYHMSqMcRMfbvuDiw
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/A1AbyED1JYQLxZ58FH5wXRSaU9skYHMSqMcRMfbvuDiw
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"approve","data":[{"token_id":"ember-nocturne","parent":"ember","by":"ada.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "approve" call to <canon-bootstate.testnet> on behalf of <ada.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"ember-nocturne"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── hal registers **Ember Field — Pixel** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    hal.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A 48×48 pixel edition, awaiting review.",
+│                                       "file_hash": "genome:ember-pixel",
+│                                       "media": "canon:genome/4127/flow/ember/pixel?kind=Pixel%20edition",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "250000000000000000000000",
+│                                         "upstream_bps": 1000
+│                                       },
+│                                       "title": "Ember Field — Pixel",
+│                                       "token_id": "ember-pixel"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A8FHHtkuNKAZmaVXcLqR9PQVvo5knoU9L21X1k1KrenT
+│    Signature:  ed25519:4zAv3t4TG7PrCu8Uz8TkbqR54ocqMvtA4XYP3MEzeVo8HpCU9tHAnXVBKQpFU54MdPXJRqX55BMrBz1ZTzwCJgQ1
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 19.0 Tgas
+│    Transaction fee: 0.0080835950062682 NEAR
+│    Transaction ID: FozgXUfj6CVYTygyMCAxM3KzFXTiP7SKgVmB28yhajoo
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FozgXUfj6CVYTygyMCAxM3KzFXTiP7SKgVmB28yhajoo
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"ember-pixel","owner_id":"hal.canon-bootstate-demo.testnet","parent":"ember","vault_id":"ember-pixel.canon-bootstate.testnet"}]}
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-pixel.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <hal.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"ember-pixel","title":"Ember Field — Pixel","description":"A 48×48 pixel edition, awaiting review.","media":"canon:genome/4127/flow/ember/pixel?kind=Pixel%20edition","file_hash":"genome:ember-pixel","terms":{"derivatives":true,"commercial":true,"upstream_bps":1000,"price":"250000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as hal.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── ivy registers **Moth Light**
+├  Unsigned transaction:
+│    signer_id:    ivy.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "Concentric orbits. Fan works welcome; commercial use reserved.",
+│                                       "file_hash": "genome:moth-light",
+│                                       "media": "canon:genome/913/rings/violet/-?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": false,
+│                                         "derivatives": true,
+│                                         "price": "0",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Moth Light",
+│                                       "token_id": "moth-light"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:3KaEkh5eea5wThzCaihBCxP2fBBBMQmSXS9dfnF2dHhT
+│    Signature:  ed25519:4ubBd6iT6q7pb4nFwi9hGGumUNSJGrZMk1eZQZJ2gRLv8prjEp9JJfi6hGDVh8D2SBAjz2j2htqJwCCuLEVHmSZW
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 18.7 Tgas
+│    Transaction fee: 0.0080572786869491 NEAR
+│    Transaction ID: A1rEBNSfojVhEQHnys8Gkv5p51ALXzXQDbhPdUiZKBSP
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/A1rEBNSfojVhEQHnys8Gkv5p51ALXzXQDbhPdUiZKBSP
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"register","data":[{"token_id":"moth-light","owner_id":"ivy.canon-bootstate-demo.testnet","parent":null,"vault_id":"moth-light.canon-bootstate.testnet"}]}
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [moth-light.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <ivy.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"moth-light","title":"Moth Light","description":"Concentric orbits. Fan works welcome; commercial use reserved.","media":"canon:genome/913/rings/violet/-?kind=Original%20artwork","file_hash":"genome:moth-light","terms":{"derivatives":true,"commercial":false,"upstream_bps":0,"price":"0"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ivy.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── jun registers **Moth Light — Fragments** as a derivative of `moth-light`
+├  Unsigned transaction:
+│    signer_id:    jun.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A tiled remix of Moth Light.",
+│                                       "file_hash": "genome:moth-fragments",
+│                                       "media": "canon:genome/913/rings/violet/fragment?kind=Remix",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "moth-light",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "200000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Moth Light — Fragments",
+│                                       "token_id": "moth-fragments"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:ETyFTCbB84qA67NNa8JRWZM9qBEtG9cyKm6L6WAjC4Dg
+│    Signature:  ed25519:c6VqN55Dcci59bejeWXqFuSCPCX7SzyUurMmtz8gKMW2Go1NHkfQEycnXdQ9TECmSobMMQXt24xKwb9eqfS1ugL
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 19.0 Tgas
+│    Transaction fee: 0.008082489424739 NEAR
+│    Transaction ID: FtCt4ZGdKSE4PL61ATgakZ2bwLnQeBtxaLQhbnoep4ab
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FtCt4ZGdKSE4PL61ATgakZ2bwLnQeBtxaLQhbnoep4ab
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"moth-fragments","owner_id":"jun.canon-bootstate-demo.testnet","parent":"moth-light","vault_id":"moth-fragments.canon-bootstate.testnet"}]}
+│    [36mLogs [jun.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [jun.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [moth-fragments.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [jun.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [jun.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [jun.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <jun.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"moth-fragments","title":"Moth Light — Fragments","description":"A tiled remix of Moth Light.","media":"canon:genome/913/rings/violet/fragment?kind=Remix","file_hash":"genome:moth-fragments","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"200000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"moth-light"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as jun.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── ivy approves Fragments
+├  Unsigned transaction:
+│    signer_id:    ivy.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "moth-fragments"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:3KaEkh5eea5wThzCaihBCxP2fBBBMQmSXS9dfnF2dHhT
+│    Signature:  ed25519:duhkoWZeNmswFDiHaBtyPEtQztR97PgVjh1Ei6xxxvMNwrZGknKznZhRiUAgQo3RUyPgLF6WGJN1cVbUiySdgah
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002244927339836 NEAR
+│    Transaction ID: GuW4zJRPz2gHShiRTyFDiTDysPMzYbujLGibKAwDqzGn
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GuW4zJRPz2gHShiRTyFDiTDysPMzYbujLGibKAwDqzGn
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"approve","data":[{"token_id":"moth-fragments","parent":"moth-light","by":"ivy.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [ivy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "approve" call to <canon-bootstate.testnet> on behalf of <ivy.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"moth-fragments"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ivy.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ studio tries to license Fragments (parent forbids commercial use)
+├  Unsigned transaction:
+│    signer_id:    studio.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "moth-fragments",
+│                                       "use_case": "Brand & merchandise"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.3 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│    Signature:  ed25519:4QoWtw1u2zBgWCXAkaBQu3uA6CjPcziuCQrZ3GVCv8mkr2awAKXqRqUHyZ35GLxEb4GtFzEfaY8inv9JWoA9mTV6
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.0001877068656364 NEAR
+│    Transaction ID: CzeASXdLC7mFtJTyX1N8HcHdowPdQpkENtZikVTc6acY
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CzeASXdLC7mFtJTyX1N8HcHdowPdQpkENtZikVTc6acY
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet buy_license json-args '{"token_id":"moth-fragments","use_case":"Brand & merchandise"}' prepaid-gas '150.0 Tgas' attached-deposit '0.3 NEAR' sign-as studio.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_CLEARED")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── lea registers **Tidal**
+├  Unsigned transaction:
+│    signer_id:    lea.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "max.canon-bootstate-demo.testnet",
+│                                           "bps": 1500,
+│                                           "role": "Art direction"
+│                                         }
+│                                       ],
+│                                       "description": "Fourteen layers of sea-floor strata under a low sun.",
+│                                       "file_hash": "genome:tidal",
+│                                       "media": "canon:genome/2203/strata/tidal/-?kind=Original%20artwork",
+│                                       "owner_bps": 8500,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "600000000000000000000000",
+│                                         "upstream_bps": 1500
+│                                       },
+│                                       "title": "Tidal",
+│                                       "token_id": "tidal"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs
+│    Signature:  ed25519:591mSuVbFVePF9xmiXro1oGhYZK44LxbebKndgkk554whKTinUrQGYphZ6ZdJfWQd7mqSHanzo9qUh4isp3No78T
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 18.0 Tgas
+│    Transaction fee: 0.007983112170657 NEAR
+│    Transaction ID: 2RN5zgE83QNQzBY8nmSwdLUeDbaySd1aSfkAibpfSHgy
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2RN5zgE83QNQzBY8nmSwdLUeDbaySd1aSfkAibpfSHgy
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"register","data":[{"token_id":"tidal","owner_id":"lea.canon-bootstate-demo.testnet","parent":null,"vault_id":"tidal.canon-bootstate.testnet"}]}
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [tidal.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <lea.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"tidal","title":"Tidal","description":"Fourteen layers of sea-floor strata under a low sun.","media":"canon:genome/2203/strata/tidal/-?kind=Original%20artwork","file_hash":"genome:tidal","terms":{"derivatives":true,"commercial":true,"upstream_bps":1500,"price":"600000000000000000000000"},"owner_bps":8500,"contributors":[{"account_id":"max.canon-bootstate-demo.testnet","role":"Art direction","bps":1500}],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as lea.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── nox registers **Tidal — Neon Remix** as a derivative of `tidal`
+├  Unsigned transaction:
+│    signer_id:    nox.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A neon, tiled reinterpretation of Tidal.",
+│                                       "file_hash": "genome:tidal-neon",
+│                                       "media": "canon:genome/2203/strata/neon/recolor+fragment?kind=Remix",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "tidal",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "350000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Tidal — Neon Remix",
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:Fuai7TTfpaPa5EKzPDdzbPNG4z4ujiZtvUp7QakWEccB
+│    Signature:  ed25519:gbppi5pqZ7nrU59umbrH1VMnvHtcRyY2ouZUizSuNs4dcftkEZ5T64t4Z5a92e3M2T1mLPWsKr4QhzR7T9ECBMB
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 19.1 Tgas
+│    Transaction fee: 0.0080997870710683 NEAR
+│    Transaction ID: 71u8Cin7SYtC5AKNZiRPA9njNwYfuNidgHEsyiTvoaXb
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/71u8Cin7SYtC5AKNZiRPA9njNwYfuNidgHEsyiTvoaXb
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"submit","data":[{"token_id":"tidal-neon","owner_id":"nox.canon-bootstate-demo.testnet","parent":"tidal","vault_id":"tidal-neon.canon-bootstate.testnet"}]}
+│    [36mLogs [nox.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [nox.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [tidal-neon.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [nox.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [nox.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [nox.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <nox.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"tidal-neon","title":"Tidal — Neon Remix","description":"A neon, tiled reinterpretation of Tidal.","media":"canon:genome/2203/strata/neon/recolor+fragment?kind=Remix","file_hash":"genome:tidal-neon","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"350000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"tidal"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as nox.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── lea approves Neon Remix
+├  Unsigned transaction:
+│    signer_id:    lea.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs
+│    Signature:  ed25519:5y11B3xRjjw17jfbaGt2jnf5v3J9yx5pWi2CaTgs9dzg4pZ3gson6jEKiUwjKDYYLyrJNX2iBZAQmWMv2xz4t9XJ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002239298139962 NEAR
+│    Transaction ID: 3RuQqW6hAha4aAPohk9oktkmj7krMBx6ZDdnXZcy8XiR
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3RuQqW6hAha4aAPohk9oktkmj7krMBx6ZDdnXZcy8XiR
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"approve","data":[{"token_id":"tidal-neon","parent":"tidal","by":"lea.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "approve" call to <canon-bootstate.testnet> on behalf of <lea.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet approve json-args '{"token_id":"tidal-neon"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as lea.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── lea revokes Neon Remix
+├  Unsigned transaction:
+│    signer_id:    lea.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  revoke
+│                       args:         {
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4Kiz4csiktCr5H5jKf2QfGRiSWtfQGsQaYiTMsp6QJZs
+│    Signature:  ed25519:2DEzjc5i2oaaUvtvzamvutiGz8QR65aaL4fESduDzMMwHwrs7nhbNNEUKCpejP2ZFDvSfmRqaVKfLoxkgUKckika
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.000223890261569 NEAR
+│    Transaction ID: AciCgWNsn9x1obdoc3dKdXw7fiLgwkdV5sg67kfrYFzw
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AciCgWNsn9x1obdoc3dKdXw7fiLgwkdV5sg67kfrYFzw
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"revoke","data":[{"token_id":"tidal-neon","parent":"tidal","by":"lea.canon-bootstate-demo.testnet"}]}
+│    [36mLogs [lea.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "revoke" call to <canon-bootstate.testnet> on behalf of <lea.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet revoke json-args '{"token_id":"tidal-neon"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as lea.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ studio tries to license the revoked Neon Remix
+├  Unsigned transaction:
+│    signer_id:    studio.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "tidal-neon",
+│                                       "use_case": "Film & motion"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.5 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│    Signature:  ed25519:39oNNCjVEFMysJoNfkagNh4536eQPi9dgyJdMPfr5oXb5FgvmUfXuJu6Xky6BezEF2tWHpLYPh4nentW7gmXiZcM
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.000188338453325 NEAR
+│    Transaction ID: FT5gufJ3c5vsUUturgrsbU3BMcce7MjdjExYwiNToAtC
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FT5gufJ3c5vsUUturgrsbU3BMcce7MjdjExYwiNToAtC
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet buy_license json-args '{"token_id":"tidal-neon","use_case":"Film & motion"}' prepaid-gas '150.0 Tgas' attached-deposit '0.5 NEAR' sign-as studio.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_CLEARED")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── kai registers **Quarry**
+├  Unsigned transaction:
+│    signer_id:    kai.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "Cut stone in relief. Licensable as-is; derivatives closed.",
+│                                       "file_hash": "genome:quarry",
+│                                       "media": "canon:genome/77/strata/quarry/relief?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "800000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Quarry",
+│                                       "token_id": "quarry"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:F1Ts4QZ2cp1tuzSjqdVDZvpnH3bRJE5vg3HStspNPzDa
+│    Signature:  ed25519:4nHkVbArYeWirnduj6Qvsc2ue3Y9SpTbNtPMi4b4vhWdLnnYCkVAtDEAi9ewSD6UDPtVd4djhpKRvSUkczMJtvrz
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 19.6 Tgas
+│    Transaction fee: 0.0081468019124974 NEAR
+│    Transaction ID: BH1QexfUrKxcJRKc2VB889KBMPSv6yeVtvFE1K572RCg
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BH1QexfUrKxcJRKc2VB889KBMPSv6yeVtvFE1K572RCg
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"register","data":[{"token_id":"quarry","owner_id":"kai.canon-bootstate-demo.testnet","parent":null,"vault_id":"quarry.canon-bootstate.testnet"}]}
+│    [36mLogs [kai.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [kai.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [quarry.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [kai.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [kai.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [kai.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "register_work" call to <canon-bootstate.testnet> on behalf of <kai.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"quarry","title":"Quarry","description":"Cut stone in relief. Licensable as-is; derivatives closed.","media":"canon:genome/77/strata/quarry/relief?kind=Original%20artwork","file_hash":"genome:quarry","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"800000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as kai.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ hal tries to derive from Quarry (derivatives closed)
+├  Unsigned transaction:
+│    signer_id:    hal.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": null,
+│                                       "file_hash": "x",
+│                                       "media": null,
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "quarry",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "100000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Quarry Remix",
+│                                       "token_id": "quarry-remix"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A8FHHtkuNKAZmaVXcLqR9PQVvo5knoU9L21X1k1KrenT
+│    Signature:  ed25519:61y2S3JNiVGKcdgDqNXMxz9sYgH3mzZ6ronmPLgDmzZXnzoyXb79J9Ddnc8Gxp4cUkGDqPATdrGYv2z9x2kjXhLj
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.4 Tgas
+│    Transaction fee: 0.0001880245400518 NEAR
+│    Transaction ID: Ni4CKwb75iQDkVXHFdDcMgMmPrFH4ct8Q8mcj4kVmV7
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Ni4CKwb75iQDkVXHFdDcMgMmPrFH4ct8Q8mcj4kVmV7
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [hal.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"quarry-remix","title":"Quarry Remix","description":null,"media":null,"file_hash":"x","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"100000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"quarry"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as hal.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_DERIVATIVES_CLOSED")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ ada registers splits totalling 90%
+├  Unsigned transaction:
+│    signer_id:    ada.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": null,
+│                                       "file_hash": "x",
+│                                       "media": null,
+│                                       "owner_bps": 9000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "100000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Bad",
+│                                       "token_id": "bad-splits"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GV4rbkAw97M59rLVdpThaor4onwDFaijcf7vxi3zJE22
+│    Signature:  ed25519:2Pk6GHQEh1CbHXUqmx8a78dJuAzFKK6sgA1hgmX9gZ6ow4oraNCUmY83ewaavUSs1hn8VgVDvqHCcQuwRzSqurAY
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.00017939358713 NEAR
+│    Transaction ID: B7LnZV5uTaDDs3YHyEMzVcrAzEaKnqViBdF7RfCfEbrM
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/B7LnZV5uTaDDs3YHyEMzVcrAzEaKnqViBdF7RfCfEbrM
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet register_work json-args '{"token_id":"bad-splits","title":"Bad","description":null,"media":null,"file_hash":"x","terms":{"derivatives":true,"commercial":true,"upstream_bps":0,"price":"100000000000000000000000"},"owner_bps":9000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ada.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_BAD_SPLITS")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── studio licenses **Ember Field — Motion** for 1.5 Ⓝ (splits: dee vault 0.9, fay 0.225, ben vault 0.21, cy 0.09, ada vault 0.075)
+├  Unsigned transaction:
+│    signer_id:    studio.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "ember-motion",
+│                                       "use_case": "Games & interactive"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      1.6 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│    Signature:  ed25519:541K7Tb6FrivFcyWDhcyzqv5zSspSkSUeU8ReQ3EgPJT7Vb9igTEdHZcUZb1xgxUvDRr8KkxfMS9zZx7sUGE3Uge
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 10.5 Tgas
+│    Transaction fee: 0.0009345753917682 NEAR
+│    Transaction ID: AjoPWXFtebxkJTwLVdaDLeVBNz8GxoyySYnijppTxrQD
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AjoPWXFtebxkJTwLVdaDLeVBNz8GxoyySYnijppTxrQD
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"license","data":[{"token_id":"ember-motion","licence_token_id":"licence-0","buyer":"studio.canon-bootstate-demo.testnet","price":"1500000000000000000000000","use_case":"Games & interactive","payouts":[{"token_id":"ember-motion","account_id":"fay.canon-bootstate-demo.testnet","amount":"225000000000000000000000","to_vault":false},{"token_id":"ember-motion","account_id":"ember-motion.canon-bootstate.testnet","amount":"900000000000000000000000","to_vault":true},{"token_id":"ember-relief","account_id":"cy.canon-bootstate-demo.testnet","amount":"90000000000000000000000","to_vault":false},{"token_id":"ember-relief","account_id":"ember-relief.canon-bootstate.testnet","amount":"210000000000000000000000","to_vault":true},{"token_id":"ember","account_id":"ember.canon-bootstate.testnet","amount":"75000000000000000000000","to_vault":true}]}]}
+│    [36mLogs [ember-motion.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-relief.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+"licence-0"
+
+
+The "buy_license" call to <canon-bootstate.testnet> on behalf of <studio.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet buy_license json-args '{"token_id":"ember-motion","use_case":"Games & interactive"}' prepaid-gas '150.0 Tgas' attached-deposit '1.6 NEAR' sign-as studio.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── studio licenses **Quarry** for 0.8 Ⓝ
+├  Unsigned transaction:
+│    signer_id:    studio.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "quarry",
+│                                       "use_case": "Brand & merchandise"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.9 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2kLqZ6RMsEXBaa9MveYiKaoHp6i9GES3zEbfpPXjhgKs
+│    Signature:  ed25519:5mTU43CiRgv4QPKb7CHgwhxB27QEBbUnx1eB6KBSweQN7m2ZgpWeo5PKjd1DsNuAimNuUki9zujg7Yj27QL3kxDV
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0007859187602001 NEAR
+│    Transaction ID: 4o9Sqs7jtzQHxZQijbgB6K2NwQM2NxBVJGfD8gLcXQb8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4o9Sqs7jtzQHxZQijbgB6K2NwQM2NxBVJGfD8gLcXQb8
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"license","data":[{"token_id":"quarry","licence_token_id":"licence-1","buyer":"studio.canon-bootstate-demo.testnet","price":"800000000000000000000000","use_case":"Brand & merchandise","payouts":[{"token_id":"quarry","account_id":"quarry.canon-bootstate.testnet","amount":"800000000000000000000000","to_vault":true}]}]}
+│    [36mLogs [quarry.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+"licence-1"
+
+
+The "buy_license" call to <canon-bootstate.testnet> on behalf of <studio.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet buy_license json-args '{"token_id":"quarry","use_case":"Brand & merchandise"}' prepaid-gas '150.0 Tgas' attached-deposit '0.9 NEAR' sign-as studio.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ eve (not the owner) tries to withdraw Relief's vault
+├  Unsigned transaction:
+│    signer_id:    eve.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE
+│    Signature:  ed25519:62ij3hHjLByxdSssprY1ayU9F1MG61gnAXNpmQ1NuWBqsx3E1rJNA7UtZEePdpW3oxVHYEjHEhtr4CCrDagSExcZ
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774454679091 NEAR
+│    Transaction ID: GzD729gi2n3f97MoQ4ArLC37ERh7Xoyvm2UMkbHeNkFf
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GzD729gi2n3f97MoQ4ArLC37ERh7Xoyvm2UMkbHeNkFf
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as eve.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_OWNER")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── ben lists Relief on a marketplace (nft_approve)
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  nft_approve
+│                       args:         {
+│                                       "account_id": "eve.canon-bootstate-demo.testnet",
+│                                       "msg": null,
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0.01 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:3X9Mgg6oRQWbSpm6q6xSzWdeqBCAoHo7B7FBsWzD9CyRxBTR5NTGaKRZwXrpH6xRqGK6sFEkZQPnQDdqUoxuASVY
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.3 Tgas
+│    Transaction fee: 0.0002819915561417 NEAR
+│    Transaction ID: 5peYCoWEKKaDthZJLKowggYdx2Bg1Z7SrcQB5QBPjeUR
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/5peYCoWEKKaDthZJLKowggYdx2Bg1Z7SrcQB5QBPjeUR
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+null
+
+
+The "nft_approve" call to <canon-bootstate.testnet> on behalf of <ben.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet nft_approve json-args '{"token_id":"ember-relief","account_id":"eve.canon-bootstate-demo.testnet","msg":null}' prepaid-gas '30.0 Tgas' attached-deposit '0.01 NEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ ben tries to drain Relief's vault while it is listed
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:3Cge2en8dqAf17bXe3wrPsrBEoK276hB14gseXydwn5S595amvAXpAqWyx4oo9EZoLYT6eJLThcSyRmSCVzjU1mQ
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0001959135287025 NEAR
+│    Transaction ID: CNLgN8gkA8UDDrAQNE4itvjVXxTp89ah871fQ8MWT541
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CNLgN8gkA8UDDrAQNE4itvjVXxTp89ah871fQ8MWT541
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_TOKEN_LISTED")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── ben sells Relief to eve (nft_transfer)
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  nft_transfer
+│                       args:         {
+│                                       "approval_id": null,
+│                                       "memo": null,
+│                                       "receiver_id": "eve.canon-bootstate-demo.testnet",
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:5exWK53XzUbx5RW5VtmDvYsRFYdxpkEntjnpTgGkZUL7DNjUcZyYGPTPX8XMuiQo4JwjqyD4MQBuQh2YWnCfUyug
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.7 Tgas
+│    Transaction fee: 0.0003448351090051 NEAR
+│    Transaction ID: 8vmazckjDYiohF8HWeE1vZgQtMQaK5J9gPTZQJNB94Vo
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/8vmazckjDYiohF8HWeE1vZgQtMQaK5J9gPTZQJNB94Vo
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"nep171","version":"1.0.0","event":"nft_transfer","data":[{"old_owner_id":"ben.canon-bootstate-demo.testnet","new_owner_id":"eve.canon-bootstate-demo.testnet","token_ids":["ember-relief"]}]}
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "nft_transfer" call to <canon-bootstate.testnet> on behalf of <ben.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet nft_transfer json-args '{"receiver_id":"eve.canon-bootstate-demo.testnet","token_id":"ember-relief","approval_id":null,"memo":null}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ ben (the seller) tries to withdraw after the sale
+├  Unsigned transaction:
+│    signer_id:    ben.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:5b9AgamQyVxWHPvCgr6weWHVvZpUGz3LWHJy6nS8U1pW
+│    Signature:  ed25519:5XQ4awyi2TPm65u35SjWEUNv4wm41yWcjg4LGH2T7CYbvkCoU6t8a4bzzMN69MtpWBHdkFFyBsPAdLcvAsRtvBmm
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774454679091 NEAR
+│    Transaction ID: FAeoHSyP15ZkjNjRb4tDvRCDSiKnhw5sRuPx34rPWRUZ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FAeoHSyP15ZkjNjRb4tDvRCDSiKnhw5sRuPx34rPWRUZ
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOT_OWNER")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ eve calls Relief's vault `release` directly, bypassing the registry
+├  Unsigned transaction:
+│    signer_id:    eve.canon-bootstate-demo.testnet
+│    receiver_id:  ember-relief.canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  release
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE
+│    Signature:  ed25519:3dXvFzpiNEYXC78hCKAKjw3nExZA7zF13fuAuypHpGjGDa83yEffh6B7haWhJVRHTgAnbCbhQHSvMgLqsowA12vQ
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 1.6 Tgas
+│    Transaction fee: 0.0001289277753654 NEAR
+│    Transaction ID: NaJwfCk58Ba4zqqYyoQvrrKSK6bg9LewrNZKhEADfRR
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/NaJwfCk58Ba4zqqYyoQvrrKSK6bg9LewrNZKhEADfRR
+│     [0m
+├  Function execution logs:
+│    [31mLogs [ember-relief.canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction ember-relief.canon-bootstate.testnet release json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as eve.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_ONLY_REGISTRY")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── eve (the buyer) withdraws 0.21 Ⓝ earned before she bought it
+├  Unsigned transaction:
+│    signer_id:    eve.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2rrHxKPhauPRYfZpcDdfh5uHquYePDQTLua9abjUtthE
+│    Signature:  ed25519:2JDZnRZhcV4eJBDvHpK7ijdmdhAVPMscEPhfVA3aXjHQjJLEEWKeHiRUDoMSVRMUr4vUa4yRo4Qpqmt53gLvjpZ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 7.3 Tgas
+│    Transaction fee: 0.000633334265819 NEAR
+│    Transaction ID: uvz5MXAvnQBbmBStLstUHzY3X8LzTuo8E7mPeDrwiQP
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/uvz5MXAvnQBbmBStLstUHzY3X8LzTuo8E7mPeDrwiQP
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-relief.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"withdraw","data":[{"token_id":"ember-relief","to":"eve.canon-bootstate-demo.testnet","amount":"210000000000000000000000"}]}
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "withdraw" call to <canon-bootstate.testnet> on behalf of <eve.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as eve.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── cy claims 0.09 Ⓝ: her credit did not move with the sale
+├  Unsigned transaction:
+│    signer_id:    cy.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  claim
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:3YAHGA9q6aC698Ljoa1FkxMwHheSvmpGKGNdAQv2s82S
+│    Signature:  ed25519:4W1m8ccMQvFQg12ZZK8TYbHZVVHnnLTmmV8cYdRW84zJ8jQkNXkvi1NMfsrEvyw37itkPmEqAUQzZ33AiANJw9GY
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 5.3 Tgas
+│    Transaction fee: 0.0004562710440584 NEAR
+│    Transaction ID: F3P96ahCSzpVztVZFu8vHAxk7JgKqyiUyMvJTeReL5so
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/F3P96ahCSzpVztVZFu8vHAxk7JgKqyiUyMvJTeReL5so
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [cy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [cy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"claim","data":[{"account_id":"cy.canon-bootstate-demo.testnet","amount":"90000000000000000000000"}]}
+│    [36mLogs [cy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [cy.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "claim" call to <canon-bootstate.testnet> on behalf of <cy.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet claim json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as cy.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── dee withdraws Motion's vault (0.9 Ⓝ)
+├  Unsigned transaction:
+│    signer_id:    dee.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:RwuEZziadC4NbYsze8tszZHJ8s5yixTRQEy6tuT5fiQ
+│    Signature:  ed25519:52SytYcKiqRPr9Weu4yPMTZYBJoqYriSShW6FcwZHHiXaXWVFGHpzMGP1XtgKth41oKK8Ww8ZxqasUEHDzCcoh4u
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 7.3 Tgas
+│    Transaction fee: 0.000633391594419 NEAR
+│    Transaction ID: 3CtXogCoBRz5WLfn5AqvuLvS78rPMgHDFwqcHLh3W1tp
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3CtXogCoBRz5WLfn5AqvuLvS78rPMgHDFwqcHLh3W1tp
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ember-motion.canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"withdraw","data":[{"token_id":"ember-motion","to":"dee.canon-bootstate-demo.testnet","amount":"900000000000000000000000"}]}
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [dee.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "withdraw" call to <canon-bootstate.testnet> on behalf of <dee.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet withdraw json-args '{"token_id":"ember-motion"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as dee.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── fay claims her 0.225 Ⓝ score share
+├  Unsigned transaction:
+│    signer_id:    fay.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  claim
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HjAddSCPNdDE5T2ToiQVsKFpbYr45gBBGUSZoQXuWTFB
+│    Signature:  ed25519:4vGMoV2q9VKcDEmVeTwZpjPTGDoFT6qCWLN8mETnGDnkQZBkuv9XeepyeNGuKamLPAN5mRtsG9vCKruMZQFazurY
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 5.3 Tgas
+│    Transaction fee: 0.0004563943488468 NEAR
+│    Transaction ID: EbQqsXbevpzoQUwLK3Gs1TiUGNjwypL3sckp1PwTqXdr
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EbQqsXbevpzoQUwLK3Gs1TiUGNjwypL3sckp1PwTqXdr
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canon-bootstate.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [fay.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [fay.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canon-bootstate.testnet]:[39m
+│      EVENT_JSON:{"standard":"canon","version":"1.0.0","event":"claim","data":[{"account_id":"fay.canon-bootstate-demo.testnet","amount":"225000000000000000000000"}]}
+│    [36mLogs [fay.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [fay.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "claim" call to <canon-bootstate.testnet> on behalf of <fay.canon-bootstate-demo.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet claim json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as fay.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── 🛡️ fay tries to claim twice
+├  Unsigned transaction:
+│    signer_id:    fay.canon-bootstate-demo.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  claim
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HjAddSCPNdDE5T2ToiQVsKFpbYr45gBBGUSZoQXuWTFB
+│    Signature:  ed25519:5fWGUDVt2PLUKvBGyeCaP6xUaP3KkrpUtVLAkYvnCQShfZLS3fQiXpRR48orQS3wpsv2kPpWk97DxNrYpYaho5bp
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.0 Tgas
+│    Transaction fee: 0.0001762278131217 NEAR
+│    Transaction ID: 26T2f7ZJWBre6RwEBkoDrGi69cvh7Tf2yX4hVbe16xx5
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/26T2f7ZJWBre6RwEBkoDrGi69cvh7Tf2yX4hVbe16xx5
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canon-bootstate.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [fay.canon-bootstate-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canon-bootstate.testnet claim json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as fay.canon-bootstate-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NOTHING_TO_CLAIM")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── Delete registry access key `ed25519:HZ3WK4XqSi…`
+├  Unsigned transaction:
+│    signer_id:    canon-bootstate.testnet
+│    receiver_id:  canon-bootstate.testnet
+│    actions:
+│       -- delete access key:  
+│                       public key:   ed25519:HZ3WK4XqSivX7uZaA13QQa5D8Aate55BtE6Z4uAuxEzW
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HZ3WK4XqSivX7uZaA13QQa5D8Aate55BtE6Z4uAuxEzW
+│    Signature:  ed25519:5j88Uy2N7N8Ec3BWutYAwqJoqhfgxXGVfT1FmMehaTvtzxMTiVrKmzpVu9yyG7e8a5eafQRnHQoZV6bP9vyatacj
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.630 Tgas
+│    Transaction fee: 0.000040601225 NEAR
+│    Transaction ID: 45xDjthrVNa2zWBkPk2qSJoBpFyCFQHjjYZFXUuqjUjU
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/45xDjthrVNa2zWBkPk2qSJoBpFyCFQHjjYZFXUuqjUjU
+│     [0m
+
+
+Access key <ed25519:HZ3WK4XqSivX7uZaA13QQa5D8Aate55BtE6Z4uAuxEzW> for account <canon-bootstate.testnet> has been successfully deleted.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account delete-keys canon-bootstate.testnet public-keys ed25519:HZ3WK4XqSivX7uZaA13QQa5D8Aate55BtE6Z4uAuxEzW network-config testnet sign-with-legacy-keychain send[39m
