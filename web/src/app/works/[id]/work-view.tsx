@@ -1,18 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { ArrowUpRight, Check, ChevronRight, Copy, FileLock2, Play, X } from "lucide-react";
-import { Character } from "@/components/character";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, ChevronRight, Copy, Download, Play, X } from "lucide-react";
+import { Artwork, downloadArtwork } from "@/components/artwork";
 import { LineageGraph, type PayoutRun } from "@/components/lineage-graph";
 import { LicenseSheet } from "@/components/license-sheet";
-import { Button, Card, Chip, Eyebrow, Fig, Mono, StatusPill } from "@/components/ui";
+import { Button, Chip, Label, Mono, StatusPill } from "@/components/ui";
 import { computeClearance, formatDate, formatNear } from "@/lib/canon";
-import { ancestorsOf, generationOf, getWork, rootOf, vaultAccount } from "@/lib/data";
+import { generationOf, getWork, rootOf, shortTitle, vaultAccount } from "@/lib/data";
 import type { EventKind } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
-const SPLIT_COLORS = ["var(--accent)", "var(--gen-1)", "var(--gen-2)", "var(--gen-3)"];
+const SPLIT = ["#eef0f3", "#a98bff", "#52d6ff", "#ff6a3d"];
 
 export function WorkView({ id }: { id: string }) {
   const work = getWork(id)!;
@@ -25,208 +25,215 @@ export function WorkView({ id }: { id: string }) {
   const [licensed, setLicensed] = useState(false);
   const lineageRef = useRef<HTMLElement>(null);
 
+  useEffect(() => {
+    try {
+      setLicensed(localStorage.getItem(`canon-licence-${id}`) !== null);
+    } catch {}
+  }, [id]);
+
   const preview = () => {
     setRun({ workId: id, priceNear: work.terms.priceNear || 100, key: Date.now() });
     lineageRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-28 pt-6 sm:px-6 sm:pt-10 lg:px-8 lg:pb-8">
-      <nav className="flex items-center gap-1.5 text-sm text-ink-3" aria-label="Breadcrumb">
-        <Link href="/explore" className="hover:text-ink">Explore</Link>
+    <div className="mx-auto max-w-[1280px] px-4 pb-32 pt-6 sm:px-6 sm:pt-10 lg:px-8 lg:pb-0">
+      <nav className="flex items-center gap-1.5 text-[13px] text-fg-3" aria-label="Breadcrumb">
+        <Link href="/explore" className="hover:text-fg">Explore</Link>
         <ChevronRight className="size-3.5" />
         {root.id !== id && (
           <>
-            <Link href={`/works/${root.id}`} className="hover:text-ink">{root.title}</Link>
+            <Link href={`/works/${root.id}`} className="hover:text-fg">{root.title}</Link>
             <ChevronRight className="size-3.5" />
           </>
         )}
-        <span className="truncate text-ink">{work.title.replace(/^.*— /, "")}</span>
+        <span className="truncate text-fg">{shortTitle(work)}</span>
       </nav>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
-        {/* ── Left: artwork + record ── */}
-        <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <Card className="overflow-hidden">
-            <div className="relative aspect-square">
-              <Character art={work.art} title={work.title} />
-              <span className="num absolute left-4 top-4 rounded-full bg-surface/90 px-2.5 py-1 text-[11px] text-ink-2 backdrop-blur">
-                {gen === 0 ? "Original · Gen 0" : `Derivative · Gen ${gen}`}
-              </span>
+      <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14">
+        {/* Artwork */}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="relative overflow-hidden rounded-[28px] border border-line">
+            <Artwork genome={work.genome} alt={work.title} className="aspect-square w-full" size={1080} live />
+            <div className="absolute left-4 top-4 flex gap-2">
+              <span className="rounded-full bg-bg/60 px-2.5 py-1 font-mono text-[11px] text-fg-2 ring-1 ring-white/10 backdrop-blur">{gen === 0 ? "Original · Gen 0" : `Derivative · Gen ${gen}`}</span>
             </div>
-          </Card>
-          <Card className="p-5">
-            <p className="text-sm font-medium text-ink">On-chain record</p>
-            <dl className="mt-3 divide-y divide-line text-sm">
-              <Row k="Vault account" v={<CopyMono text={vaultAccount(work.id)} />} />
-              <Row k="Current owner" v={<Mono>{work.owner}</Mono>} />
-              <Row k="Vault balance" v={<span className="num font-medium text-ink">{formatNear(work.vaultNear)} Ⓝ</span>} />
-              <Row k="Access keys" v={<span className="num text-ok">0 · keyless</span>} />
-              <Row k="File hash" v={<Mono>{work.fileHash}</Mono>} />
-              <Row k="Registered" v={<span className="text-ink-2">{formatDate(work.mintedAt)}</span>} />
-            </dl>
-            <p className="mt-4 rounded-lg bg-paper-2 p-3 text-xs leading-relaxed text-ink-3">
-              Authorship is declared by <span className="font-mono">{work.creator}</span> and recorded on-chain with the file hash.
-              It is evidence, not a copyright registration.
-            </p>
-          </Card>
+            <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5">
+              {work.genome.transforms.length === 0 ? (
+                <span className="rounded-full bg-bg/60 px-2.5 py-1 font-mono text-[11px] text-fg-2 ring-1 ring-white/10 backdrop-blur">base · {work.genome.style}</span>
+              ) : (
+                ["base", ...work.genome.transforms].map((t, i) => (
+                  <span key={t + i} className="rounded-full bg-bg/60 px-2.5 py-1 font-mono text-[11px] text-fg-2 ring-1 ring-white/10 backdrop-blur">
+                    {i > 0 && <span className="mr-1 text-fg-3">+</span>}
+                    {t}
+                  </span>
+                ))
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* ── Right: details ── */}
-        <div className="min-w-0 space-y-8">
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Eyebrow>{work.kind}</Eyebrow>
-              <StatusPill status={work.status} />
-            </div>
-            <h1 className="mt-3 font-display text-5xl leading-[1] tracking-[-0.02em] sm:text-6xl">{work.title}</h1>
-            {parent && (
-              <p className="mt-3 text-sm text-ink-2">
-                Derived from{" "}
-                <Link href={`/works/${parent.id}`} className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-accent">
-                  {parent.title}
-                </Link>{" "}
-                by <span className="font-mono text-[13px]">{parent.owner}</span>
-              </p>
-            )}
-            <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-ink-2">{work.description}</p>
-            {work.statusNote && <p className="mt-4 rounded-xl bg-bad-soft p-4 text-sm text-bad">{work.statusNote}</p>}
+        {/* Details */}
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Label>{work.kind}</Label>
+            <StatusPill status={work.status} />
+          </div>
+          <h1 className="display mt-4 text-[44px] text-fg sm:text-[60px]">{work.title}</h1>
+          {parent && (
+            <p className="mt-4 text-sm text-fg-2">
+              Derived from{" "}
+              <Link href={`/works/${parent.id}`} className="text-fg underline decoration-line-3 underline-offset-4 hover:decoration-fg">
+                {parent.title}
+              </Link>{" "}
+              · <span className="font-mono text-[12.5px] text-fg-3">{parent.owner}</span>
+            </p>
+          )}
+          <p className="mt-5 text-[17px] leading-relaxed text-fg-2">{work.description}</p>
+          {work.statusNote && <p className="mt-5 rounded-2xl border border-bad/25 bg-bad/[0.07] p-4 text-sm text-bad">{work.statusNote}</p>}
+
+          {/* Licence CTA */}
+          <div className="mt-8 hidden lg:block">
+            <LicenceCta cleared={clearance.cleared} price={work.terms.priceNear} licensed={licensed} onLicense={() => setSheet(true)} onPreview={preview} onDownload={() => downloadArtwork(work.genome, `${work.id}-source-2048.png`)} />
           </div>
 
+          {/* Clearance */}
+          <section className="mt-10">
+            <Label>Commercial clearance</Label>
+            <div className="mt-3 overflow-hidden rounded-2xl border border-line">
+              <div className={cn("flex items-start gap-3 px-4 py-3.5 text-sm font-medium", clearance.cleared ? "bg-ok/[0.08] text-ok" : "bg-bad/[0.08] text-bad")}>
+                {clearance.cleared ? <Check className="mt-0.5 size-4 shrink-0" /> : <X className="mt-0.5 size-4 shrink-0" />}
+                {clearance.summary}
+              </div>
+              <ol>
+                {clearance.checks.map((c, i) => (
+                  <li key={c.work.id} className="flex items-center gap-3 border-t border-line px-4 py-3">
+                    <span className="w-10 shrink-0 font-mono text-[10.5px] text-fg-3">{i === 0 ? "this" : `−${i}`}</span>
+                    <Artwork genome={c.work.genome} className="size-8 shrink-0 rounded-full" size={128} />
+                    <Link href={`/works/${c.work.id}`} className="min-w-0 flex-1 hover:opacity-80">
+                      <p className="truncate text-sm text-fg">{c.label}</p>
+                      <p className="truncate text-xs text-fg-3">{c.reason}</p>
+                    </Link>
+                    {c.ok ? <Check className="size-4 shrink-0 text-ok" /> : <X className="size-4 shrink-0 text-bad" />}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+
           {/* Contributors */}
-          <section>
-            <SectionTitle>Contributors &amp; splits</SectionTitle>
-            <div className="mt-3 flex h-2.5 overflow-hidden rounded-full bg-paper-2">
+          <section className="mt-10">
+            <Label>Contributors &amp; splits</Label>
+            <div className="mt-4 flex h-1.5 gap-0.5 overflow-hidden rounded-full">
               {work.splits.map((s, i) => (
-                <div key={s.account} style={{ width: `${s.bps / 100}%`, background: SPLIT_COLORS[i % 4] }} className="h-full first:rounded-l-full last:rounded-r-full" />
+                <div key={s.account} style={{ width: `${s.bps / 100}%`, background: SPLIT[i % 4] }} className="h-full" />
               ))}
             </div>
-            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {work.splits.map((s, i) => (
-                <li key={s.account} className="flex items-center justify-between gap-3 rounded-xl p-3 ring-1 ring-line">
+                <li key={s.account} className="flex items-center justify-between gap-3 rounded-2xl border border-line p-3.5">
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="size-2.5 shrink-0 rounded-full" style={{ background: SPLIT_COLORS[i % 4] }} />
+                    <span className="size-2 shrink-0 rounded-full" style={{ background: SPLIT[i % 4] }} />
                     <div className="min-w-0">
-                      <p className="truncate font-mono text-[13px] text-ink">{s.account}</p>
-                      <p className="text-xs text-ink-3">{s.role} · {s.isOwner ? "to vault (follows NFT)" : "personal credit"}</p>
+                      <p className="truncate font-mono text-[12.5px] text-fg">{s.account}</p>
+                      <p className="truncate text-[11.5px] text-fg-3">{s.role} · {s.isOwner ? "vault, follows NFT" : "personal credit"}</p>
                     </div>
                   </div>
-                  <span className="num text-sm font-medium text-ink">{s.bps / 100}%</span>
+                  <span className="num text-sm text-fg">{s.bps / 100}%</span>
                 </li>
               ))}
             </ul>
           </section>
 
           {/* Terms */}
-          <section>
-            <SectionTitle>Terms</SectionTitle>
+          <section className="mt-10">
+            <Label>Terms</Label>
             <div className="mt-3 flex flex-wrap gap-2">
               <Chip tone={work.terms.derivatives ? "ok" : "neutral"}>{work.terms.derivatives ? <Check className="size-3" /> : <X className="size-3" />} Derivatives</Chip>
               <Chip tone={work.terms.commercial ? "ok" : "bad"}>{work.terms.commercial ? <Check className="size-3" /> : <X className="size-3" />} Commercial use</Chip>
-              {work.terms.derivatives && <Chip>Upstream share · {work.terms.upstreamBps / 100}%</Chip>}
-              {work.terms.commercial && <Chip>Licence · {formatNear(work.terms.priceNear, 0)} Ⓝ</Chip>}
+              {work.terms.derivatives && <Chip>Takes {work.terms.upstreamBps / 100}% from derivatives</Chip>}
+              {work.terms.commercial && <Chip>Licence {formatNear(work.terms.priceNear, 0)} Ⓝ</Chip>}
             </div>
           </section>
 
-          {/* Clearance */}
-          <section>
-            <SectionTitle>Commercial clearance</SectionTitle>
-            <Card className="mt-3 overflow-hidden">
-              <div className={cn("flex items-start gap-3 p-4", clearance.cleared ? "bg-ok-soft" : "bg-bad-soft")}>
-                <span className={cn("mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-paper", clearance.cleared ? "bg-ok" : "bg-bad")}>
-                  {clearance.cleared ? <Check className="size-3" /> : <X className="size-3" />}
-                </span>
-                <p className={cn("text-sm font-medium", clearance.cleared ? "text-ok" : "text-bad")}>{clearance.summary}</p>
-              </div>
-              <ol className="divide-y divide-line">
-                {clearance.checks.map((c, i) => (
-                  <li key={c.work.id} className="flex items-center gap-3 px-4 py-3">
-                    <span className="num w-10 shrink-0 text-[11px] text-ink-3">{i === 0 ? "this" : `gen −${i}`}</span>
-                    <div className="size-8 shrink-0 overflow-hidden rounded-full ring-1 ring-line">
-                      <Character art={c.work.art} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm text-ink">{c.label}</p>
-                      <p className="truncate text-xs text-ink-3">{c.reason}</p>
-                    </div>
-                    {c.ok ? <Check className="size-4 shrink-0 text-ok" /> : <X className="size-4 shrink-0 text-bad" />}
-                  </li>
-                ))}
-              </ol>
-            </Card>
+          {/* Record */}
+          <section className="mt-10">
+            <Label>On-chain record</Label>
+            <dl className="mt-3 divide-y divide-line rounded-2xl border border-line px-4 text-[13.5px]">
+              <Row k="Vault" v={<CopyMono text={vaultAccount(work.id)} />} />
+              <Row k="Owner" v={<Mono>{work.owner}</Mono>} />
+              <Row k="Balance" v={<span className="num text-fg">{formatNear(work.vaultNear)} Ⓝ</span>} />
+              <Row k="Access keys" v={<span className="num text-ok">0</span>} />
+              <Row k="File hash" v={<Mono>{work.fileHash}</Mono>} />
+              <Row k="Registered" v={<span className="text-fg-2">{formatDate(work.mintedAt)}</span>} />
+            </dl>
+            <p className="mt-3 text-xs leading-relaxed text-fg-3">
+              Authorship is declared by <span className="font-mono">{work.creator}</span> and anchored to the file hash. It is evidence, not a copyright registration.
+            </p>
           </section>
-
-          {/* Licence CTA (desktop) */}
-          <LicenceCta
-            className="hidden lg:flex"
-            cleared={clearance.cleared}
-            price={work.terms.priceNear}
-            licensed={licensed}
-            onLicense={() => setSheet(true)}
-            onPreview={preview}
-          />
         </div>
       </div>
 
-      {/* ── Lineage ── */}
-      <section ref={lineageRef} className="mt-16 scroll-mt-24">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      {/* Lineage */}
+      <section ref={lineageRef} className="mt-24 scroll-mt-24">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <Eyebrow>Lineage</Eyebrow>
-            <h2 className="mt-3 font-display text-4xl tracking-[-0.015em]">The {root.title} family</h2>
+            <Label>Lineage</Label>
+            <h2 className="display mt-4 text-[36px] text-fg sm:text-[48px]">The {root.title} family</h2>
           </div>
           {clearance.cleared && (
             <Button variant="secondary" size="sm" onClick={preview}>
-              <Play className="size-3.5" /> Preview a {formatNear(work.terms.priceNear, 0)} Ⓝ licence
+              <Play className="size-3.5" /> Replay a {formatNear(work.terms.priceNear, 0)} Ⓝ licence
             </Button>
           )}
         </div>
-        <Card className="grain mt-5 overflow-hidden p-4 sm:p-8">
-          <Fig n="1.0">Money flows upward. Solid lines are approved; dashed are pending or revoked.</Fig>
-          <LineageGraph focusId={id} payout={run} className="mt-4" />
-        </Card>
+        <div className="panel noise relative mt-6 overflow-hidden p-4 sm:p-8">
+          <div className="hairline-grid absolute inset-0 opacity-40 fade-mask-y" />
+          <p className="relative font-mono text-[11px] text-fg-3">Money flows upward · solid = approved · dashed = pending or revoked</p>
+          <LineageGraph focusId={id} payout={run} className="relative mt-4" />
+        </div>
       </section>
 
-      {/* ── History ── */}
-      <section className="mt-16">
-        <Eyebrow>History</Eyebrow>
-        <h2 className="mt-3 font-display text-4xl tracking-[-0.015em]">What this work earned, paid and did</h2>
-        <Card className="mt-5 overflow-hidden">
-          <ul className="divide-y divide-line">
-            {[...work.history].reverse().map((h, i) => (
-              <li key={i} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-4 sm:grid-cols-[120px_auto_1fr_auto] sm:gap-5 sm:px-6">
-                <span className="hidden text-xs text-ink-3 sm:block">{formatDate(h.at)}</span>
-                <EventBadge kind={h.kind} />
-                <div className="min-w-0">
-                  <p className="truncate text-sm text-ink">{h.detail}</p>
-                  <p className="truncate font-mono text-[11px] text-ink-3">
-                    {h.actor}
-                    <span className="sm:hidden"> · {formatDate(h.at)}</span>
-                  </p>
-                </div>
-                <span className="num text-sm text-ink">{h.amountNear ? `+${formatNear(h.amountNear)} Ⓝ` : ""}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
+      {/* History */}
+      <section className="mt-24">
+        <Label>History</Label>
+        <h2 className="display mt-4 text-[36px] text-fg sm:text-[48px]">Earned, paid, approved.</h2>
+        <ul className="mt-6 overflow-hidden rounded-2xl border border-line">
+          {[...work.history].reverse().map((h, i) => (
+            <li key={i} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-line px-4 py-4 last:border-b-0 sm:grid-cols-[110px_auto_1fr_auto] sm:gap-5 sm:px-6">
+              <span className="hidden font-mono text-[11.5px] text-fg-3 sm:block">{formatDate(h.at)}</span>
+              <EventBadge kind={h.kind} />
+              <div className="min-w-0">
+                <p className="truncate text-sm text-fg">{h.detail}</p>
+                <p className="truncate font-mono text-[11px] text-fg-3">
+                  {h.actor}
+                  <span className="sm:hidden"> · {formatDate(h.at)}</span>
+                </p>
+              </div>
+              <span className="num text-sm text-fg">{h.amountNear ? `+${formatNear(h.amountNear)}` : ""}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* ── Mobile sticky CTA ── */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/90 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl lg:hidden">
-        <LicenceCta cleared={clearance.cleared} price={work.terms.priceNear} licensed={licensed} onLicense={() => setSheet(true)} onPreview={preview} compact />
+      {/* Mobile CTA */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/85 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-2xl lg:hidden">
+        <LicenceCta compact cleared={clearance.cleared} price={work.terms.priceNear} licensed={licensed} onLicense={() => setSheet(true)} onPreview={preview} onDownload={() => downloadArtwork(work.genome, `${work.id}-source-2048.png`)} />
       </div>
 
       <LicenseSheet
         open={sheet}
         workId={id}
         onClose={() => setSheet(false)}
-        onPaid={() => {
+        onPaid={(use) => {
+          try {
+            localStorage.setItem(`canon-licence-${id}`, JSON.stringify({ use, at: Date.now() }));
+          } catch {}
           setLicensed(true);
           setSheet(false);
           setTimeout(preview, 250);
         }}
       />
-      <span className="sr-only">{ancestorsOf(id).length} ancestors</span>
     </div>
   );
 }
@@ -237,43 +244,42 @@ function LicenceCta({
   licensed,
   onLicense,
   onPreview,
+  onDownload,
   compact,
-  className,
 }: {
   cleared: boolean;
   price: number;
   licensed: boolean;
   onLicense: () => void;
   onPreview: () => void;
+  onDownload: () => void;
   compact?: boolean;
-  className?: string;
 }) {
   if (!cleared)
     return (
-      <div className={cn("flex items-center justify-between gap-3", !compact && "rounded-2xl p-5 ring-1 ring-line", className)}>
-        <p className="text-sm text-ink-3">This work can't be licensed commercially right now.</p>
-        <span className="num text-sm text-ink-3">—</span>
+      <div className={cn("flex items-center justify-between gap-3", !compact && "rounded-2xl border border-line p-5")}>
+        <p className="text-sm text-fg-3">Not licensable while the lineage is not cleared.</p>
       </div>
     );
   return (
-    <div className={cn("flex items-center justify-between gap-4", !compact && "rounded-2xl bg-surface p-5 shadow-card ring-1 ring-line", className)}>
+    <div className={cn("flex items-center justify-between gap-4", !compact && "panel p-5")}>
       <div>
-        <p className="text-xs text-ink-3">{licensed ? "You hold a licence NFT" : "Commercial licence"}</p>
-        <p className="num text-xl font-medium text-ink">{formatNear(price, 0)} Ⓝ</p>
+        <p className="text-xs text-fg-3">{licensed ? "You hold a licence" : "Commercial licence · perpetual"}</p>
+        <p className="num mt-0.5 text-2xl text-fg">{formatNear(price, 0)} Ⓝ</p>
       </div>
       <div className="flex items-center gap-2">
-        {!compact && (
+        {!compact && !licensed && (
           <Button variant="ghost" onClick={onPreview}>
             Preview payout
           </Button>
         )}
         {licensed ? (
-          <Button variant="secondary">
-            <FileLock2 className="size-4" /> Source files
+          <Button variant="secondary" size={compact ? "md" : "lg"} onClick={onDownload}>
+            <Download className="size-4" /> Source file
           </Button>
         ) : (
-          <Button variant="accent" size={compact ? "md" : "lg"} onClick={onLicense}>
-            License this work <ArrowUpRight className="size-4" />
+          <Button variant="ember" size={compact ? "md" : "lg"} onClick={onLicense}>
+            License <ArrowUpRight className="size-4" />
           </Button>
         )}
       </div>
@@ -281,14 +287,10 @@ function LicenceCta({
   );
 }
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-sm font-medium text-ink">{children}</h2>;
-}
-
 function Row({ k, v }: { k: string; v: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-2.5">
-      <dt className="shrink-0 text-ink-3">{k}</dt>
+    <div className="flex items-center justify-between gap-4 py-3">
+      <dt className="shrink-0 text-fg-3">{k}</dt>
       <dd className="min-w-0 truncate text-right">{v}</dd>
     </div>
   );
@@ -299,7 +301,7 @@ function CopyMono({ text }: { text: string }) {
   return (
     <button
       type="button"
-      className="inline-flex max-w-full items-center gap-1.5 font-mono text-[12px] text-ink-2 hover:text-ink"
+      className="inline-flex max-w-full items-center gap-1.5 font-mono text-[12px] text-fg-2 hover:text-fg"
       onClick={() => {
         navigator.clipboard?.writeText(text).catch(() => {});
         setCopied(true);
@@ -312,19 +314,19 @@ function CopyMono({ text }: { text: string }) {
   );
 }
 
-const EVENT_STYLE: Record<EventKind, [string, string]> = {
-  minted: ["Minted", "bg-paper-2 text-ink-2"],
-  submitted: ["Submitted", "bg-warn-soft text-warn"],
-  approved: ["Approved", "bg-ok-soft text-ok"],
-  licensed: ["Licensed", "bg-accent-soft text-accent"],
-  royalty: ["Upstream", "bg-accent-soft text-accent"],
-  withdrawn: ["Withdrawn", "bg-paper-2 text-ink-2"],
-  transferred: ["Transferred", "bg-paper-2 text-ink-2"],
-  revoked: ["Revoked", "bg-bad-soft text-bad"],
-  flagged: ["Flagged", "bg-bad-soft text-bad"],
+const EVENT: Record<EventKind, [string, string]> = {
+  minted: ["Minted", "text-fg-2 ring-line-2"],
+  submitted: ["Submitted", "text-warn ring-warn/25"],
+  approved: ["Approved", "text-ok ring-ok/25"],
+  licensed: ["Licensed", "text-ember ring-ember/30"],
+  royalty: ["Upstream", "text-violet ring-violet/30"],
+  withdrawn: ["Withdrawn", "text-fg-2 ring-line-2"],
+  transferred: ["Transferred", "text-fg-2 ring-line-2"],
+  revoked: ["Revoked", "text-bad ring-bad/25"],
+  flagged: ["Flagged", "text-bad ring-bad/25"],
 };
 
 function EventBadge({ kind }: { kind: EventKind }) {
-  const [label, cls] = EVENT_STYLE[kind];
-  return <span className={cn("w-[84px] rounded-md px-2 py-1 text-center text-[11px] font-medium", cls)}>{label}</span>;
+  const [label, cls] = EVENT[kind];
+  return <span className={cn("w-[86px] rounded-full px-2 py-1 text-center font-mono text-[10.5px] ring-1", cls)}>{label}</span>;
 }

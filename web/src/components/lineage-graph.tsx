@@ -7,9 +7,9 @@ import { WORKS, rootOf } from "@/lib/data";
 import { computeCascade, formatNear } from "@/lib/canon";
 import type { Work } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { Character } from "./character";
+import { Artwork } from "./artwork";
 
-const GEN_COLORS = ["var(--gen-0)", "var(--gen-1)", "var(--gen-2)", "var(--gen-3)"];
+const GEN_COLORS = ["#ff6a3d", "#a98bff", "#52d6ff", "#b6ff5c"];
 
 interface LaidOutNode {
   work: Work;
@@ -153,7 +153,7 @@ export function LineageGraph({
                   key={child.work.id}
                   d={edgePath(child, parent)}
                   fill="none"
-                  stroke={s === "revoked" ? "var(--bad)" : "var(--line-strong)"}
+                  stroke={s === "revoked" ? "var(--bad)" : "rgba(255,255,255,0.16)"}
                   strokeWidth={1.5}
                   strokeDasharray={s === "approved" ? undefined : "4 5"}
                   strokeLinecap="round"
@@ -260,15 +260,15 @@ function Node({
   const inner = (
     <>
       <div className="relative" style={{ width: avatar, height: avatar }}>
-        {burst && <span className="anim-ping absolute inset-0 rounded-full" style={{ background: "var(--accent)" }} />}
+        {burst && <motion.span initial={{ scale: 0.6, opacity: 0.8 }} animate={{ scale: 2.4, opacity: 0 }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-0 rounded-full" style={{ background: "#ff6a3d" }} />}
         <div
           className={cn(
-            "relative size-full overflow-hidden rounded-full bg-surface shadow-card transition-transform duration-300 group-hover:scale-105",
+            "relative size-full overflow-hidden rounded-full bg-surface transition-transform duration-300 group-hover:scale-105",
             dim && "opacity-55 grayscale-[0.4]",
           )}
-          style={{ boxShadow: `0 0 0 ${focused ? 3 : 2}px var(--paper), 0 0 0 ${focused ? 5 : 3.5}px ${focused ? "var(--accent)" : color}` }}
+          style={{ boxShadow: `0 0 0 ${focused ? 3 : 2}px var(--bg), 0 0 0 ${focused ? 5 : 3.5}px ${focused ? "#eef0f3" : color}, 0 0 ${focused ? 40 : 24}px -4px ${color}` }}
         >
-          <Character art={work.art} title={work.title} />
+          <Artwork genome={work.genome} alt={work.title} className="size-full" size={192} />
         </div>
         <AnimatePresence>
           {credit !== undefined && (
@@ -277,23 +277,23 @@ function Node({
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ type: "spring", bounce: 0.35, duration: 0.5 }}
-              className="num absolute left-full top-1/2 z-10 ml-2 -translate-y-1/2 whitespace-nowrap rounded-full bg-ink px-2 py-0.5 text-[11px] font-medium text-paper shadow-float"
+              className="num absolute left-full top-1/2 z-10 ml-2 -translate-y-1/2 whitespace-nowrap rounded-full bg-fg px-2 py-0.5 text-[11px] font-medium text-bg shadow-[0_8px_24px_-6px_rgba(0,0,0,0.8)]"
             >
               +{formatNear(credit)} Ⓝ
             </motion.span>
           )}
         </AnimatePresence>
         {burst && priceNear !== undefined && credit === undefined && (
-          <span className="num absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full whitespace-nowrap text-[10px] text-accent">
+          <span className="num absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full whitespace-nowrap text-[10px] text-ember">
             {formatNear(priceNear, 0)} Ⓝ in
           </span>
         )}
       </div>
       <div className="mt-2.5 text-center" style={{ width: compact ? 96 : 132 }}>
-        <p className={cn("truncate font-medium leading-tight text-ink", compact ? "text-[11px]" : "text-[13px]")}>
+        <p className={cn("truncate font-medium leading-tight text-fg", compact ? "text-[11px]" : "text-[13px]")}>
           {work.title.replace(/^.*— /, "")}
         </p>
-        <p className="truncate font-mono text-[10px] text-ink-3">
+        <p className="truncate font-mono text-[10px] text-fg-3">
           {work.status === "approved" ? work.owner : work.status === "pending" ? "pending" : work.status}
         </p>
       </div>

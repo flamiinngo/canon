@@ -1,184 +1,151 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* ───────────────────────── Tokens ───────────────────────── */
+/* ───────────────────────── Tokens (dark, single theme) ───────────────────────── */
 :root {
-  --paper: oklch(0.985 0.004 85);
-  --paper-2: oklch(0.965 0.006 85);
-  --surface: oklch(1 0 0);
-  --ink: oklch(0.19 0.012 270);
-  --ink-2: oklch(0.42 0.012 270);
-  --ink-3: oklch(0.58 0.01 270);
-  --line: oklch(0.9 0.006 85);
-  --line-strong: oklch(0.82 0.008 85);
+  --bg: #07080a;
+  --bg-2: #0b0d10;
+  --surface: #0f1115;
+  --surface-2: #14171c;
+  --fg: #eef0f3;
+  --fg-2: #a3a9b4;
+  --fg-3: #6b717c;
+  --line: rgb(255 255 255 / 0.07);
+  --line-2: rgb(255 255 255 / 0.12);
+  --line-3: rgb(255 255 255 / 0.2);
 
-  --accent: oklch(0.64 0.205 36);
-  --accent-ink: oklch(0.99 0.01 36);
-  --accent-soft: oklch(0.95 0.04 40);
+  --ember: #ff6a3d;
+  --violet: #a98bff;
+  --cyan: #52d6ff;
+  --lime: #b6ff5c;
+  --ok: #3ee39b;
+  --warn: #ffc65c;
+  --bad: #ff5d6c;
 
-  --gen-0: oklch(0.64 0.205 36);
-  --gen-1: oklch(0.56 0.2 288);
-  --gen-2: oklch(0.62 0.12 190);
-  --gen-3: oklch(0.72 0.15 75);
-
-  --ok: oklch(0.6 0.14 155);
-  --ok-soft: oklch(0.95 0.04 155);
-  --warn: oklch(0.72 0.15 75);
-  --warn-soft: oklch(0.96 0.05 85);
-  --bad: oklch(0.58 0.2 20);
-  --bad-soft: oklch(0.95 0.035 20);
-
-  --shadow-card: 0 1px 2px oklch(0.2 0.02 270 / 0.06), 0 8px 24px -12px oklch(0.2 0.02 270 / 0.14);
-  --shadow-float: 0 2px 4px oklch(0.2 0.02 270 / 0.06), 0 24px 48px -16px oklch(0.2 0.02 270 / 0.22);
-  color-scheme: light;
-}
-
-.dark {
-  --paper: oklch(0.155 0.008 270);
-  --paper-2: oklch(0.185 0.009 270);
-  --surface: oklch(0.205 0.01 270);
-  --ink: oklch(0.96 0.005 85);
-  --ink-2: oklch(0.76 0.008 85);
-  --ink-3: oklch(0.6 0.008 270);
-  --line: oklch(0.28 0.01 270);
-  --line-strong: oklch(0.36 0.012 270);
-
-  --accent: oklch(0.7 0.19 38);
-  --accent-ink: oklch(0.16 0.02 36);
-  --accent-soft: oklch(0.3 0.07 36);
-
-  --gen-0: oklch(0.72 0.18 38);
-  --gen-1: oklch(0.7 0.16 288);
-  --gen-2: oklch(0.75 0.11 190);
-  --gen-3: oklch(0.8 0.14 80);
-
-  --ok: oklch(0.74 0.15 155);
-  --ok-soft: oklch(0.3 0.06 155);
-  --warn: oklch(0.8 0.14 80);
-  --warn-soft: oklch(0.32 0.06 80);
-  --bad: oklch(0.7 0.17 20);
-  --bad-soft: oklch(0.3 0.07 20);
-
-  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px -12px oklch(0 0 0 / 0.5);
-  --shadow-float: 0 2px 4px oklch(0 0 0 / 0.4), 0 24px 48px -16px oklch(0 0 0 / 0.6);
   color-scheme: dark;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
   --color-surface: var(--surface);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
   --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-soft: var(--accent-soft);
-  --color-gen-0: var(--gen-0);
-  --color-gen-1: var(--gen-1);
-  --color-gen-2: var(--gen-2);
-  --color-gen-3: var(--gen-3);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+  --color-ember: var(--ember);
+  --color-violet: var(--violet);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
   --color-ok: var(--ok);
-  --color-ok-soft: var(--ok-soft);
   --color-warn: var(--warn);
-  --color-warn-soft: var(--warn-soft);
   --color-bad: var(--bad);
-  --color-bad-soft: var(--bad-soft);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
 
-  --shadow-card: var(--shadow-card);
-  --shadow-float: var(--shadow-float);
-
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ───────────────────────── Base ───────────────────────── */
 html {
   -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
+  background: var(--bg);
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "ss01", "ss02", "cv01";
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--ember);
+  color: #0b0b0b;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 6px;
+  outline: 1.5px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
 
 .num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
-/* Hairline paper grid used behind hero figures */
-.ledger-grid {
-  background-image:
-    linear-gradient(to right, var(--line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+.display {
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
 }
 
-.grain {
+/* Gradient text used once per screen, never more. */
+.text-spectrum {
+  background: linear-gradient(92deg, #ff6a3d 0%, #ffb35c 28%, #a98bff 62%, #52d6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Panels: hairline border with a lit top edge */
+.panel {
   position: relative;
-  isolation: isolate;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 30px 80px -40px rgb(0 0 0 / 0.8);
 }
-.grain::after {
+
+.hairline-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.fade-mask-b {
+  mask-image: linear-gradient(to bottom, black 55%, transparent);
+}
+.fade-mask-y {
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+.noise::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
   border-radius: inherit;
-}
-.dark .grain::after {
-  mix-blend-mode: screen;
-  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* ───────────────────────── Character motion ───────────────────────── */
-@keyframes canon-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
 }
-@keyframes canon-blink {
-  0%, 92%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.1); }
+.animate-marquee {
+  animation: marquee 60s linear infinite;
 }
-@keyframes canon-sway {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(6deg); }
+
+@keyframes caret {
+  50% { opacity: 0; }
 }
-@keyframes canon-ping {
-  0% { transform: scale(0.6); opacity: 0.8; }
-  100% { transform: scale(2.4); opacity: 0; }
+.caret::after {
+  content: "▍";
+  margin-left: 2px;
+  color: var(--fg-3);
+  animation: caret 1s steps(1) infinite;
 }
-.anim-float { animation: canon-float 3.2s ease-in-out infinite; transform-box: fill-box; }
-.anim-blink { animation: canon-blink 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-.anim-sway { animation: canon-sway 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 0% 100%; }
-.anim-ping { animation: canon-ping 1.2s var(--ease-out-quint) forwards; transform-box: fill-box; transform-origin: center; }
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-float, .anim-blink, .anim-sway, .anim-ping { animation: none; }
+  .animate-marquee { animation: none; }
   html { scroll-behavior: auto; }
 }
