@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Canon v2: contracts are already deployed on canonhq.testnet.
-# Top up demo accounts, seed the story, write JUDGES.md, then lock the registry.
+# Top up demo accounts, seed the story, write LEDGER.md, then lock the registry.
 export SKIP_BUILD=1
 export SKIP_DEPLOY=1
 export PUBLISH_TX=ArCB71nem4FTMQuiishHYyPt8H6VLiWWYRY4jEBCXELS

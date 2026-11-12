@@ -5,7 +5,7 @@ every way we could think of for a seller (or anyone else) to take money or right
 should not have, the defence in the contracts, and the test that proves it.
 
 Contracts: `contracts/registry` (NEP-171 registry) and `contracts/vault` (per-work vault).
-Tests: `cargo test -p canon-registry` in `contracts/` (41 unit tests) plus the testnet ledger in [JUDGES.md](JUDGES.md), where every attack below that can be sent as a transaction is sent, and refused.
+Tests: `cargo test -p canon-registry` in `contracts/` (41 unit tests) plus the testnet ledger in [LEDGER.md](LEDGER.md), where every attack below that can be sent as a transaction is sent, and refused.
 
 ## Trust model
 

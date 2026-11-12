@@ -1,4 +1,4 @@
-/** Generated from JUDGES.md: real NEAR testnet transactions recorded by scripts/deploy.sh. */
+/** Generated from LEDGER.md: real NEAR testnet transactions recorded by scripts/deploy.sh. */
 export const REGISTRY_ACCOUNT = "canonhq.testnet";
 export const LEDGER: { step: string; expected: string; refused: boolean; ok: boolean; hash: string }[] = [
  {

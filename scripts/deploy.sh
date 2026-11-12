@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Canon: build, deploy, seed the demo lineage on NEAR testnet, record every
-# transaction (including refused attacks) in JUDGES.md, then lock the registry.
+# transaction (including refused attacks) in LEDGER.md, then lock the registry.
 #
 # Usage (Linux / macOS / WSL), after creating two funded testnet accounts:
 #   near account create-account sponsor-by-faucet-service <registry>.testnet autogenerate-new-keypair save-to-legacy-keychain network-config testnet create
@@ -18,7 +18,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-$HOME/canon-target}"
 OUT="$CARGO_TARGET_DIR/near"
 LOG="$ROOT/scripts/deploy.log"
-LEDGER="$ROOT/JUDGES.md"
+LEDGER="$ROOT/LEDGER.md"
 EXPLORER="https://testnet.nearblocks.io/txns"
 : > "$LOG"
 
@@ -190,7 +190,7 @@ if [[ -z "${SKIP_LOCK:-}" ]]; then
   KEYS_NOTE="$(near account list-keys "$REGISTRY" $NET now 2>&1 | tail -5)"
 fi
 
-# ── 5. Write JUDGES.md ──────────────────────────────────────────────────
+# ── 5. Write LEDGER.md ──────────────────────────────────────────────────
 {
   echo "# Canon on NEAR testnet: verifiable ledger"
   echo
@@ -221,5 +221,5 @@ fi
   echo '```'
 } > "$LEDGER"
 
-say "Done. Ledger written to JUDGES.md; full CLI output in scripts/deploy.log"
+say "Done. Ledger written to LEDGER.md; full CLI output in scripts/deploy.log"
 echo "Set NEXT_PUBLIC_CANON_CONTRACT=$REGISTRY in web/.env.local (and on Vercel)."

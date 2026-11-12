@@ -14,13 +14,11 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-[1280px] px-4 pt-14 text-center sm:px-6 sm:pt-20 lg:px-8 lg:pt-24">
           <Link
-            href="https://nearhackathon.com"
-            target="_blank"
-            rel="noreferrer"
+            href="/proof"
             className="inline-flex items-center gap-2 rounded-full border border-line-2 bg-white/[0.03] py-1 pl-1 pr-3 text-[12.5px] text-fg-2 backdrop-blur transition-colors hover:border-line-3 hover:text-fg"
           >
-            <span className="rounded-full bg-ember/15 px-2 py-0.5 font-mono text-[10.5px] text-ember">NEAR</span>
-            NFTs that do something
+            <span className="rounded-full bg-ok/15 px-2 py-0.5 font-mono text-[10.5px] text-ok">LIVE</span>
+            On NEAR · 0 admin keys · every claim verifiable
             <ArrowUpRight className="size-3.5 text-fg-3" />
           </Link>
           <h1 className="display mx-auto mt-7 max-w-[15ch] text-[48px] text-fg sm:text-[80px] lg:text-[104px]">
@@ -51,7 +49,7 @@ export default function Home() {
           {[
             ["0", "access keys on any vault"],
             ["1 tx", "per licence, end to end"],
-            ["3", "generations paid in the demo"],
+            ["3", "generations paid per licence"],
             ["100%", "of every payment accounted for"],
           ].map(([v, l]) => (
             <div key={l} className="px-2 py-8 md:px-8">
@@ -74,7 +72,7 @@ export default function Home() {
 
       {/* ── The account is the asset ─────────────────────── */}
       <section className="mx-auto max-w-[1280px] px-4 pt-28 sm:px-6 lg:px-8 lg:pt-40">
-        <SectionHead label="NFTs that do something" title={<>The NFT is the account.</>} body="Each work owns money, earns from its descendants and carries rights. Control moves with the token, and only with the token." />
+        <SectionHead label="Programmable NFTs" title={<>The NFT is the account.</>} body="Each work owns money, earns from its descendants and carries rights. Control moves with the token, and only with the token." />
         <AccountBento />
       </section>
 
@@ -99,6 +97,61 @@ export default function Home() {
         </div>
         <div className="mt-12">
           <GalleryMarquee />
+        </div>
+      </section>
+
+      {/* ── Who it's for ─────────────────────────────────── */}
+      <section className="mx-auto max-w-[1280px] px-4 pt-28 sm:px-6 lg:px-8 lg:pt-40">
+        <SectionHead label="Who it's for" title={<>One market, three sides.</>} body="Canon is for everyone in the chain of a creative work, from the first sketch to the studio that ships it." />
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {[
+            ["IP owners & communities", "Run an official derivative program. Approve the best community work into canon and earn on everything built from yours.", "/register"],
+            ["Creators & contributors", "Build on IP people already love, with permission on record and an automatic share of every licence, even after a sale.", "/register"],
+            ["Studios & brands", "One clearance verdict across every ancestor, one payment that pays everyone, and a licence NFT legal can verify.", "/explore"],
+          ].map(([t, b, href]) => (
+            <Link key={t} href={href} className="panel group block p-7 transition-colors hover:border-line-3">
+              <p className="text-[21px] font-medium tracking-[-0.03em] text-fg">{t}</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-fg-2">{b}</p>
+              <p className="mt-6 inline-flex items-center gap-1.5 text-sm text-fg-3 transition-colors group-hover:text-fg">
+                Get started <ArrowRight className="size-3.5" />
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Open & roadmap ───────────────────────────────── */}
+      <section className="mx-auto max-w-[1280px] px-4 pt-20 sm:px-6 lg:px-8">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="panel p-7 md:col-span-2">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-fg-3">Roadmap</p>
+            <div className="mt-5 grid gap-6 sm:grid-cols-3">
+              {[
+                ["Now", "Testnet live · NEP-171 & NEP-199 · 41 tests · open source", true],
+                ["Q1 2027", "Security review · mainnet · pilot programs with NEAR artists", false],
+                ["2027", "Clearance API · multi-parent works · fiat checkout", false],
+              ].map(([w, d, done]) => (
+                <div key={String(w)}>
+                  <p className={`flex items-center gap-2 text-sm font-medium ${done ? "text-ok" : "text-fg"}`}>
+                    <span className={`size-1.5 rounded-full ${done ? "bg-ok shadow-[0_0_8px_var(--ok)]" : "bg-white/30"}`} />
+                    {w}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-fg-2">{d}</p>
+                </div>
+              ))}
+            </div>
+            <Link href="/about" className="mt-6 inline-flex items-center gap-1.5 text-sm text-fg-2 hover:text-fg">
+              Mission, business model and roadmap <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+          <a href="https://github.com/flamiinngo/canon" target="_blank" rel="noreferrer" className="panel group block p-7 transition-colors hover:border-line-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-fg-3">Open source · MIT</p>
+            <p className="mt-5 text-[21px] font-medium tracking-[-0.03em] text-fg">Every line is public.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-fg-2">Contracts, app, tests and the deploy script that produced every transaction on the Proof page.</p>
+            <p className="mt-6 inline-flex items-center gap-1.5 font-mono text-[13px] text-fg-3 group-hover:text-fg">
+              github.com/flamiinngo/canon <ArrowUpRight className="size-3.5" />
+            </p>
+          </a>
         </div>
       </section>
 

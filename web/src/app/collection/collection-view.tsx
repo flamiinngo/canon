@@ -113,7 +113,7 @@ export function CollectionView() {
 
       {!account && (
         <div className="mt-6">
-          <Label>Or open a demo collector</Label>
+          <Label>Or explore a collector</Label>
           <div className="mt-3 grid gap-2 sm:grid-cols-3">
             {DEMO_COLLECTORS.map((d) => (
               <Link key={d.account} href={`/collection?account=${d.account}`} className="panel block p-4 transition-colors hover:border-line-3">

@@ -9,10 +9,23 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
+const description =
+  "Canon turns creative works into NEAR NFTs that own keyless vaults. Derivatives join a lineage with the original's approval, and every licence and resale pays the whole family tree in one transaction.";
+
 export const metadata: Metadata = {
-  title: "Canon — the rights layer for creative IP",
-  description:
-    "Canon turns creative works into NEAR accounts. Derivatives join a lineage with the original's approval, and every licence payment flows up the family tree in one transaction.",
+  metadataBase: new URL("https://canon.bootstate.xyz"),
+  title: { default: "Canon — the rights layer for creative IP", template: "%s" },
+  description,
+  applicationName: "Canon",
+  keywords: ["NEAR", "NFT", "creative IP", "licensing", "royalties", "NEP-171", "NEP-199", "derivatives"],
+  openGraph: {
+    type: "website",
+    url: "https://canon.bootstate.xyz",
+    siteName: "Canon",
+    title: "Canon — creative IP that pays its whole family tree",
+    description,
+  },
+  twitter: { card: "summary_large_image", title: "Canon — creative IP that pays its whole family tree", description },
 };
 
 export const viewport: Viewport = { themeColor: "#07080a", colorScheme: "dark" };

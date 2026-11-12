@@ -24,14 +24,15 @@ export function SiteFooter() {
           title="Trust"
           links={[
             ["Proof & threat model", "/proof"],
-            ["NEAR Hackathon", "https://nearhackathon.com"],
+            ["About & roadmap", "/about"],
+            ["Source code (MIT)", "https://github.com/flamiinngo/canon"],
             ["NEP-171 standard", "https://github.com/near/NEPs/blob/master/neps/nep-0171.md"],
           ]}
         />
       </div>
       <div className="mx-auto flex max-w-[1280px] flex-col gap-2 border-t border-line px-4 py-6 text-xs text-fg-3 sm:flex-row sm:justify-between sm:px-6 lg:px-8">
         <p>On-chain records show declarations and approvals. They are evidence, not copyright registration.</p>
-        <p className="font-mono">A Bootstate project · canon.bootstate.xyz</p>
+        <p className="font-mono">© 2026 Bootstate · canon.bootstate.xyz</p>
       </div>
     </footer>
   );

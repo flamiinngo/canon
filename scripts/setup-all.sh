@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One-shot setup: creates the two faucet-funded testnet accounts (if missing),
-# then deploys Canon, seeds the demo story and writes JUDGES.md.
+# then deploys Canon, seeds the demo story and writes LEDGER.md.
 #
 #   bash scripts/setup-all.sh [registry-name] [funder-name]
 # Defaults: canon-bootstate.testnet and canon-bootstate-demo.testnet

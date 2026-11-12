@@ -4,9 +4,8 @@
 
 <p align="center">
   <a href="https://testnet.nearblocks.io/address/canonhq.testnet"><img alt="NEAR testnet" src="https://img.shields.io/badge/NEAR-testnet%20live-b6ff5c?style=flat-square&labelColor=0f1115"></a>
-  <img alt="Track" src="https://img.shields.io/badge/Track%2010-NFTs%20That%20Do%20Something-ff6a3d?style=flat-square&labelColor=0f1115">
   <img alt="Tests" src="https://img.shields.io/badge/registry%20tests-41%20passing-3ee39b?style=flat-square&labelColor=0f1115">
-  <a href="JUDGES.md"><img alt="Ledger" src="https://img.shields.io/badge/testnet%20ledger-41%20tx%20%C2%B7%2011%20refused%20attacks-a98bff?style=flat-square&labelColor=0f1115"></a>
+  <a href="LEDGER.md"><img alt="Ledger" src="https://img.shields.io/badge/testnet%20ledger-41%20tx%20%C2%B7%2011%20refused%20attacks-a98bff?style=flat-square&labelColor=0f1115"></a>
   <img alt="Keys" src="https://img.shields.io/badge/admin%20keys-0-52d6ff?style=flat-square&labelColor=0f1115">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-eef0f3?style=flat-square&labelColor=0f1115"></a>
 </p>
@@ -17,13 +16,14 @@
 payment splits up the entire family tree (original artist, 3D sculptor, animator, every contributor) in a
 single transaction.**
 
-Built at **NEAR HACKATHON 2026** for **Track 10 · NFTs That Do Something** by Bootstate.
+**Canon is the rights layer for creative IP:** approvals, lineage-wide clearance, licensing and payouts for every
+work and everything built on it. Built by [Bootstate](https://canon.bootstate.xyz/about).
 
 | | |
 |---|---|
 | **Registry contract** | [`canonhq.testnet`](https://testnet.nearblocks.io/address/canonhq.testnet) · NEP-171 / 177 / 178 / 181 / 199 · **0 access keys** |
 | **Vault code** | 3.5 KB `no_std` contract, published as an immutable NEP-591 global contract · hash `Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw` |
-| **Proof** | [JUDGES.md](JUDGES.md): 41 real testnet transactions, including **11 attacks the contract refused** |
+| **Verifiable ledger** | [LEDGER.md](LEDGER.md): 41 real testnet transactions, including **11 attacks the contract refused** |
 | **Security** | [THREAT_MODEL.md](THREAT_MODEL.md): 27 attacks → defence → error code → test |
 | **Live app** | **[canon.bootstate.xyz](https://canon.bootstate.xyz)** · Next.js 16 on Netlify · reads and writes the live registry · or [run it in 2 commands](#run-it) |
 
@@ -77,7 +77,7 @@ sequenceDiagram
 > **Asset income follows the NFT. Authorship income follows people.** The owner's share lands in the work's vault
 > and changes hands with the token. Contributor shares are credited to the person and never move with a sale.
 
-## Try it (judges)
+## Try it in 60 seconds
 
 **No wallet needed** for the first four rows. Every row works on NEAR testnet.
 
@@ -106,7 +106,7 @@ near contract call-function as-read-only canonhq.testnet nft_tokens_for_owner \
 
 ## Security: the refusals are on-chain
 
-The track asks *what stops the old owner from keeping access?* Every answer below is a transaction anyone can open.
+*What stops a seller from keeping the money?* Every answer below is a transaction anyone can open.
 
 | Attack | Refused with | Transaction |
 |---|---|---|
@@ -197,7 +197,7 @@ cd contracts && cargo test -p canon-registry            # 41 tests
 (cd vault && RUSTUP_TOOLCHAIN=1.86.0 cargo near build non-reproducible-wasm --no-abi)   # 3.5 KB
 (cd registry && cargo near build non-reproducible-wasm)
 
-# Everything from scratch: faucet accounts → deploy → seed demo story → JUDGES.md → delete registry keys
+# Everything from scratch: faucet accounts → deploy → seed the sample lineage → LEDGER.md → delete registry keys
 bash scripts/setup-all.sh <registry>.testnet <funder>.testnet
 ```
 
@@ -206,7 +206,7 @@ contracts/registry   NEP-171 registry: lineage, approvals, clearance, payouts, l
 contracts/vault      no_std vault, 3.5 KB, registry-only release
 web/                 Next.js app: generative art engine, live chain layer, wallet, all pages
 scripts/             setup-all.sh (one shot) · deploy.sh (build, deploy, seed, ledger, lock)
-JUDGES.md            every testnet transaction from the seed run
+LEDGER.md            every testnet transaction from the seed run
 THREAT_MODEL.md      27 attacks, defences, error codes and tests
 ```
 
@@ -218,10 +218,22 @@ THREAT_MODEL.md      27 attacks, defences, error codes and tests
   blockchain, and Canon says so on every work rather than over-promising.
 * **No admin, by design.** Nobody, including us, can move a vault's money, freeze a work or upgrade the contract.
   The trade-off is deliberate: an owner who loses their keys must recover their NEAR account through their wallet.
-* **Testnet.** The rules allow testnet for every track, and it lets judges repeat every step with free faucet funds
+* **Testnet first.** Anyone can repeat every step with free faucet funds
   (demo prices are 0.2–1.5 Ⓝ). The same contracts deploy to mainnet unchanged.
 
-## Disclosure
+## Roadmap
+
+| When | Status | |
+|---|---|---|
+| November 2026 | **Shipped** | Registry and keyless vaults on NEAR testnet · approvals · lineage clearance · licence NFTs · NEP-199 resale royalties · 41 tests · MIT |
+| Q1 2027 | Planned | Independent security review · mainnet launch · pilot derivative programs with NEAR artists and collections · licence templates reviewed by IP counsel |
+| 2027 | Planned | Clearance API for studios and marketplaces · works with multiple parents · fiat checkout · program dashboards |
+
+Mission, audiences and business model: [canon.bootstate.xyz/about](https://canon.bootstate.xyz/about).
+
+## Hackathon submission and disclosure
+
+Canon was first built for NEAR HACKATHON 2026 (Track 10, *NFTs That Do Something*).
 
 * **Pre-hackathon code:** none. All code was written during the hackathon; the first commit is 2026-11-12.
 * **Libraries:** near-sdk, near-contract-standards, Next.js, React, Tailwind CSS, motion, lucide-react, clsx,

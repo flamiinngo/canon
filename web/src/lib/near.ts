@@ -185,7 +185,7 @@ export function accountExplorerUrl(accountId: string) {
   return `${EXPLORER}/address/${accountId}`;
 }
 
-/** Demo accounts seeded by scripts/deploy.sh, useful for judges without a wallet. */
+/** Sample collectors on testnet, so anyone can explore real NFTs without a wallet. */
 export const DEMO_COLLECTORS = [
   { account: "studio.canonhq-demo.testnet", note: "Studio that bought two licences" },
   { account: "eve.canonhq-demo.testnet", note: "Bought Relief, then withdrew its earnings" },
