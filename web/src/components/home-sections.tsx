@@ -425,7 +425,7 @@ export function RefusalTerminal() {
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
-        <span className="ml-3 truncate font-mono text-[11px] text-fg-3">cargo test -p canon-registry · 33 passed</span>
+        <span className="ml-3 truncate font-mono text-[11px] text-fg-3">cargo test -p canon-registry · 41 passed</span>
       </div>
       <ul className="divide-y divide-line font-mono text-[12.5px]">
         {REFUSALS.map(([a, code], i) => (

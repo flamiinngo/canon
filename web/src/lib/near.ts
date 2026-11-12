@@ -6,7 +6,7 @@ import type { Genome, PaletteName, Style, Transform } from "./art";
 import type { HistoryEvent, Work } from "./types";
 
 /** Deployed registry. Set NEXT_PUBLIC_CANON_CONTRACT="" to run in preview mode with demo data. */
-export const CONTRACT = process.env.NEXT_PUBLIC_CANON_CONTRACT ?? "canon-bootstate.testnet";
+export const CONTRACT = process.env.NEXT_PUBLIC_CANON_CONTRACT ?? "canonhq.testnet";
 export const NETWORK_ID = (process.env.NEXT_PUBLIC_NEAR_NETWORK as "testnet" | "mainnet") || "testnet";
 export const RPC_URL = process.env.NEXT_PUBLIC_NEAR_RPC || (NETWORK_ID === "mainnet" ? "https://rpc.mainnet.fastnear.com" : "https://test.rpc.fastnear.com");
 export const LIVE = CONTRACT.length > 0;
@@ -187,7 +187,7 @@ export function accountExplorerUrl(accountId: string) {
 
 /** Demo accounts seeded by scripts/deploy.sh, useful for judges without a wallet. */
 export const DEMO_COLLECTORS = [
-  { account: "studio.canon-bootstate-demo.testnet", note: "Studio that bought two licences" },
-  { account: "eve.canon-bootstate-demo.testnet", note: "Bought Relief, then withdrew its earnings" },
-  { account: "dee.canon-bootstate-demo.testnet", note: "Animator who owns Motion" },
+  { account: "studio.canonhq-demo.testnet", note: "Studio that bought two licences" },
+  { account: "eve.canonhq-demo.testnet", note: "Bought Relief, then withdrew its earnings" },
+  { account: "dee.canonhq-demo.testnet", note: "Animator who owns Motion" },
 ];

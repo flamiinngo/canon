@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://testnet.nearblocks.io/address/canon-bootstate.testnet"><img alt="NEAR testnet" src="https://img.shields.io/badge/NEAR-testnet%20live-b6ff5c?style=flat-square&labelColor=0f1115"></a>
+  <a href="https://testnet.nearblocks.io/address/canonhq.testnet"><img alt="NEAR testnet" src="https://img.shields.io/badge/NEAR-testnet%20live-b6ff5c?style=flat-square&labelColor=0f1115"></a>
   <img alt="Track" src="https://img.shields.io/badge/Track%2010-NFTs%20That%20Do%20Something-ff6a3d?style=flat-square&labelColor=0f1115">
-  <img alt="Tests" src="https://img.shields.io/badge/registry%20tests-33%20passing-3ee39b?style=flat-square&labelColor=0f1115">
-  <a href="JUDGES.md"><img alt="Ledger" src="https://img.shields.io/badge/testnet%20ledger-38%20tx%20%C2%B7%2011%20refused%20attacks-a98bff?style=flat-square&labelColor=0f1115"></a>
+  <img alt="Tests" src="https://img.shields.io/badge/registry%20tests-41%20passing-3ee39b?style=flat-square&labelColor=0f1115">
+  <a href="JUDGES.md"><img alt="Ledger" src="https://img.shields.io/badge/testnet%20ledger-41%20tx%20%C2%B7%2011%20refused%20attacks-a98bff?style=flat-square&labelColor=0f1115"></a>
   <img alt="Keys" src="https://img.shields.io/badge/admin%20keys-0-52d6ff?style=flat-square&labelColor=0f1115">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-eef0f3?style=flat-square&labelColor=0f1115"></a>
 </p>
@@ -21,10 +21,10 @@ Built at **NEAR HACKATHON 2026** for **Track 10 · NFTs That Do Something** by B
 
 | | |
 |---|---|
-| **Registry contract** | [`canon-bootstate.testnet`](https://testnet.nearblocks.io/address/canon-bootstate.testnet) · NEP-171 / 177 / 178 / 181 · **0 access keys** |
-| **Vault code** | 3.4 KB `no_std` contract, published as an immutable NEP-591 global contract · hash `8CsdQ7aVrqG9YXSUoxjuE8YMVnnPiEiCYjjfTHUoaBUH` |
-| **Proof** | [JUDGES.md](JUDGES.md): 38 real testnet transactions, including **11 attacks the contract refused** |
-| **Security** | [THREAT_MODEL.md](THREAT_MODEL.md): 23 attacks → defence → error code → test |
+| **Registry contract** | [`canonhq.testnet`](https://testnet.nearblocks.io/address/canonhq.testnet) · NEP-171 / 177 / 178 / 181 / 199 · **0 access keys** |
+| **Vault code** | 3.5 KB `no_std` contract, published as an immutable NEP-591 global contract · hash `Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw` |
+| **Proof** | [JUDGES.md](JUDGES.md): 41 real testnet transactions, including **11 attacks the contract refused** |
+| **Security** | [THREAT_MODEL.md](THREAT_MODEL.md): 27 attacks → defence → error code → test |
 | **App** | Next.js 16 · reads and writes the live registry · [run it in 2 commands](#run-it) |
 
 ---
@@ -35,16 +35,18 @@ A normal NFT records who owns a picture. A Canon NFT **is an account with money 
 
 | The NFT… | How | Proof |
 |---|---|---|
-| **owns a wallet** | Each work gets a sub-account `<work>.canon-bootstate.testnet` with **no access keys**, running the shared vault code | [`ember-motion.canon-bootstate.testnet`](https://testnet.nearblocks.io/address/ember-motion.canon-bootstate.testnet) |
-| **earns from its descendants** | Every licence of a derivative sends a share upstream to each ancestor's vault | [licence tx `AjoPWX…`](https://testnet.nearblocks.io/txns/AjoPWXFtebxkJTwLVdaDLeVBNz8GxoyySYnijppTxrQD) |
-| **carries rights** | Derivatives exist only with the parent owner's on-chain approval; clearance walks every ancestor | [refused `ERR_NOT_CLEARED`](https://testnet.nearblocks.io/txns/CzeASXdLC7mFtJTyX1N8HcHdowPdQpkENtZikVTc6acY) |
-| **moves money with ownership** | Sell the NFT and its vault, plus all future income, goes to the buyer; the seller is locked out | [seller refused `ERR_NOT_OWNER`](https://testnet.nearblocks.io/txns/FAeoHSyP15ZkjNjRb4tDvRCDSiKnhw5sRuPx34rPWRUZ) → [buyer withdraws](https://testnet.nearblocks.io/txns/uvz5MXAvnQBbmBStLstUHzY3X8LzTuo8E7mPeDrwiQP) |
+| **owns a wallet** | Each work gets a sub-account `<work>.canonhq.testnet` with **no access keys**, running the shared vault code | [`ember-motion.canonhq.testnet`](https://testnet.nearblocks.io/address/ember-motion.canonhq.testnet) |
+| **earns from its descendants** | Every licence of a derivative sends a share upstream to each ancestor's vault | [licence tx `HrgXyS…`](https://testnet.nearblocks.io/txns/HrgXySX1m4uHA21ynYgLrCvCBxJNg2n8syFSWGAm8U2a) |
+| **carries rights** | Derivatives exist only with the parent owner's on-chain approval; clearance walks every ancestor | [refused `ERR_NOT_CLEARED`](https://testnet.nearblocks.io/txns/4bSvXfN9AWuoMbN4mmzS8rMB71nwfDGqzngQRN9czHwQ) |
+| **moves money with ownership** | Sell the NFT and its vault, plus all future income, goes to the buyer; the seller is locked out | [seller refused `ERR_NOT_OWNER`](https://testnet.nearblocks.io/txns/BV24rL8mdsXAFYFPsUEYngqGXhSsUEECWc1dr57BkRu3) → [buyer withdraws](https://testnet.nearblocks.io/txns/663gSSN18Rz6ZTwjgr1pzdC7xBVSDbkQnV6W6GXnztyc) |
+| **earns on resale** | NEP-199 `nft_payout` / `nft_transfer_payout`: any marketplace that sells a work pays every ancestor's vault its share | [sale `F2G9dc…`](https://testnet.nearblocks.io/txns/F2G9dcGT33nxmmsmCKngJ67UKQhd5c3rD9i2Dq1vBDVo) → [royalty into Ember's vault](https://testnet.nearblocks.io/txns/EbYDjVU4Jv7oVvZxJqkCWeQcpVYu22cNyph9GjMaEQgv) → [Ada withdraws it](https://testnet.nearblocks.io/txns/BKJvR3RrVDgsro4G4PRL6DWkr187VLitmSjCrzVt6GVH) |
+| **shows its art anywhere** | Token `media` is a hosted 1024 px image, so wallets and explorers render it | [`docs/art/`](docs/art) |
 | **is a key** | The studio receives a **licence NFT**; holding it unlocks the source files, and it can be resold | `nft_tokens_for_owner(studio…)` → `licence-0`, `licence-1` |
 
 ## The payment, step by step
 
 A studio licenses **Ember Field — Motion** for **1.5 Ⓝ**. One call, `buy_license`, does all of this
-([transaction](https://testnet.nearblocks.io/txns/AjoPWXFtebxkJTwLVdaDLeVBNz8GxoyySYnijppTxrQD)):
+([transaction](https://testnet.nearblocks.io/txns/HrgXySX1m4uHA21ynYgLrCvCBxJNg2n8syFSWGAm8U2a)):
 
 ```mermaid
 sequenceDiagram
@@ -84,7 +86,7 @@ sequenceDiagram
 | `cd web && pnpm i && pnpm dev`, open `localhost:3000` | Live hero: one licence splitting across three generations with a synced transaction log |
 | **Explore** → **Ember Field — Motion** | Clearance across 3 generations · contributor splits · **The NFT** panel (contract, token ID, holder, raw `nft_token` metadata) · licences issued and who holds them · lineage graph |
 | **Collection** → *Studio* demo collector | The studio's two **licence NFTs**, read with `nft_tokens_for_owner` |
-| **Proof** | All 38 testnet transactions with explorer links; refused attacks highlighted |
+| **Proof** | All 41 testnet transactions with explorer links; refused attacks highlighted |
 | Connect any testnet wallet → **License** a cleared work | One `buy_license` transaction; payouts shown before you pay; licence NFT appears in your Collection; **Source file** downloads |
 | **Register** → *A derivative* → pick a parent | A pending work with its own keyless vault, waiting in the parent owner's **Review** queue |
 | Open **Moth Light — Fragments** | "Not cleared": its parent forbids commercial use |
@@ -92,14 +94,14 @@ sequenceDiagram
 ### Verify on-chain yourself
 
 ```bash
-near account list-keys canon-bootstate.testnet network-config testnet now                 # → no keys
-near account list-keys ember-motion.canon-bootstate.testnet network-config testnet now    # → no keys
-near contract call-function as-read-only canon-bootstate.testnet quote_license \
+near account list-keys canonhq.testnet network-config testnet now                 # → no keys
+near account list-keys ember-motion.canonhq.testnet network-config testnet now    # → no keys
+near contract call-function as-read-only canonhq.testnet quote_license \
   json-args '{"token_id":"ember-motion"}' network-config testnet now                       # → the split above
-near contract call-function as-read-only canon-bootstate.testnet clearance \
+near contract call-function as-read-only canonhq.testnet clearance \
   json-args '{"token_id":"moth-fragments"}' network-config testnet now                     # → cleared: false + reason
-near contract call-function as-read-only canon-bootstate.testnet nft_tokens_for_owner \
-  json-args '{"account_id":"studio.canon-bootstate-demo.testnet"}' network-config testnet now
+near contract call-function as-read-only canonhq.testnet nft_tokens_for_owner \
+  json-args '{"account_id":"studio.canonhq-demo.testnet"}' network-config testnet now
 ```
 
 ## Security: the refusals are on-chain
@@ -108,17 +110,17 @@ The track asks *what stops the old owner from keeping access?* Every answer belo
 
 | Attack | Refused with | Transaction |
 |---|---|---|
-| Seller withdraws after selling the NFT | `ERR_NOT_OWNER` | [`FAeoHS…`](https://testnet.nearblocks.io/txns/FAeoHSyP15ZkjNjRb4tDvRCDSiKnhw5sRuPx34rPWRUZ) |
-| Seller drains the vault while the NFT is listed | `ERR_TOKEN_LISTED` | [`CNLgN8…`](https://testnet.nearblocks.io/txns/CNLgN8gkA8UDDrAQNE4itvjVXxTp89ah871fQ8MWT541) |
-| Stranger withdraws from a vault | `ERR_NOT_OWNER` | [`GzD729…`](https://testnet.nearblocks.io/txns/GzD729gi2n3f97MoQ4ArLC37ERh7Xoyvm2UMkbHeNkFf) |
-| Anyone calls a vault directly | `ERR_ONLY_REGISTRY` | [`NaJwfC…`](https://testnet.nearblocks.io/txns/NaJwfCk58Ba4zqqYyoQvrrKSK6bg9LewrNZKhEADfRR) |
-| Non-owner approves a derivative | `ERR_NOT_PARENT_OWNER` | [`EPa2Ws…`](https://testnet.nearblocks.io/txns/EPa2WsTM7bUhEZVQQF2ZDTTSavFzatuY3oPHEwJmxrT7) |
-| Licence a work with a non-commercial ancestor | `ERR_NOT_CLEARED` | [`CzeASX…`](https://testnet.nearblocks.io/txns/CzeASXdLC7mFtJTyX1N8HcHdowPdQpkENtZikVTc6acY) |
-| Licence a revoked derivative | `ERR_NOT_CLEARED` | [`FT5guf…`](https://testnet.nearblocks.io/txns/FT5gufJ3c5vsUUturgrsbU3BMcce7MjdjExYwiNToAtC) |
-| Licence a pending derivative | `ERR_NOT_CLEARED` | [`947NfY…`](https://testnet.nearblocks.io/txns/947NfYdnrtym2eeozWJwWi3BMvzK2g1gHhTRwXow931e) |
-| Derive from a closed work | `ERR_DERIVATIVES_CLOSED` | [`Ni4CKw…`](https://testnet.nearblocks.io/txns/Ni4CKwb75iQDkVXHFdDcMgMmPrFH4ct8Q8mcj4kVmV7) |
-| Splits that don't total 100% | `ERR_BAD_SPLITS` | [`B7LnZV…`](https://testnet.nearblocks.io/txns/B7LnZV5uTaDDs3YHyEMzVcrAzEaKnqViBdF7RfCfEbrM) |
-| Claim the same earnings twice | `ERR_NOTHING_TO_CLAIM` | [`26T2f7…`](https://testnet.nearblocks.io/txns/26T2f7ZJWBre6RwEBkoDrGi69cvh7Tf2yX4hVbe16xx5) |
+| Seller withdraws after selling the NFT | `ERR_NOT_OWNER` | [`BV24rL…`](https://testnet.nearblocks.io/txns/BV24rL8mdsXAFYFPsUEYngqGXhSsUEECWc1dr57BkRu3) |
+| Seller drains the vault while the NFT is listed | `ERR_TOKEN_LISTED` | [`6825sV…`](https://testnet.nearblocks.io/txns/6825sV2P2vweDqrmfRebjBU9j413tpipeWV5G56reuvH) |
+| Stranger withdraws from a vault | `ERR_NOT_OWNER` | [`AAeV3S…`](https://testnet.nearblocks.io/txns/AAeV3SwDaLqRPkaZpnYr5JVrcN1gCvNN1RgEoiuWtZMH) |
+| Anyone calls a vault directly | `ERR_ONLY_REGISTRY` | [`6fxRFG…`](https://testnet.nearblocks.io/txns/6fxRFGxnNw1ws7XTRw3pEctBtmjVegZuUaYf5iqFBuKG) |
+| Non-owner approves a derivative | `ERR_NOT_PARENT_OWNER` | [`HbPJrG…`](https://testnet.nearblocks.io/txns/HbPJrGFZJrUJF4K3LwbQ8xBJ1S9bfkoMFLMw1njYU1iM) |
+| Licence a work with a non-commercial ancestor | `ERR_NOT_CLEARED` | [`4bSvXf…`](https://testnet.nearblocks.io/txns/4bSvXfN9AWuoMbN4mmzS8rMB71nwfDGqzngQRN9czHwQ) |
+| Licence a revoked derivative | `ERR_NOT_CLEARED` | [`4goc1M…`](https://testnet.nearblocks.io/txns/4goc1MyPKzs8rak9boq7bdnSnmdMoi2fm97DeMgYpDYF) |
+| Licence a pending derivative | `ERR_NOT_CLEARED` | [`6Hrqux…`](https://testnet.nearblocks.io/txns/6HrquxkqPHfyfYFmEZ12GN9LMkXewBKeiZU8skfK4bBU) |
+| Derive from a closed work | `ERR_DERIVATIVES_CLOSED` | [`6S7b5n…`](https://testnet.nearblocks.io/txns/6S7b5nYG2De1rHVQMEnbqXdjoBiTrPYYrwmxQULDoctJ) |
+| Splits that don't total 100% | `ERR_BAD_SPLITS` | [`GQNgq9…`](https://testnet.nearblocks.io/txns/GQNgq9VrPjEMjnA2nVdFbrHoBwFGzRz5Hr2TwKvYR7wx) |
+| Claim the same earnings twice | `ERR_NOTHING_TO_CLAIM` | [`5mNeHj…`](https://testnet.nearblocks.io/txns/5mNeHjdts6zGeUpwiZs2Mn7j1vaUyJKTe15nnT2VyngB) |
 
 Attacks that need a race (selling *during* a withdrawal) or a failure (vault creation or release failing) are
 covered by unit tests: `cannot_sell_while_a_withdrawal_is_in_flight`, `cannot_withdraw_twice_concurrently`,
@@ -126,7 +128,7 @@ covered by unit tests: `cannot_sell_while_a_withdrawal_is_in_flight`, `cannot_wi
 `quote_matches_price_exactly_for_awkward_amounts`. The full list is in [THREAT_MODEL.md](THREAT_MODEL.md).
 
 **No master key.** The registry has no owner, pause, upgrade or override method, and its access keys were deleted
-in [`45xDjt…`](https://testnet.nearblocks.io/txns/45xDjthrVNa2zWBkPk2qSJoBpFyCFQHjjYZFXUuqjUjU). Vault code is
+in [`Ck5zh9…`](https://testnet.nearblocks.io/txns/Ck5zh9yc4mYKkbfRndWQazufKViYokjqn7wihpsn1eKD). Vault code is
 referenced by hash, so it cannot change either.
 
 ## Architecture
@@ -139,11 +141,11 @@ flowchart LR
       W["near-connect wallet"]
     end
     subgraph NEAR["NEAR testnet"]
-      REG["canon-bootstate.testnet<br/>registry · Rust · near-sdk 5.30<br/>NEP-171/177/178/181"]
+      REG["canonhq.testnet<br/>registry · Rust · near-sdk 5.30<br/>NEP-171/177/178/181"]
       V1["ember vault · 0 keys"]
       V2["ember-relief vault · 0 keys"]
       V3["ember-motion vault · 0 keys"]
-      G[("NEP-591 global code<br/>3.4 KB vault, by hash")]
+      G[("NEP-591 global code<br/>3.5 KB vault, by hash")]
     end
     UI -- "RPC views" --> REG
     W -- "register · approve · buy_license<br/>withdraw · claim · nft_transfer" --> REG
@@ -180,6 +182,7 @@ resemblance is visible. Uploaded files stay with the creator; only their SHA-256
 | `withdraw(token_id)` | current NFT owner, 1 yN | Move the vault balance to the owner (locked while in flight) |
 | `claim()` | contributors | Collect credited shares |
 | `get_work` · `get_works` · `get_licences` · `has_licence` · `get_claimable` | views | Read everything the UI shows |
+| `nft_payout` / `nft_transfer_payout` | NEP-199 | Resale royalties: each ancestor's vault gets its `upstream_bps` cascade; the seller keeps the rest |
 | `nft_*` | NEP-171/177/178/181 | Standard NFT interface (transfer blocked while a withdrawal is in flight) |
 
 ## Run it
@@ -190,8 +193,8 @@ cd web && pnpm install && pnpm dev                      # http://localhost:3000
 # NEXT_PUBLIC_CANON_CONTRACT=<account> points at another registry; "" = preview mode with demo data
 
 # Contracts (Linux / macOS / WSL; near-sdk 5.30 needs Rust ≥ 1.95)
-cd contracts && cargo test -p canon-registry            # 33 tests
-(cd vault && RUSTUP_TOOLCHAIN=1.86.0 cargo near build non-reproducible-wasm --no-abi)   # 3.4 KB
+cd contracts && cargo test -p canon-registry            # 41 tests
+(cd vault && RUSTUP_TOOLCHAIN=1.86.0 cargo near build non-reproducible-wasm --no-abi)   # 3.5 KB
 (cd registry && cargo near build non-reproducible-wasm)
 
 # Everything from scratch: faucet accounts → deploy → seed demo story → JUDGES.md → delete registry keys
@@ -199,22 +202,24 @@ bash scripts/setup-all.sh <registry>.testnet <funder>.testnet
 ```
 
 ```
-contracts/registry   NEP-171 registry: lineage, approvals, clearance, payouts, licences, withdrawals (+ 33 tests)
-contracts/vault      no_std vault, 3.4 KB, registry-only release
+contracts/registry   NEP-171 registry: lineage, approvals, clearance, payouts, licences, withdrawals (+ 41 tests)
+contracts/vault      no_std vault, 3.5 KB, registry-only release
 web/                 Next.js app: generative art engine, live chain layer, wallet, all pages
 scripts/             setup-all.sh (one shot) · deploy.sh (build, deploy, seed, ledger, lock)
 JUDGES.md            every testnet transaction from the seed run
-THREAT_MODEL.md      23 attacks, defences, error codes and tests
+THREAT_MODEL.md      27 attacks, defences, error codes and tests
 ```
 
-## Honest limits
+## Scope and design decisions
 
-* **Copyright truth.** A registration is a creator's declaration plus a file hash. It is evidence, not a copyright
-  registration, and the app says so on every work.
-* **Secondary-sale royalties (NEP-199)** are not implemented; licence income is the revenue path.
-* **Testnet only.** Demo prices are small (0.2–1.5 Ⓝ) so judges can repeat every step with faucet funds.
-* **Key loss.** There is deliberately no admin override. Lost keys mean an unreachable vault until the owner recovers
-  their account.
+* **On-chain records are evidence, not a court.** A registration is the creator's signed declaration plus a file
+  hash and a timestamp; approvals are signed by the parent's owner. That is strong, public evidence of who claimed
+  and approved what, and when. Whether a claim is legally true is decided by contracts and courts, not by any
+  blockchain, and Canon says so on every work rather than over-promising.
+* **No admin, by design.** Nobody, including us, can move a vault's money, freeze a work or upgrade the contract.
+  The trade-off is deliberate: an owner who loses their keys must recover their NEAR account through their wallet.
+* **Testnet.** The rules allow testnet for every track, and it lets judges repeat every step with free faucet funds
+  (demo prices are 0.2–1.5 Ⓝ). The same contracts deploy to mainnet unchanged.
 
 ## Disclosure
 

@@ -54,7 +54,7 @@ export default function ProofPage() {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         {[
-          ["Registry unit tests", "33 passing", "text-ok"],
+          ["Registry unit tests", "41 passing", "text-ok"],
           ["Attacks refused on testnet", `${LEDGER.filter((r) => r.refused).length} of ${LEDGER.filter((r) => r.refused).length}`, "text-ok"],
           ["Keys on the registry and vaults", "0", "text-ok"],
         ].map(([k, v, c]) => (
