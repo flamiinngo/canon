@@ -57,7 +57,7 @@ web/ (Next.js 16, Tailwind 4)          contracts/ (Rust, near-sdk 5.30)
   ├─ live data via NEAR RPC views        │    register_work · approve · reject · revoke
   └─ wallet via @hot-labs/near-connect   │    clearance · quote_license · buy_license
                                          │    withdraw (locked) · claim · views
-                                         └─ vault     release(to, amount), registry-only
+                                         └─ vault     no_std, 3.4 KB: release(to, amount), registry-only
 ```
 
 * **Vaults** are sub-accounts created by the registry in one batch:
@@ -85,9 +85,9 @@ cd web && pnpm install && pnpm dev            # http://localhost:3000
 echo "NEXT_PUBLIC_CANON_CONTRACT=<registry>.testnet" > web/.env.local
 
 # Contracts (Linux/macOS/WSL)
-cd contracts && cargo test --workspace         # 37 unit tests
-cargo near build non-reproducible-wasm --manifest-path vault/Cargo.toml
-cargo near build non-reproducible-wasm --manifest-path registry/Cargo.toml
+cd contracts && cargo test -p canon-registry   # 33 unit tests
+(cd vault && RUSTUP_TOOLCHAIN=1.86.0 cargo near build non-reproducible-wasm --no-abi)   # 3.4 KB
+(cd registry && cargo near build non-reproducible-wasm)
 # Deploy + seed the demo lineage + record judge transactions
 bash scripts/deploy.sh <registry>.testnet <funder>.testnet
 ```

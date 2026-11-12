@@ -324,12 +324,7 @@ impl Canon {
             .create_account()
             .transfer(VAULT_DEPOSIT)
             .use_global_contract(self.vault_code_hash)
-            .function_call(
-                "new".to_string(),
-                json!({ "registry": env::current_account_id() }).to_string().into_bytes(),
-                NearToken::from_yoctonear(0),
-                GAS_VAULT_INIT,
-            )
+            .function_call("new".to_string(), vec![], NearToken::from_yoctonear(0), GAS_VAULT_INIT)
             .then(
                 Self::ext(env::current_account_id())
                     .with_static_gas(GAS_CALLBACK)
@@ -526,9 +521,10 @@ impl Canon {
         work.locked = true;
         let amount = work.vault_balance;
 
-        ext_vault::ext(vault_id)
-            .with_static_gas(GAS_RELEASE)
-            .release(owner.clone(), U128(amount))
+        // The vault takes Borsh args (String to, u128 amount); see contracts/vault.
+        let args = near_sdk::borsh::to_vec(&(owner.to_string(), amount)).unwrap_or_else(|_| env::panic_str("ERR_ARGS"));
+        Promise::new(vault_id)
+            .function_call("release".to_string(), args, NearToken::from_yoctonear(0), GAS_RELEASE)
             .then(Self::ext(env::current_account_id()).with_static_gas(GAS_CALLBACK).on_withdraw(token_id, owner, U128(amount)))
     }
 
@@ -724,12 +720,6 @@ impl Canon {
             created_at_ms: w.created_at_ms,
         }
     }
-}
-
-#[near_sdk::ext_contract(ext_vault)]
-#[allow(dead_code)]
-trait Vault {
-    fn release(&mut self, to: AccountId, amount: U128) -> Promise;
 }
 
 // ─────────────────────────── NEP-171 / 177 / 178 / 181 ───────────────────────────

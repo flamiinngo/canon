@@ -1,22 +1,14 @@
 [package]
 name = "canon-vault"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/bootstate/canon"
-description = "Keyless per-work vault for Canon. Obeys only the registry."
+description = "Keyless per-work vault for Canon. no_std, registry-only, published as an immutable NEP-591 global contract."
 
 [lib]
-crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
-near-sdk = "5.30.1"
 
-[package.metadata.near.reproducible_build]
-image = "sourcescan/cargo-near:0.23.0-rust-1.86.0"
-image_digest = ""
-passed_env = []
-container_build_command = ["cargo", "near", "build", "non-reproducible-wasm", "--locked"]
-
-[dev-dependencies]
-near-sdk = { version = "5.30.1", features = ["unit-testing"] }
+[package.metadata.near]
+min_protocol_version = 84

@@ -5,7 +5,7 @@ every way we could think of for a seller (or anyone else) to take money or right
 should not have, the defence in the contracts, and the test that proves it.
 
 Contracts: `contracts/registry` (NEP-171 registry) and `contracts/vault` (per-work vault).
-Tests: `cargo test --workspace` in `contracts/` (37 unit tests).
+Tests: `cargo test -p canon-registry` in `contracts/` (33 unit tests) plus the testnet ledger in [JUDGES.md](JUDGES.md), where every attack below that can be sent as a transaction is sent, and refused.
 
 ## Trust model
 
@@ -17,8 +17,10 @@ Tests: `cargo test --workspace` in `contracts/` (37 unit tests).
 | Contributor | Claim their credited shares | Lose credit when the NFT is sold |
 | Deployer | Nothing after deploy: the registry has no owner/admin methods and its keys are deleted | — |
 
-The vault code is a NEP-591 **global contract referenced by code hash**, so every vault runs
-byte-identical code that no one can change.
+The vault is a dependency-free `no_std` contract (3.4 KB) published as a NEP-591 **global
+contract referenced by code hash**, so every vault runs byte-identical code that no one can change.
+`new()` records its caller as the registry; the registry calls it in the same batch that creates
+the account, so nobody can initialise a vault first.
 
 ## Attacks and defences
 
@@ -30,8 +32,8 @@ byte-identical code that no one can change.
 | 4 | Seller lists the NFT on a marketplace, then drains the vault before the buyer pays | `withdraw` refuses while the token has any NEP-178 approval | `ERR_TOKEN_LISTED` | `cannot_drain_vault_while_listed_for_sale` |
 | 5 | Vault release fails (e.g. receiver deleted) and the balance is lost or double counted | Callback unlocks and only decrements the tracked balance on success | — | `failed_withdrawal_unlocks_and_keeps_the_balance` |
 | 6 | Seller keeps a key on the vault account | Vault batch is `CreateAccount + Transfer + UseGlobalContract + FunctionCall(new)`, never `AddKey` | — | `vault_is_created_without_any_access_key` |
-| 7 | Anyone calls the vault directly | `release` and `new` require `predecessor == registry` | `ERR_ONLY_REGISTRY` | vault: `stranger_cannot_release`, `only_registry_can_initialise` |
-| 8 | Vault releases more than it holds and breaks storage staking | `release` caps at balance minus storage stake | `ERR_INSUFFICIENT_BALANCE` | vault: `cannot_release_more_than_available` |
+| 7 | Anyone calls the vault directly | `release` and `new` require `predecessor == registry` | `ERR_ONLY_REGISTRY` | testnet ledger: direct `release` call on a vault |
+| 8 | Vault releases more than it holds and breaks storage staking | `release` caps at balance minus storage stake | `ERR_INSUFFICIENT_BALANCE` | code review: `contracts/vault/src/lib.rs` (3.4 KB, no dependencies) |
 | 9 | Stranger approves a derivative into someone's lineage | `approve`/`reject`/`revoke` require the parent's **current** owner | `ERR_NOT_PARENT_OWNER` | `stranger_cannot_approve_derivative`, `previous_parent_owner_cannot_approve_after_selling` |
 | 10 | Approval sent from a limited (function-call) key, e.g. a compromised dApp key | Owner-sensitive calls require exactly 1 yoctoNEAR, which function-call keys cannot attach | NEP-141 style one-yocto | `approval_requires_full_access_key_signature`, `withdraw_requires_full_access_key_signature` |
 | 11 | Studio licenses a derivative whose ancestor forbids commercial use | `buy_license` re-computes clearance across the whole lineage | `ERR_NOT_CLEARED` | `non_commercial_ancestor_blocks_licence` |

@@ -27,8 +27,8 @@ export default function ProofPage() {
       </Label>
       <h1 className="display mt-5 max-w-[16ch] text-[48px] text-fg sm:text-[72px]">Every way a seller could try to keep the money.</h1>
       <p className="mt-5 max-w-2xl text-fg-2">
-        This is the threat model the contracts are built against. Every row is covered by a unit test in the registry or vault
-        contract, and after deployment each refusal is reproduced as a testnet transaction.
+        This is the threat model the contracts are built against. Every row is covered by a unit test in the registry contract or
+        by a refused testnet transaction, and after deployment each refusal is reproduced as a testnet transaction.
       </p>
 
       <div className="panel noise mt-12 overflow-hidden">
@@ -53,7 +53,7 @@ export default function ProofPage() {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         {[
-          ["Contract unit tests", "37 passing", "text-ok"],
+          ["Registry unit tests", "33 passing", "text-ok"],
           ["Testnet transactions", "After deploy", "text-fg-2"],
           ["Admin keys", "0", "text-ok"],
         ].map(([k, v, c]) => (
