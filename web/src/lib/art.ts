@@ -92,9 +92,10 @@ function drawFlow(ctx: Ctx, S: number, pal: readonly string[], rand: () => numbe
     ctx.globalAlpha = 0.55 + rand() * 0.45;
     ctx.lineWidth = w;
     if (relief) {
-      ctx.shadowColor = "rgba(0,0,0,0.65)";
-      ctx.shadowBlur = 6 * (S / 640);
-      ctx.shadowOffsetY = 3.5 * (S / 640);
+      ctx.shadowColor = "rgba(0,0,0,0.85)";
+      ctx.shadowBlur = 9 * (S / 640);
+      ctx.shadowOffsetX = 2.5 * (S / 640);
+      ctx.shadowOffsetY = 6 * (S / 640);
     }
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -246,9 +247,9 @@ function applyMotionStreak(ctx: Ctx, S: number) {
 function applyFinish(ctx: Ctx, S: number, relief: boolean) {
   if (relief) {
     const spec = ctx.createLinearGradient(0, 0, S, S);
-    spec.addColorStop(0, "rgba(255,255,255,0.16)");
-    spec.addColorStop(0.45, "rgba(255,255,255,0)");
-    spec.addColorStop(1, "rgba(0,0,0,0.25)");
+    spec.addColorStop(0, "rgba(255,240,220,0.28)");
+    spec.addColorStop(0.4, "rgba(255,255,255,0)");
+    spec.addColorStop(1, "rgba(0,0,0,0.45)");
     ctx.fillStyle = spec;
     ctx.fillRect(0, 0, S, S);
   }

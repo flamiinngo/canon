@@ -4,6 +4,7 @@ import { childrenOf, generationOf, getWork } from "@/lib/data";
 import type { Work } from "@/lib/types";
 import { Artwork } from "./artwork";
 import { StatusPill } from "./ui";
+import { cn } from "@/lib/cn";
 
 export function WorkCard({ work }: { work: Work }) {
   const gen = generationOf(work.id);
@@ -27,11 +28,11 @@ export function WorkCard({ work }: { work: Work }) {
         </div>
       </div>
       <div className="flex items-center justify-between gap-2 px-1 pt-3 text-[12px]">
-        <span className={cleared ? "flex items-center gap-1.5 text-ok" : "flex items-center gap-1.5 text-fg-3"}>
+        <span className={cn("flex min-w-0 items-center gap-1.5 truncate", cleared ? "text-ok" : "text-fg-3")}>
           <span className={`size-1.5 rounded-full ${cleared ? "bg-ok shadow-[0_0_8px_var(--ok)]" : "bg-white/20"}`} />
-          {cleared ? "Commercially cleared" : "Not licensable"}
+          {cleared ? <><span className="sm:hidden">Cleared</span><span className="hidden sm:inline">Commercially cleared</span></> : "Not licensable"}
         </span>
-        <span className="num text-fg-2">{cleared ? `${formatNear(work.terms.priceNear, 0)} Ⓝ` : parent ? `from ${parent.title.split("—")[0].trim()}` : `${kids} derivative${kids === 1 ? "" : "s"}`}</span>
+        <span className="num shrink-0 whitespace-nowrap text-fg-2">{cleared ? `${formatNear(work.terms.priceNear, 0)} Ⓝ` : parent ? `from ${parent.title.split("—")[0].trim()}` : `${kids} derivative${kids === 1 ? "" : "s"}`}</span>
       </div>
     </Link>
   );

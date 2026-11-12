@@ -86,8 +86,8 @@ export function HowItWorks() {
             data-i={i}
             className="flex min-h-0 flex-col justify-center border-t border-line py-10 lg:min-h-[62vh] lg:py-0"
           >
-            <p className={cn("font-mono text-sm transition-colors duration-500", active === i ? "text-ember" : "text-fg-3")}>{s.k}</p>
-            <h3 className={cn("mt-3 text-[28px] font-medium tracking-[-0.035em] transition-colors duration-500 sm:text-[34px]", active === i ? "text-fg" : "text-fg-3 lg:text-fg-3")}>{s.title}</h3>
+            <p className={cn("font-mono text-sm transition-colors duration-500", active === i ? "text-ember" : "text-ember lg:text-fg-3")}>{s.k}</p>
+            <h3 className={cn("mt-3 text-[28px] font-medium tracking-[-0.035em] transition-colors duration-500 sm:text-[34px]", active === i ? "text-fg" : "text-fg lg:text-fg-3")}>{s.title}</h3>
             <p className="mt-4 max-w-md text-[16px] leading-relaxed text-fg-2">{s.body}</p>
             <div className="panel mt-8 flex items-center justify-center overflow-hidden p-6 lg:hidden">
               <StepVisual i={i} />

@@ -10,17 +10,17 @@ const CYCLE = 9000; // ms
 const HOP = 950; // ms per edge
 const GEN = ["#ff6a3d", "#a98bff", "#52d6ff", "#b6ff5c"];
 
-type NodeDef = { id: string; x: number; y: number; gen: number; pending?: boolean };
+type NodeDef = { id: string; x: number; y: number; gen: number; pending?: boolean; mx: number };
 
 // Normalised layout (desktop). Mobile compresses horizontally.
 const NODES: NodeDef[] = [
-  { id: "ember", x: 0.5, y: 0.17, gen: 0 },
-  { id: "ember-relief", x: 0.3, y: 0.47, gen: 1 },
-  { id: "ember-nocturne", x: 0.58, y: 0.47, gen: 1 },
-  { id: "ember-pixel", x: 0.8, y: 0.47, gen: 1, pending: true },
-  { id: "ember-motion", x: 0.3, y: 0.78, gen: 2 },
+  { id: "ember", x: 0.5, y: 0.17, gen: 0, mx: 0.5 },
+  { id: "ember-relief", x: 0.3, y: 0.47, gen: 1, mx: 0.17 },
+  { id: "ember-nocturne", x: 0.58, y: 0.47, gen: 1, mx: 0.5 },
+  { id: "ember-pixel", x: 0.8, y: 0.47, gen: 1, pending: true, mx: 0.83 },
+  { id: "ember-motion", x: 0.3, y: 0.78, gen: 2, mx: 0.17 },
 ];
-const STUDIO = { x: 0.08, y: 0.94 };
+const STUDIO = { x: 0.08, y: 0.94, mx: 0.62, my: 0.8 };
 
 export function HeroScene({ className }: { className?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -83,10 +83,9 @@ export function HeroScene({ className }: { className?: string }) {
       }),
     );
 
-    const pos = (n: { x: number; y: number }) => {
+    const pos = (n: { x: number; y: number; mx: number; my?: number }) => {
       const mobile = W < 640;
-      const x = mobile ? 0.08 + n.x * 0.84 : n.x;
-      return { x: x * W, y: n.y * H };
+      return { x: (mobile ? n.mx : n.x) * W, y: (mobile && n.my ? n.my : n.y) * H };
     };
     const R = () => (W < 640 ? 20 : 30);
 
@@ -142,7 +141,7 @@ export function HeroScene({ className }: { className?: string }) {
         ["ember-motion", "ember-relief", false],
       ];
       edges.forEach(([child, parent, dashed]) => {
-        const pts = edgePts({ x: P[child].x, y: P[child].y - r }, { x: P[parent].x, y: P[parent].y + r + 30 });
+        const pts = edgePts({ x: P[child].x, y: P[child].y - r }, { x: P[parent].x, y: P[parent].y + r + 44 });
         ctx.setLineDash(dashed ? [4, 6] : []);
         ctx.strokeStyle = "rgba(255,255,255,0.13)";
         ctx.lineWidth = 1.2;
@@ -153,7 +152,7 @@ export function HeroScene({ className }: { className?: string }) {
       });
       ctx.setLineDash([]);
       // studio link
-      const sPts = edgePts({ x: P.studio.x, y: P.studio.y - 14 }, { x: P["ember-motion"].x - r - 4, y: P["ember-motion"].y + 8 });
+      const sPts = W < 640 ? edgePts({ x: P.studio.x - 40, y: P.studio.y }, { x: P["ember-motion"].x + r + 4, y: P["ember-motion"].y + 4 }) : edgePts({ x: P.studio.x, y: P.studio.y - 14 }, { x: P["ember-motion"].x - r - 4, y: P["ember-motion"].y + 8 });
       ctx.setLineDash([2, 5]);
       ctx.strokeStyle = "rgba(255,106,61,0.35)";
       ctx.beginPath();
@@ -166,7 +165,7 @@ export function HeroScene({ className }: { className?: string }) {
         const a = path[i];
         const b = path[i + 1];
         if (a === "studio") return sPts;
-        return edgePts({ x: P[a].x, y: P[a].y - r }, { x: P[b].x, y: P[b].y + r + 30 });
+        return edgePts({ x: P[a].x, y: P[a].y - r }, { x: P[b].x, y: P[b].y + r + 44 });
       };
 
       // ambient money particles
@@ -276,8 +275,9 @@ export function HeroScene({ className }: { className?: string }) {
           const appear = Math.min(1, since / 250);
           const fade = since > CYCLE - hitAt - 1400 ? Math.max(0, (CYCLE - hitAt - 600 - since) / 800) : 1;
           ctx.globalAlpha = appear * fade;
-          const bx = x + r + 10;
-          const by = y - 11 - (1 - appear) * 6;
+          const mobile = W < 640;
+          const bx = mobile ? x - bw / 2 : x + r + 10;
+          const by = (mobile ? y - r - 30 : y - 11) - (1 - appear) * 6;
           roundRect(ctx, bx, by, bw, 22, 11);
           ctx.fillStyle = "#eef0f3";
           ctx.fill();
@@ -304,8 +304,8 @@ export function HeroScene({ className }: { className?: string }) {
   const lines: { at: number; node: React.ReactNode }[] = [
     { at: 0, node: <><span className="text-fg">buy_license</span><span className="text-fg-3">(</span><span className="text-cyan">&quot;ember-motion&quot;</span><span className="text-fg-3">)</span> <span className="text-fg-3">·</span> <span className="text-ember">150.00 Ⓝ</span></> },
     { at: 350, node: <><span className="text-ok">✓</span> clearance <span className="text-fg-3">3/3 generations</span></> },
-    { at: 300 + HOP, node: <><Arrow /> {vaultAccount("ember-motion")} <Amt v={m.payees[0].amountNear} /> <span className="text-fg-3">· fay.near</span> <Amt v={m.payees[1].amountNear} /></> },
-    { at: 300 + (HOP + 120) + HOP, node: <><Arrow /> {vaultAccount("ember-relief")} <Amt v={r.payees[0].amountNear} /> <span className="text-fg-3">· cy.near</span> <Amt v={r.payees[1].amountNear} /></> },
+    { at: 300 + HOP, node: <><Arrow /> {vaultAccount("ember-motion")} <Amt v={m.payees[0].amountNear} /> <span className="hidden sm:inline"><span className="text-fg-3">· fay.near</span> <Amt v={m.payees[1].amountNear} /></span></> },
+    { at: 300 + (HOP + 120) + HOP, node: <><Arrow /> {vaultAccount("ember-relief")} <Amt v={r.payees[0].amountNear} /> <span className="hidden sm:inline"><span className="text-fg-3">· cy.near</span> <Amt v={r.payees[1].amountNear} /></span></> },
     { at: 300 + 2 * (HOP + 120) + HOP, node: <><Arrow /> {vaultAccount("ember")} <Amt v={e.payees[0].amountNear} /></> },
     { at: 300 + 3 * (HOP + 120) + 300, node: <><span className="text-violet">◆</span> licence NFT <span className="text-fg">#0042</span> <span className="text-fg-3">→ studio.near</span></> },
     { at: 300 + 3 * (HOP + 120) + 700, node: <><span className="text-ok">✓</span> Σ <span className="text-fg">150.00 Ⓝ</span> <span className="text-fg-3">= price · 1 transaction</span></> },

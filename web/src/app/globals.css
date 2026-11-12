@@ -81,6 +81,7 @@ body {
 }
 
 .display {
+  text-wrap: balance;
   font-weight: 560;
   letter-spacing: -0.045em;
   line-height: 0.95;
