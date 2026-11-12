@@ -3,7 +3,7 @@ name = "canon-registry"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/bootstate/canon"
+repository = "https://github.com/flamiinngo/canon"
 description = "Canon registry: NEP-171 works with lineage, approvals, clearance, licensing and lineage payouts."
 
 [lib]
