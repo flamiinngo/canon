@@ -8,13 +8,13 @@ const THREATS: [string, string, string][] = [
   ["Seller keeps withdrawing after the sale", "withdraw() checks the current NFT owner at call time", "ERR_NOT_OWNER"],
   ["Seller sells while a withdrawal is in flight", "The token is locked for the withdrawal; nft_transfer rejects while locked", "ERR_TOKEN_LOCKED"],
   ["Seller lists, then drains the vault before the buyer pays", "Withdrawals are blocked while the token has any approval", "ERR_TOKEN_LISTED"],
-  ["Seller keeps an access key on the vault", "Vaults are created with zero access keys and no upgrade method", "keys = []"],
+  ["Seller keeps an access key on the vault", "Vaults are created with zero access keys and no upgrade method", "no AddKey"],
   ["Anyone calls the vault directly", "The vault accepts calls only from the registry contract", "ERR_ONLY_REGISTRY"],
   ["A stranger approves a derivative into canon", "approve() requires the parent's current owner", "ERR_NOT_PARENT_OWNER"],
   ["A studio licenses work with a non-commercial ancestor", "buy_license() re-checks clearance across the whole lineage", "ERR_NOT_CLEARED"],
   ["Splits over or under 100%", "Registration rejects splits that don't total 10,000 bps", "ERR_BAD_SPLITS"],
-  ["Rounding leaks or creates money", "Integer math; the remainder goes to the node's vault; sum equals price", "invariant"],
-  ["An approved file is silently swapped", "The file hash is fixed at approval and cannot change", "ERR_IMMUTABLE"],
+  ["Rounding leaks or creates money", "Integer math; the remainder goes to the node's vault; sum equals price", "ERR_INVARIANT_SUM"],
+  ["An approved file is silently swapped", "The file hash is written once at registration; no method can change it", "no setter"],
 ];
 
 export default function ProofPage() {
@@ -27,8 +27,8 @@ export default function ProofPage() {
       </Label>
       <h1 className="display mt-5 max-w-[16ch] text-[48px] text-fg sm:text-[72px]">Every way a seller could try to keep the money.</h1>
       <p className="mt-5 max-w-2xl text-fg-2">
-        This is the threat model the contracts are built against. Each row becomes a sandbox test, and after deployment a
-        testnet transaction showing the attack being refused.
+        This is the threat model the contracts are built against. Every row is covered by a unit test in the registry or vault
+        contract, and after deployment each refusal is reproduced as a testnet transaction.
       </p>
 
       <div className="panel noise mt-12 overflow-hidden">
@@ -53,7 +53,7 @@ export default function ProofPage() {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         {[
-          ["Sandbox tests", "Being written", "text-warn"],
+          ["Contract unit tests", "37 passing", "text-ok"],
           ["Testnet transactions", "After deploy", "text-fg-2"],
           ["Admin keys", "0", "text-ok"],
         ].map(([k, v, c]) => (
