@@ -15,6 +15,7 @@ import { useCanonData } from "@/components/canon-data";
 import { useWallet } from "@/components/wallet";
 import { EXPLORER, LIVE, view } from "@/lib/near";
 import { ButtonLink } from "@/components/ui";
+import { TokenPanel } from "@/components/token-panel";
 
 const SPLIT = ["#eef0f3", "#a98bff", "#52d6ff", "#ff6a3d"];
 
@@ -216,6 +217,8 @@ function WorkDetail({ id }: { id: string }) {
               {work.terms.commercial && <Chip>Licence {formatNear(work.terms.priceNear, 0)} Ⓝ</Chip>}
             </div>
           </section>
+
+          <TokenPanel workId={id} />
 
           {/* Record */}
           <section className="mt-10">

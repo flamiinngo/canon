@@ -17,13 +17,13 @@ export function WorkCard({ work }: { work: Work }) {
       <div className="relative overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,transform] duration-500 group-hover:-translate-y-1 group-hover:border-line-3">
         <Artwork genome={work.genome} alt={work.title} className="aspect-[4/5] w-full transition-transform duration-[900ms] ease-[var(--ease-out-expo)] group-hover:scale-[1.045]" size={560} />
         <div className="absolute inset-x-0 top-0 flex items-center justify-between p-3">
-          <span className="rounded-full bg-bg/60 px-2 py-0.5 font-mono text-[10.5px] text-fg-2 ring-1 ring-white/10 backdrop-blur">{gen === 0 ? "Original" : `Gen ${gen}`}</span>
+          <span className="rounded-full bg-bg/60 px-2 py-0.5 font-mono text-[10.5px] text-fg-2 ring-1 ring-white/10 backdrop-blur">NFT · {gen === 0 ? "Original" : `Gen ${gen}`}</span>
           <StatusPill status={work.status} className="bg-bg/60" />
         </div>
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg via-bg/70 to-transparent p-4 pt-14">
           <p className="truncate text-[15px] font-medium tracking-[-0.02em] text-fg">{work.title}</p>
           <p className="truncate font-mono text-[11px] text-fg-3">
-            {work.kind} · {work.owner}
+            #{work.id} · {work.owner}
           </p>
         </div>
       </div>

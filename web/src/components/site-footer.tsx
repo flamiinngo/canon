@@ -17,6 +17,7 @@ export function SiteFooter() {
             ["Explore works", "/explore"],
             ["Register a work", "/register"],
             ["Review queue", "/review"],
+            ["Collection", "/collection"],
           ]}
         />
         <Col

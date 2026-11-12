@@ -141,3 +141,40 @@ export async function fetchWorks(): Promise<Work[]> {
   }
   return all.map(toWork);
 }
+
+// ── NEP-171 tokens ──────────────────────────────────────────────────────
+export interface NftToken {
+  token_id: string;
+  owner_id: string;
+  metadata: { title: string | null; description: string | null; media: string | null; extra: string | null; issued_at: string | null } | null;
+  approved_account_ids?: Record<string, number>;
+}
+
+export const isLicenceToken = (id: string) => id.startsWith("licence-");
+
+export function licenceWorkId(t: NftToken): string | null {
+  try {
+    return JSON.parse(t.metadata?.extra ?? "{}").work_id ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function tokensForOwner(accountId: string): Promise<NftToken[]> {
+  return view<NftToken[]>("nft_tokens_for_owner", { account_id: accountId, from_index: "0", limit: 100 });
+}
+
+export function nftExplorerUrl(tokenId: string) {
+  return `${EXPLORER}/nft-token/${CONTRACT}/${encodeURIComponent(tokenId)}`;
+}
+
+export function accountExplorerUrl(accountId: string) {
+  return `${EXPLORER}/address/${accountId}`;
+}
+
+/** Demo accounts seeded by scripts/deploy.sh, useful for judges without a wallet. */
+export const DEMO_COLLECTORS = [
+  { account: "studio.canon-bootstate-demo.testnet", note: "Studio that bought two licences" },
+  { account: "eve.canon-bootstate-demo.testnet", note: "Bought Relief, then withdrew its earnings" },
+  { account: "dee.canon-bootstate-demo.testnet", note: "Animator who owns Motion" },
+];
