@@ -1,5 +1,6 @@
 import { ancestorsOf, getWork } from "./data";
 import type { Work } from "./types";
+import { WORKS } from "./data";
 
 /**
  * Amounts are computed in integer micro-NEAR (1e-6) with floor division,
@@ -27,10 +28,10 @@ export interface CascadeStep {
   payees: Payee[];
 }
 
-export function computeCascade(workId: string, priceNear: number): CascadeStep[] {
-  const licensed = getWork(workId);
+export function computeCascade(workId: string, priceNear: number, src: Work[] = WORKS): CascadeStep[] {
+  const licensed = getWork(workId, src);
   if (!licensed) return [];
-  const chain = [licensed, ...ancestorsOf(workId)];
+  const chain = [licensed, ...ancestorsOf(workId, src)];
   const steps: CascadeStep[] = [];
   let incoming = toMicro(priceNear);
 
@@ -77,10 +78,10 @@ export interface Clearance {
 }
 
 /** Walks the whole lineage. A work is cleared only if every ancestor allows it. */
-export function computeClearance(workId: string): Clearance {
-  const work = getWork(workId);
+export function computeClearance(workId: string, src: Work[] = WORKS): Clearance {
+  const work = getWork(workId, src);
   if (!work) return { cleared: false, checks: [], summary: "Unknown work" };
-  const chain = [work, ...ancestorsOf(workId)];
+  const chain = [work, ...ancestorsOf(workId, src)];
 
   const checks: ClearanceCheck[] = chain.map((w, i) => {
     const child = chain[i - 1];

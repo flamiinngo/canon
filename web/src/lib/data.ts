@@ -1,5 +1,6 @@
 import type { Genome, Transform } from "./art";
 import type { Work } from "./types";
+import { CONTRACT } from "./near";
 
 /** A derivative's genome = its parent's genome plus one transform (and optionally a new palette). */
 const derive = (g: Genome, t: Transform, palette?: Genome["palette"]): Genome => ({
@@ -23,7 +24,7 @@ const QUARRY: Genome = { seed: 77, style: "strata", palette: "quarry", transform
  * Preview dataset. Shapes match the registry contract's view methods so the
  * UI can switch to live chain reads without changing components.
  */
-export const WORKS: Work[] = [
+export const DEMO_WORKS: Work[] = [
   {
     id: "ember",
     title: "Ember Field",
@@ -236,19 +237,51 @@ export const WORKS: Work[] = [
   },
 ];
 
-export function getWork(id: string) {
-  return WORKS.find((w) => w.id === id);
+/**
+ * The live dataset. Starts as the demo set; when a registry contract is
+ * configured, `setWorks` swaps in the on-chain works. ES module live bindings
+ * mean every importer sees the new array; components subscribe via
+ * `useCanonData` to re-render.
+ */
+export let WORKS: Work[] = CONTRACT ? [] : DEMO_WORKS;
+let version = 0;
+const listeners = new Set<() => void>();
+
+export function setWorks(next: Work[]) {
+  WORKS = next;
+  version++;
+  listeners.forEach((l) => l());
+}
+
+export function subscribeWorks(l: () => void) {
+  listeners.add(l);
+  return () => {
+    listeners.delete(l);
+  };
+}
+
+export function worksVersion() {
+  return version;
+}
+
+export function getWork(id: string, src: Work[] = WORKS) {
+  return src.find((w) => w.id === id);
+}
+
+/** Curated demo works used by the landing page illustrations in every mode. */
+export function demoWork(id: string) {
+  return DEMO_WORKS.find((w) => w.id === id)!;
 }
 
 export function childrenOf(id: string) {
   return WORKS.filter((w) => w.parentId === id);
 }
 
-export function ancestorsOf(id: string): Work[] {
+export function ancestorsOf(id: string, src: Work[] = WORKS): Work[] {
   const chain: Work[] = [];
-  let cur = getWork(id)?.parentId;
+  let cur = getWork(id, src)?.parentId;
   while (cur) {
-    const w = getWork(cur);
+    const w = getWork(cur, src);
     if (!w) break;
     chain.push(w);
     cur = w.parentId;
@@ -266,7 +299,7 @@ export function generationOf(id: string) {
 }
 
 export function vaultAccount(id: string) {
-  return `${id}.canon.near`;
+  return `${id}.${CONTRACT || "canon.near"}`;
 }
 
 export function shortTitle(w: Work) {

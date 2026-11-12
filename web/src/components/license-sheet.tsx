@@ -9,6 +9,8 @@ import { Artwork, downloadArtwork } from "./artwork";
 import { Button } from "./ui";
 import { useWallet } from "./wallet";
 import { cn } from "@/lib/cn";
+import { EXPLORER, LIVE, nearToYocto } from "@/lib/near";
+import { refreshWorks } from "./canon-data";
 
 export const USES = [
   { id: "game", label: "Games & interactive", note: "Key art, in-game skies, cosmetics" },
@@ -20,13 +22,38 @@ export function LicenseSheet({ open, workId, onClose, onPaid }: { open: boolean;
   const work = getWork(workId)!;
   const price = work.terms.priceNear;
   const cascade = computeCascade(workId, price);
-  const { accountId, connect, busy } = useWallet();
+  const { accountId, connect, busy, call } = useWallet();
   const [use, setUse] = useState("game");
   const [phase, setPhase] = useState<"review" | "paying" | "done">("review");
+  const [err, setErr] = useState<string | null>(null);
+  const [tx, setTx] = useState<{ hash: string; licence: string } | null>(null);
 
   useEffect(() => {
-    if (open) setPhase("review");
+    if (open) {
+      setPhase("review");
+      setErr(null);
+    }
   }, [open]);
+
+  const pay = async () => {
+    setPhase("paying");
+    setErr(null);
+    if (!LIVE) {
+      setTimeout(() => setPhase("done"), 1500);
+      return;
+    }
+    try {
+      // Price plus 0.05 NEAR for the licence NFT's storage; the surplus is refunded by the contract.
+      const deposit = (BigInt(nearToYocto(price)) + BigInt(nearToYocto("0.05"))).toString();
+      const r = await call("buy_license", { token_id: workId, use_case: USES.find((u) => u.id === use)?.label ?? use }, deposit, 150);
+      setTx({ hash: r.hash, licence: typeof r.value === "string" ? r.value : "licence" });
+      setPhase("done");
+      void refreshWorks();
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e));
+      setPhase("review");
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -124,10 +151,7 @@ export function LicenseSheet({ open, workId, onClose, onPaid }: { open: boolean;
                     size="lg"
                     className="w-full"
                     disabled={phase === "paying"}
-                    onClick={() => {
-                      setPhase("paying");
-                      setTimeout(() => setPhase("done"), 1500);
-                    }}
+                    onClick={pay}
                   >
                     {phase === "paying" ? (
                       <>
@@ -142,8 +166,11 @@ export function LicenseSheet({ open, workId, onClose, onPaid }: { open: boolean;
                     <Wallet className="size-4" /> {busy ? "Connecting…" : "Connect a NEAR wallet to license"}
                   </Button>
                 )}
+                {err && <p className="rounded-xl border border-bad/25 bg-bad/[0.07] px-3 py-2.5 text-center text-xs text-bad">{err}</p>}
                 <p className="text-center text-[11px] leading-relaxed text-fg-3">
-                  The registry contract is being deployed to NEAR testnet. Until then, payment settlement is simulated in your browser and no funds move.
+                  {LIVE
+                    ? "One transaction on NEAR. The contract re-checks clearance, splits the payment up the lineage and mints your licence NFT. Surplus deposit is refunded."
+                    : "Preview mode: no registry contract is configured, so settlement is simulated in your browser and no funds move."}
                 </p>
               </div>
             ) : (
@@ -158,6 +185,11 @@ export function LicenseSheet({ open, workId, onClose, onPaid }: { open: boolean;
                   <div className="p-5">
                     <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-fg-3">Licence NFT · perpetual</p>
                     <p className="mt-1.5 text-xl font-medium tracking-[-0.03em] text-fg">{work.title}</p>
+                    {tx && (
+                      <a href={`${EXPLORER}/txns/${tx.hash}`} target="_blank" rel="noreferrer" className="mt-1 inline-block font-mono text-[11px] text-ember underline underline-offset-2">
+                        {tx.licence} · view transaction ↗
+                      </a>
+                    )}
                     <p className="mt-1 text-xs text-fg-3">
                       {USES.find((u) => u.id === use)?.label} · holder <span className="font-mono">{accountId}</span>
                     </p>

@@ -7,6 +7,7 @@ import { WORKS } from "@/lib/data";
 import { computeClearance } from "@/lib/canon";
 import { WorkCard } from "@/components/work-card";
 import { cn } from "@/lib/cn";
+import { useCanonData } from "@/components/canon-data";
 
 const FILTERS = [
   { id: "all", label: "All" },
@@ -18,6 +19,7 @@ const FILTERS = [
 type FilterId = (typeof FILTERS)[number]["id"];
 
 export function ExploreGrid() {
+  const { status } = useCanonData();
   const [filter, setFilter] = useState<FilterId>("all");
   const [q, setQ] = useState("");
 
@@ -29,7 +31,8 @@ export function ExploreGrid() {
       derivatives: WORKS.filter((w) => w.parentId).length,
       pending: WORKS.filter((w) => w.status === "pending").length,
     }),
-    [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [status, WORKS],
   );
 
   const works = useMemo(
@@ -42,7 +45,8 @@ export function ExploreGrid() {
         const s = q.trim().toLowerCase();
         return !s || [w.title, w.kind, w.owner].some((v) => v.toLowerCase().includes(s));
       }),
-    [filter, q],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filter, q, status, WORKS],
   );
 
   return (
@@ -77,10 +81,20 @@ export function ExploreGrid() {
           </motion.div>
         ))}
       </motion.div>
-      {works.length === 0 && (
+      {status === "loading" && (
+        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="aspect-[4/5] animate-pulse rounded-2xl bg-white/[0.04]" />
+          ))}
+        </div>
+      )}
+      {status === "error" && (
+        <div className="panel mt-10 p-10 text-center text-sm text-bad">Couldn&apos;t reach the NEAR registry. Refresh to try again.</div>
+      )}
+      {status !== "loading" && status !== "error" && works.length === 0 && (
         <div className="panel mt-10 p-14 text-center">
-          <p className="text-xl font-medium tracking-[-0.03em] text-fg">No works match</p>
-          <p className="mt-2 text-sm text-fg-3">Clear the search or pick another filter.</p>
+          <p className="text-xl font-medium tracking-[-0.03em] text-fg">{WORKS.length === 0 ? "The canon is empty" : "No works match"}</p>
+          <p className="mt-2 text-sm text-fg-3">{WORKS.length === 0 ? "Register the first original to start a lineage." : "Clear the search or pick another filter."}</p>
         </div>
       )}
     </>

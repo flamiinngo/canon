@@ -2,8 +2,15 @@
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { NearConnector } from "@hot-labs/near-connect";
+import { CONTRACT, NETWORK_ID } from "@/lib/near";
 
-export const NETWORK = (process.env.NEXT_PUBLIC_NEAR_NETWORK as "testnet" | "mainnet") ?? "testnet";
+export const NETWORK = NETWORK_ID;
+
+export interface TxResult {
+  hash: string;
+  /** JSON return value of the called method, if any. */
+  value: unknown;
+}
 
 interface WalletState {
   accountId: string | null;
@@ -12,6 +19,8 @@ interface WalletState {
   error: string | null;
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
+  /** Signs and sends one function call to the Canon registry. */
+  call: (method: string, args: Record<string, unknown>, depositYocto: string, gasTgas?: number) => Promise<TxResult>;
 }
 
 const WalletContext = createContext<WalletState | null>(null);
@@ -72,7 +81,35 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  return <WalletContext.Provider value={{ accountId, ready, busy, error, connect, disconnect }}>{children}</WalletContext.Provider>;
+  const call = useCallback(async (method: string, args: Record<string, unknown>, depositYocto: string, gasTgas = 100): Promise<TxResult> => {
+    if (!connector.current) throw new Error("Wallet connector is not ready");
+    if (!CONTRACT) throw new Error("No registry contract configured");
+    const wallet = await connector.current.wallet();
+    const outcome = await wallet.signAndSendTransaction({
+      receiverId: CONTRACT,
+      actions: [
+        {
+          type: "FunctionCall",
+          params: { methodName: method, args, gas: (BigInt(gasTgas) * BigInt(10) ** BigInt(12)).toString(), deposit: depositYocto },
+        },
+      ],
+    });
+    const status = outcome.status as { SuccessValue?: string; Failure?: unknown };
+    if (status && typeof status === "object" && "Failure" in status && status.Failure) {
+      throw new Error(JSON.stringify(status.Failure).match(/ERR_[A-Z_]+/)?.[0] ?? "Transaction failed");
+    }
+    let value: unknown = null;
+    if (status?.SuccessValue) {
+      try {
+        value = JSON.parse(atob(status.SuccessValue));
+      } catch {
+        value = null;
+      }
+    }
+    return { hash: outcome.transaction_outcome?.id ?? outcome.transaction?.hash ?? "", value };
+  }, []);
+
+  return <WalletContext.Provider value={{ accountId, ready, busy, error, connect, disconnect, call }}>{children}</WalletContext.Provider>;
 }
 
 export function useWallet() {

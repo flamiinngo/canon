@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
 import { Logo, buttonClass } from "./ui";
 import { NETWORK, useWallet } from "./wallet";
+import { EXPLORER, LIVE, view, yoctoToNear } from "@/lib/near";
 
 const NAV = [
   { href: "/explore", label: "Explore" },
@@ -56,8 +57,11 @@ export function SiteHeader() {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="hidden items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] text-fg-3 ring-1 ring-line sm:inline-flex">
-              <span className="size-1.5 rounded-full bg-lime shadow-[0_0_8px_var(--lime)]" /> NEAR {NETWORK}
+            <span
+              title={LIVE ? "Reading and writing the Canon registry on NEAR" : "No registry configured: demo data, simulated payments"}
+              className="hidden items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] text-fg-3 ring-1 ring-line sm:inline-flex"
+            >
+              <span className={cn("size-1.5 rounded-full", LIVE ? "bg-lime shadow-[0_0_8px_var(--lime)]" : "bg-warn")} /> {LIVE ? `Live · ${NETWORK}` : "Preview"}
             </span>
             <WalletButton className="hidden sm:inline-flex" />
             <button
@@ -102,8 +106,16 @@ export function SiteHeader() {
 }
 
 function WalletButton({ className }: { className?: string }) {
-  const { accountId, busy, ready, error, connect, disconnect } = useWallet();
+  const { accountId, busy, ready, error, connect, disconnect, call } = useWallet();
   const [menu, setMenu] = useState(false);
+  const [claimable, setClaimable] = useState<number | null>(null);
+  const [claiming, setClaiming] = useState(false);
+  useEffect(() => {
+    if (!menu || !LIVE || !accountId) return;
+    view<string>("get_claimable", { account_id: accountId })
+      .then((y) => setClaimable(yoctoToNear(y)))
+      .catch(() => setClaimable(null));
+  }, [menu, accountId]);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const close = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setMenu(false);
@@ -135,6 +147,33 @@ function WalletButton({ className }: { className?: string }) {
             className="panel absolute right-0 top-11 z-50 w-60 bg-surface p-1.5"
           >
             <p className="px-3 pb-2 pt-2 font-mono text-[11px] text-fg-3">Signed in on NEAR {NETWORK}</p>
+            {LIVE && (
+              <div className="mx-1.5 mb-1.5 rounded-xl border border-line bg-bg-2 p-3">
+                <p className="text-[11px] text-fg-3">Contributor earnings to claim</p>
+                <div className="mt-1 flex items-center justify-between gap-2">
+                  <span className="num text-lg text-fg">{claimable === null ? "…" : `${claimable.toFixed(2)} Ⓝ`}</span>
+                  <button
+                    type="button"
+                    disabled={!claimable || claiming}
+                    onClick={async () => {
+                      setClaiming(true);
+                      try {
+                        const r = await call("claim", {}, "0", 30);
+                        setClaimable(0);
+                        if (r.hash) window.open(`${EXPLORER}/txns/${r.hash}`, "_blank", "noreferrer");
+                      } catch {
+                        /* wallet shows the error */
+                      } finally {
+                        setClaiming(false);
+                      }
+                    }}
+                    className="rounded-full bg-fg px-3 py-1 text-xs font-medium text-bg disabled:opacity-30"
+                  >
+                    {claiming ? "Claiming…" : "Claim"}
+                  </button>
+                </div>
+              </div>
+            )}
             <button type="button" onClick={() => navigator.clipboard?.writeText(accountId)} className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm text-fg-2 hover:bg-white/[0.05] hover:text-fg">
               <Copy className="size-3.5" /> Copy account ID
             </button>

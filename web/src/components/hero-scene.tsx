@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { renderToUrl } from "@/lib/art";
 import { computeCascade, formatNear } from "@/lib/canon";
-import { getWork, vaultAccount } from "@/lib/data";
+import { DEMO_WORKS, demoWork as getWork, vaultAccount } from "@/lib/data";
 import { cn } from "@/lib/cn";
 
 const CYCLE = 9000; // ms
@@ -26,7 +26,7 @@ export function HeroScene({ className }: { className?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const start = useRef(0);
-  const cascade = useMemo(() => computeCascade("ember-motion", 150), []);
+  const cascade = useMemo(() => computeCascade("ember-motion", 150, DEMO_WORKS), []);
   const [tick, setTick] = useState(0);
 
   // Log clock

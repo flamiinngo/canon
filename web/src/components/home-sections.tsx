@@ -7,7 +7,7 @@ import { ArrowRight, Check, KeyRound, ShieldX, X } from "lucide-react";
 import { Artwork } from "./artwork";
 import { Label, Mono } from "./ui";
 import { computeCascade, computeClearance, formatNear } from "@/lib/canon";
-import { WORKS, getWork, vaultAccount } from "@/lib/data";
+import { DEMO_WORKS, demoWork as getWork, vaultAccount } from "@/lib/data";
 import { cn } from "@/lib/cn";
 
 // ─────────────────────────────────────────────────────────────────────
@@ -176,8 +176,8 @@ function ApproveVisual() {
 }
 
 function ClearVisual() {
-  const c = computeClearance("ember-motion");
-  const bad = computeClearance("moth-fragments");
+  const c = computeClearance("ember-motion", DEMO_WORKS);
+  const bad = computeClearance("moth-fragments", DEMO_WORKS);
   return (
     <div className="w-full max-w-[400px] space-y-3">
       <MiniPanel>
@@ -206,7 +206,7 @@ function ClearVisual() {
 }
 
 function PayVisual() {
-  const cascade = computeCascade("ember-motion", 150);
+  const cascade = computeCascade("ember-motion", 150, DEMO_WORKS);
   const payees = cascade.flatMap((s) => s.payees.map((p) => ({ ...p, gen: s.generation, id: s.work.id })));
   return (
     <MiniPanel>
@@ -243,7 +243,7 @@ function PayVisual() {
 // Bento: the NFT is the account
 // ─────────────────────────────────────────────────────────────────────
 export function AccountBento() {
-  const cascade = computeCascade("ember-motion", 150);
+  const cascade = computeCascade("ember-motion", 150, DEMO_WORKS);
   return (
     <div className="mt-14 grid gap-4 md:grid-cols-6 lg:mt-20">
       <BentoCell className="md:col-span-4" label="Vault" title="Every work has a wallet. Nobody holds its keys.">
@@ -455,7 +455,7 @@ export function RefusalTerminal() {
 // Gallery marquee
 // ─────────────────────────────────────────────────────────────────────
 export function GalleryMarquee() {
-  const works = WORKS.filter((w) => w.status === "approved");
+  const works = DEMO_WORKS.filter((w) => w.status === "approved");
   const row = [...works, ...works];
   return (
     <div className="relative overflow-hidden fade-mask-x py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">

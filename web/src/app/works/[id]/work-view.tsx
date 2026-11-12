@@ -11,11 +11,50 @@ import { computeClearance, formatDate, formatNear } from "@/lib/canon";
 import { generationOf, getWork, rootOf, shortTitle, vaultAccount } from "@/lib/data";
 import type { EventKind } from "@/lib/types";
 import { cn } from "@/lib/cn";
+import { useCanonData } from "@/components/canon-data";
+import { useWallet } from "@/components/wallet";
+import { EXPLORER, LIVE, view } from "@/lib/near";
+import { ButtonLink } from "@/components/ui";
 
 const SPLIT = ["#eef0f3", "#a98bff", "#52d6ff", "#ff6a3d"];
 
 export function WorkView({ id }: { id: string }) {
+  const { status } = useCanonData();
+  const work = getWork(id);
+  if (!work) {
+    if (status === "loading")
+      return (
+        <div className="mx-auto grid max-w-[1280px] gap-10 px-4 pt-16 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <div className="aspect-square animate-pulse rounded-[28px] bg-white/[0.04]" />
+          <div className="space-y-4">
+            <div className="h-4 w-32 animate-pulse rounded bg-white/[0.06]" />
+            <div className="h-14 w-3/4 animate-pulse rounded bg-white/[0.06]" />
+            <div className="h-24 animate-pulse rounded bg-white/[0.04]" />
+          </div>
+        </div>
+      );
+    return (
+      <div className="mx-auto max-w-[1280px] px-4 pt-24 sm:px-6 lg:px-8">
+        <Label>Not found</Label>
+        <h1 className="display mt-5 text-[52px] text-fg sm:text-[80px]">Not in the canon.</h1>
+        <p className="mt-5 max-w-md text-fg-2">
+          No work called <span className="font-mono">{id}</span> is registered{LIVE ? " on this registry" : ""}.
+        </p>
+        <ButtonLink href="/explore" className="mt-9" size="lg">
+          Explore works
+        </ButtonLink>
+      </div>
+    );
+  }
+  return <WorkDetail id={id} />;
+}
+
+function WorkDetail({ id }: { id: string }) {
   const work = getWork(id)!;
+  const { accountId, call, connect } = useWallet();
+  const { refresh } = useCanonData();
+  const [notice, setNotice] = useState<{ ok: boolean; text: string; hash?: string } | null>(null);
+  const [withdrawing, setWithdrawing] = useState(false);
   const root = rootOf(id);
   const gen = generationOf(id);
   const parent = work.parentId ? getWork(work.parentId) : undefined;
@@ -26,10 +65,32 @@ export function WorkView({ id }: { id: string }) {
   const lineageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (LIVE) {
+      if (!accountId) return setLicensed(false);
+      view<boolean>("has_licence", { account_id: accountId, work_id: id })
+        .then(setLicensed)
+        .catch(() => setLicensed(false));
+      return;
+    }
     try {
       setLicensed(localStorage.getItem(`canon-licence-${id}`) !== null);
     } catch {}
-  }, [id]);
+  }, [id, accountId]);
+
+  const isOwner = !!accountId && accountId === work.owner;
+  const withdraw = async () => {
+    setWithdrawing(true);
+    setNotice(null);
+    try {
+      const r = await call("withdraw", { token_id: id }, "1", 60);
+      setNotice({ ok: r.value !== false, text: r.value === false ? "The vault refused the release. Your balance is unchanged." : "Withdrawn to your account.", hash: r.hash });
+      await refresh();
+    } catch (e) {
+      setNotice({ ok: false, text: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setWithdrawing(false);
+    }
+  };
 
   const preview = () => {
     setRun({ workId: id, priceNear: work.terms.priceNear || 100, key: Date.now() });
@@ -163,10 +224,34 @@ export function WorkView({ id }: { id: string }) {
               <Row k="Vault" v={<CopyMono text={vaultAccount(work.id)} />} />
               <Row k="Owner" v={<Mono>{work.owner}</Mono>} />
               <Row k="Balance" v={<span className="num text-fg">{formatNear(work.vaultNear)} Ⓝ</span>} />
+              {LIVE && work.vaultNear > 0 && (
+                <div className="flex items-center justify-between gap-3 py-3">
+                  <span className="text-xs text-fg-3">{isOwner ? "You own this work." : "Only the current NFT owner can withdraw."}</span>
+                  {isOwner ? (
+                    <Button size="sm" variant="secondary" onClick={withdraw} disabled={withdrawing}>
+                      {withdrawing ? "Withdrawing…" : `Withdraw ${formatNear(work.vaultNear)} Ⓝ`}
+                    </Button>
+                  ) : !accountId ? (
+                    <Button size="sm" variant="ghost" onClick={connect}>
+                      Connect
+                    </Button>
+                  ) : null}
+                </div>
+              )}
               <Row k="Access keys" v={<span className="num text-ok">0</span>} />
               <Row k="File hash" v={<Mono>{work.fileHash}</Mono>} />
               <Row k="Registered" v={<span className="text-fg-2">{formatDate(work.mintedAt)}</span>} />
             </dl>
+            {notice && (
+              <p className={cn("mt-3 rounded-xl border px-3 py-2.5 text-xs", notice.ok ? "border-ok/25 bg-ok/[0.07] text-ok" : "border-bad/25 bg-bad/[0.07] text-bad")}>
+                {notice.text}
+                {notice.hash && (
+                  <a href={`${EXPLORER}/txns/${notice.hash}`} target="_blank" rel="noreferrer" className="ml-2 underline underline-offset-2">
+                    View transaction ↗
+                  </a>
+                )}
+              </p>
+            )}
             <p className="mt-3 text-xs leading-relaxed text-fg-3">
               Authorship is declared by <span className="font-mono">{work.creator}</span> and anchored to the file hash. It is evidence, not a copyright registration.
             </p>
@@ -226,9 +311,10 @@ export function WorkView({ id }: { id: string }) {
         workId={id}
         onClose={() => setSheet(false)}
         onPaid={(use) => {
-          try {
-            localStorage.setItem(`canon-licence-${id}`, JSON.stringify({ use, at: Date.now() }));
-          } catch {}
+          if (!LIVE)
+            try {
+              localStorage.setItem(`canon-licence-${id}`, JSON.stringify({ use, at: Date.now() }));
+            } catch {}
           setLicensed(true);
           setSheet(false);
           setTimeout(preview, 250);
