@@ -91,6 +91,12 @@ if [[ -z "${SKIP_DEPLOY:-}" ]]; then
     contract deploy "$REGISTRY" use-file "$REGISTRY_WASM" with-init-call new json-args "{\"vault_code_hash\":\"$VAULT_HASH\"}" prepaid-gas "100 Tgas" attached-deposit "0 NEAR" $NET $SIGN
 fi
 
+# When deploy happened in an earlier run, carry its transactions into the ledger.
+if [[ -n "${SKIP_DEPLOY:-}" ]]; then
+  [[ -n "${PUBLISH_TX:-}" ]] && record "Publish vault code as NEP-591 global contract \`$VAULT_HASH\`" ok "✅ succeeded" "$PUBLISH_TX"
+  [[ -n "${DEPLOY_TX:-}" ]] && record "Deploy registry to \`$REGISTRY\` and initialise with the vault hash" ok "✅ succeeded" "$DEPLOY_TX"
+fi
+
 # ── 3. Seed the demo story ──────────────────────────────────────────────
 N() { echo "$1.$FUNDER"; }
 Y() { python3 -c "from decimal import Decimal as D;print(int(D('$1')*10**24))"; }
@@ -101,16 +107,31 @@ reg() { # reg <who> <id> <title> <kind> <art slug> <terms> <owner_bps> <contribu
   local json="{\"token_id\":\"$2\",\"title\":\"$3\",\"description\":\"${10}\",\"media\":\"$ART_BASE/$5.jpg?kind=$4\",\"file_hash\":\"genome:$2\",\"terms\":$6,\"owner_bps\":$7,\"contributors\":$8,\"parent_id\":$parent}"
   local what="$1 registers **$3**"
   [[ "$9" != "null" ]] && what="$what as a derivative of \`$9\`"
-  txc "$what" ok "$(N "$1")" register_work "$json" "0.1 NEAR"
+  txc "$what" ok "$(N "$1")" register_work "$json" "0.1 NEAR" "100 Tgas"
 }
 
 if [[ -z "${SKIP_SEED:-}" ]]; then
-  say "Creating demo accounts under $FUNDER"
-  for a in ada ben cy dee fay gil hal ivy jun lea max nox kai; do
-    near account create-account fund-myself "$(N $a)" "0.25 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N $a)"
-  done
-  near account create-account fund-myself "$(N eve)" "1.3 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N eve)"
-  near account create-account fund-myself "$(N studio)" "2.7 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N studio)"
+  say "Creating (or topping up) demo accounts under $FUNDER"
+  balance() {
+    curl -s -m 20 -X POST https://test.rpc.fastnear.com -H 'content-type: application/json'       -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}"       | python3 -c "import sys,json;r=json.load(sys.stdin);print(int(r['result']['amount']) if 'result' in r else -1)"
+  }
+  ensure() { # ensure <name> <target NEAR>
+    local acc; acc="$(N "$1")"
+    local have; have="$(balance "$acc")"
+    local want; want="$(Y "$2")"
+    if [[ "$have" == "-1" ]]; then
+      near account create-account fund-myself "$acc" "$2 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  created $acc ($2 Ⓝ)"
+    elif python3 -c "import sys; sys.exit(0 if $have < $want else 1)"; then
+      local top; top="$(python3 -c "print(f'{($want - $have)/10**24:.4f}')")"
+      near tokens "$FUNDER" send-near "$acc" "$top NEAR" $NET $SIGN >> "$LOG" 2>&1 && echo "  topped up $acc (+$top Ⓝ)"
+    else
+      echo "  $acc already funded"
+    fi
+  }
+  for a in ada ben dee gil hal ivy jun lea nox kai; do ensure "$a" 0.37; done
+  for a in cy fay max; do ensure "$a" 0.2; done
+  ensure eve 1.35
+  ensure studio 2.7
 
   say "Registering the Ember Field lineage"
   reg ada ember "Ember Field" "Original%20artwork" "4127-flow-ember-base" "$(terms true true 2000 0.4)" 10000 "[]" null "A generative flow field of 1,100 strokes, released for licensed derivatives."
@@ -118,7 +139,7 @@ if [[ -z "${SKIP_SEED:-}" ]]; then
   txc "ada approves Relief into canon" ok "$(N ada)" approve '{"token_id":"ember-relief"}' "1 yoctoNEAR" "30 Tgas"
   reg dee ember-motion "Ember Field — Motion" "Motion%20loop" "4127-flow-ember-relief_motion" "$(terms false true 0 1.5)" 8000 "[{\"account_id\":\"$(N fay)\",\"role\":\"Score\",\"bps\":2000}]" ember-relief "The relief set in motion, with an original score."
   txc "🛡️ ada (not the parent's owner) tries to approve Motion" ERR_NOT_PARENT_OWNER "$(N ada)" approve '{"token_id":"ember-motion"}' "1 yoctoNEAR" "30 Tgas"
-  txc "🛡️ studio tries to license Motion before it is approved" ERR_NOT_CLEARED "$(N studio)" buy_license '{"token_id":"ember-motion","use_case":"Games & interactive"}' "1.6 NEAR"
+  txc "🛡️ studio tries to license Motion before it is approved" ERR_NOT_CLEARED "$(N studio)" buy_license '{"token_id":"ember-motion","use_case":"Games & interactive"}' "1.6 NEAR" "100 Tgas"
   txc "ben approves Motion into canon" ok "$(N ben)" approve '{"token_id":"ember-motion"}' "1 yoctoNEAR" "30 Tgas"
   reg gil ember-nocturne "Ember Field — Nocturne" "Colourway" "4127-flow-nocturne-recolor" "$(terms true true 1000 0.3)" 10000 "[]" ember "The same field at night."
   txc "ada approves Nocturne" ok "$(N ada)" approve '{"token_id":"ember-nocturne"}' "1 yoctoNEAR" "30 Tgas"
@@ -139,8 +160,8 @@ if [[ -z "${SKIP_SEED:-}" ]]; then
   txc "🛡️ ada registers splits totalling 90%" ERR_BAD_SPLITS "$(N ada)" register_work "{\"token_id\":\"bad-splits\",\"title\":\"Bad\",\"description\":null,\"media\":null,\"file_hash\":\"x\",\"terms\":$(terms true true 0 0.1),\"owner_bps\":9000,\"contributors\":[],\"parent_id\":null}" "0.1 NEAR"
 
   say "The licence: one payment, three generations"
-  txc "studio licenses **Ember Field — Motion** for 1.5 Ⓝ (splits: dee vault 0.9, fay 0.225, ben vault 0.21, cy 0.09, ada vault 0.075)" ok "$(N studio)" buy_license '{"token_id":"ember-motion","use_case":"Games & interactive"}' "1.6 NEAR"
-  txc "studio licenses **Quarry** for 0.8 Ⓝ" ok "$(N studio)" buy_license '{"token_id":"quarry","use_case":"Brand & merchandise"}' "0.9 NEAR"
+  txc "studio licenses **Ember Field — Motion** for 1.5 Ⓝ (splits: dee vault 0.9, fay 0.225, ben vault 0.21, cy 0.09, ada vault 0.075)" ok "$(N studio)" buy_license '{"token_id":"ember-motion","use_case":"Games & interactive"}' "1.6 NEAR" "100 Tgas"
+  txc "studio licenses **Quarry** for 0.8 Ⓝ" ok "$(N studio)" buy_license '{"token_id":"quarry","use_case":"Brand & merchandise"}' "0.9 NEAR" "100 Tgas"
 
   say "Control follows the token"
   txc "🛡️ eve (not the owner) tries to withdraw Relief's vault" ERR_NOT_OWNER "$(N eve)" withdraw '{"token_id":"ember-relief"}' "1 yoctoNEAR" "60 Tgas"

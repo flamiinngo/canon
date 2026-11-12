@@ -1,0 +1,1658 @@
+── Publish vault code as NEP-591 global contract `Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw`
+├  Wasm code hash: Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw[0m
+├  Global contract <Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw> already exists on <testnet> network. No transaction needed.[0m
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract deploy-as-global use-file /home/kingzeye/canon-target/near/canon_vault/canon_vault.wasm as-global-hash canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+── Deploy registry to `canonhq.testnet` and initialise with the vault hash
+├  Unsigned transaction:
+│    signer_id:    canonhq.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- deploy code <2wKkL5UCYvzWACRnR4aDJXMAQpkZBnucN4gV27PRGMeE> to a account <canonhq.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "vault_code_hash": "Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4T7JEo26gyBr5RW8UsKtQtTVMqW1B3XAzniX15PRf1Zw
+│    Signature:  ed25519:2at7QpocRqCSrDXxejR9zxZzQZKqhLgZrQ4M7KmHrjjSdE1Qh3TH8XUJuPhD8U6zsL7XrTEn6bNNg2fY1nQ3tNBJ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 29.9 Tgas
+│    Transaction fee: 0.0029675588256853 NEAR
+│    Transaction ID: CXtZrr1AbYp7cXfg1YznSGR1vSkCoT1w4w19L3xAxc3h
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CXtZrr1AbYp7cXfg1YznSGR1vSkCoT1w4w19L3xAxc3h
+│     [0m
+├  Function execution logs:
+│    [36mLogs [canonhq.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [canonhq.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <canonhq.testnet> on behalf of <canonhq.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract deploy canonhq.testnet use-file /home/kingzeye/canon-target/near/canon_registry/canon_registry.wasm with-init-call new json-args '{"vault_code_hash":"Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' network-config testnet sign-with-legacy-keychain send[39m
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  ada.canonhq-demo.testnet
+│    actions:
+│       -- create account:      ada.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:Daqqa5LYWS9zmoJVbpdv3PWoWxdFo88n3FyebyNAUc6yAHxp5JWRuvpCvYPwK18KVLn4pMeJo4VzVDDkC95mmx4
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 3tDT7hWGbXdeJtM27UG5M3UPmRDDu8SgCC5esQJb6Ruk
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3tDT7hWGbXdeJtM27UG5M3UPmRDDu8SgCC5esQJb6Ruk
+│     [0m
+
+
+New account <ada.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <ada.canonhq-demo.testnet> successfully.
+Added access key = ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS to ada.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ada.canonhq-demo.testnet/ed25519_BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ada.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ada.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  ben.canonhq-demo.testnet
+│    actions:
+│       -- create account:      ben.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:38zUn6r7JgH74gfQf4SyJSv6i8HW7PbikV5JgJhaEfsVEBAr3veNm7y2QL8kMB8PJLqAtMsVUbi998hrjVaeSeTK
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 6egocQ9QFEEHMgbheg5TBUn8iMeZFHuSUJcQ6MjpC4hM
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/6egocQ9QFEEHMgbheg5TBUn8iMeZFHuSUJcQ6MjpC4hM
+│     [0m
+
+
+New account <ben.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <ben.canonhq-demo.testnet> successfully.
+Added access key = ed25519:FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa to ben.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ben.canonhq-demo.testnet/ed25519_FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ben.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ben.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  cy.canonhq-demo.testnet
+│    actions:
+│       -- create account:      cy.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:3fxD9Rna7W73q7KH2Ldhq6BF1doKq9BMpHZAjAMH5Fnt
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:3LT7YRtbEU2YfKccjciq87692hjoi7wVs1wtku9NWo2emtPLyPefpHRtGW19Jq12nwJk3hSezcA4MX7AAeUyMiTg
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: BCDsyjDHivCFu5mNvrQoujcPL3ECJQM2GzWy5DxqTKDd
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BCDsyjDHivCFu5mNvrQoujcPL3ECJQM2GzWy5DxqTKDd
+│     [0m
+
+
+New account <cy.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <cy.canonhq-demo.testnet> successfully.
+Added access key = ed25519:3fxD9Rna7W73q7KH2Ldhq6BF1doKq9BMpHZAjAMH5Fnt to cy.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/cy.canonhq-demo.testnet/ed25519_3fxD9Rna7W73q7KH2Ldhq6BF1doKq9BMpHZAjAMH5Fnt.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/cy.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself cy.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  dee.canonhq-demo.testnet
+│    actions:
+│       -- create account:      dee.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:C6swejjRWRtJWGbQEpgmR6CZYop7tjfTpsEZJ8VrcETt
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:35R1SN2ckFgcUaTt4MVrzwJbyPF8HFPJns6xQjujqaKmu4hfETackAwRDgY8WSLTgLnyLMNVoev46vRJKPCG7RG1
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: AZGQFg4uPtvWowyPdWbxvCzvB2qE7sSk2qESr3UwcHZC
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AZGQFg4uPtvWowyPdWbxvCzvB2qE7sSk2qESr3UwcHZC
+│     [0m
+
+
+New account <dee.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <dee.canonhq-demo.testnet> successfully.
+Added access key = ed25519:C6swejjRWRtJWGbQEpgmR6CZYop7tjfTpsEZJ8VrcETt to dee.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/dee.canonhq-demo.testnet/ed25519_C6swejjRWRtJWGbQEpgmR6CZYop7tjfTpsEZJ8VrcETt.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/dee.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself dee.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  fay.canonhq-demo.testnet
+│    actions:
+│       -- create account:      fay.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:9wuD1BirLLhkKyX46pwkTkYQ4vRqFudMCWJ6qLRBq1fp
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:Ap9V7rBjz4ZArccrfm36LnfsrPbzqroCZvduLHpaUpRxWRq6kEUCDCbDgUxDPK57CcnkdSwG7Awf7F75oSFwyMp
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 4agycrA2tW5rmq1Xk1CpBjDc4v7AtpjzT8zQngs8JBKK
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4agycrA2tW5rmq1Xk1CpBjDc4v7AtpjzT8zQngs8JBKK
+│     [0m
+
+
+New account <fay.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <fay.canonhq-demo.testnet> successfully.
+Added access key = ed25519:9wuD1BirLLhkKyX46pwkTkYQ4vRqFudMCWJ6qLRBq1fp to fay.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/fay.canonhq-demo.testnet/ed25519_9wuD1BirLLhkKyX46pwkTkYQ4vRqFudMCWJ6qLRBq1fp.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/fay.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself fay.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  gil.canonhq-demo.testnet
+│    actions:
+│       -- create account:      gil.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:HVgK6QBTUazByXRxKyfMdTStCp5XfghfnTegM1dpaJ1U
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:4NnYBL4cUravzTs8Kh9ttcV8E9VnZubH8UdC7DHdXqRjCjGaZbfpNMYqGJrwHF6CEBuSSRvqujfp14oKcWDKBvRt
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 8SevDpc5ihaEZuoseLByXpnTuXwkssBbMiSSJDxhz6wE
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/8SevDpc5ihaEZuoseLByXpnTuXwkssBbMiSSJDxhz6wE
+│     [0m
+
+
+New account <gil.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <gil.canonhq-demo.testnet> successfully.
+Added access key = ed25519:HVgK6QBTUazByXRxKyfMdTStCp5XfghfnTegM1dpaJ1U to gil.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/gil.canonhq-demo.testnet/ed25519_HVgK6QBTUazByXRxKyfMdTStCp5XfghfnTegM1dpaJ1U.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/gil.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself gil.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  hal.canonhq-demo.testnet
+│    actions:
+│       -- create account:      hal.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:6FU1kJXEskr4VeZn7c5ZUT8mi9hoZHJLHnP4NSkVuLcA
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:5sP1c651ztsYAn5gSjMtNvY3wKg25hq3vTbZSeTfeuSvS2X62DRBZipZbbw1mKqJeKmgzHNxHfEmSuqZh1qK7YtB
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 9uRgEeSxYr7xihuqXy8D9JVoqDbY3PZQ1gDCEHBdwCuy
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9uRgEeSxYr7xihuqXy8D9JVoqDbY3PZQ1gDCEHBdwCuy
+│     [0m
+
+
+New account <hal.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <hal.canonhq-demo.testnet> successfully.
+Added access key = ed25519:6FU1kJXEskr4VeZn7c5ZUT8mi9hoZHJLHnP4NSkVuLcA to hal.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/hal.canonhq-demo.testnet/ed25519_6FU1kJXEskr4VeZn7c5ZUT8mi9hoZHJLHnP4NSkVuLcA.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/hal.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself hal.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  ivy.canonhq-demo.testnet
+│    actions:
+│       -- create account:      ivy.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:7zF7KU4MxBT9vA3mwBiWharqYVrYKdNmLaXa4948kAq8
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:LsbuyfXZfMekn2AJak1vm8XsidFMrLpeo3NgNMWnWN6arfCTbJYdpbidgrpoRB5uX61h4EHdsoyF3yVa96yFGGq
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 6LDR16c8vgky1JhACV3CE8BqRP2Sd9SohhCw74M2Dooa
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/6LDR16c8vgky1JhACV3CE8BqRP2Sd9SohhCw74M2Dooa
+│     [0m
+
+
+New account <ivy.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <ivy.canonhq-demo.testnet> successfully.
+Added access key = ed25519:7zF7KU4MxBT9vA3mwBiWharqYVrYKdNmLaXa4948kAq8 to ivy.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ivy.canonhq-demo.testnet/ed25519_7zF7KU4MxBT9vA3mwBiWharqYVrYKdNmLaXa4948kAq8.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/ivy.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself ivy.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  jun.canonhq-demo.testnet
+│    actions:
+│       -- create account:      jun.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:B26t5zzmBmqZuhHnxffbsUWiwuHUZa5EBHjMHvhSDhBN
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:Hvk5A2qwstrF4KZb915a3GPG53cfwBXQnQzcVJ2Lsh4x8Tbz3pzJib7pcb1EoqrgkUYt1A8SEnG7T7RhagNFKBU
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 2jvGb7PGpruDxSpvo2t6C7FQ9oYqv8tox97DaFCfXTb8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2jvGb7PGpruDxSpvo2t6C7FQ9oYqv8tox97DaFCfXTb8
+│     [0m
+
+
+New account <jun.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <jun.canonhq-demo.testnet> successfully.
+Added access key = ed25519:B26t5zzmBmqZuhHnxffbsUWiwuHUZa5EBHjMHvhSDhBN to jun.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/jun.canonhq-demo.testnet/ed25519_B26t5zzmBmqZuhHnxffbsUWiwuHUZa5EBHjMHvhSDhBN.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/jun.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself jun.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  lea.canonhq-demo.testnet
+│    actions:
+│       -- create account:      lea.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:sFbkjmzNNp65xGHvbB58Gam9RGv1f73xTaMbvCTJCtu9XqgfGufY4p4T4otVj8KrUH3SGQsG3XAsvBq7XfjzTCL
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: DgaYYSeH7VTN6TzQvKaqT3wsr7VY2ezVj1FYU97wSujN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/DgaYYSeH7VTN6TzQvKaqT3wsr7VY2ezVj1FYU97wSujN
+│     [0m
+
+
+New account <lea.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <lea.canonhq-demo.testnet> successfully.
+Added access key = ed25519:B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46 to lea.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/lea.canonhq-demo.testnet/ed25519_B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/lea.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself lea.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  max.canonhq-demo.testnet
+│    actions:
+│       -- create account:      max.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:5mTAekX9UfW191KwF6N7rRD9tKMjArMXF1RApaKmwbq3
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:526VTfErsLZUiVPcDq1aHqq4azjgrzXXAU2Vvj1M5VzrbAdTXB49twDgT5YyDAKBvQVzWf7pCHnqSVTAKKctyzp8
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: tN4QkvVsKhqDCbTMt4M4S2ZqqXGaT7mAsYXJnE4nvBK
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/tN4QkvVsKhqDCbTMt4M4S2ZqqXGaT7mAsYXJnE4nvBK
+│     [0m
+
+
+New account <max.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <max.canonhq-demo.testnet> successfully.
+Added access key = ed25519:5mTAekX9UfW191KwF6N7rRD9tKMjArMXF1RApaKmwbq3 to max.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/max.canonhq-demo.testnet/ed25519_5mTAekX9UfW191KwF6N7rRD9tKMjArMXF1RApaKmwbq3.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/max.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself max.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  nox.canonhq-demo.testnet
+│    actions:
+│       -- create account:      nox.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:H3gxWbsC4gDRuUXoo8qhif68dE6ZHZyFcX5UQTaDbTo
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:rpVSpm6bP3mRYZuX8xZYyknJfthNGCgbA9siatpcT1vGWSHGEQqZ86sCvLKVVW9RTEryDAGeB6QTcDfjMmr9N6f
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: CNBtfo4NiWqiPCGdtrtqHf7bQrnvFQAeFTVPVLrkL9Bh
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CNBtfo4NiWqiPCGdtrtqHf7bQrnvFQAeFTVPVLrkL9Bh
+│     [0m
+
+
+New account <nox.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <nox.canonhq-demo.testnet> successfully.
+Added access key = ed25519:H3gxWbsC4gDRuUXoo8qhif68dE6ZHZyFcX5UQTaDbTo to nox.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/nox.canonhq-demo.testnet/ed25519_H3gxWbsC4gDRuUXoo8qhif68dE6ZHZyFcX5UQTaDbTo.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/nox.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself nox.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  kai.canonhq-demo.testnet
+│    actions:
+│       -- create account:      kai.canonhq-demo.testnet
+│       -- transfer deposit:    0.25 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:64zW7k6kbxmhyXyzWAvcbCJ2bQoHWxSEsb24gJXJLLPV
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:654Gm2F9hQa51eUnc6AgbqtoMok718Uipz83ehtg7MUmaHdpkeJ54HyHxVcwkNvRCMiVkD13AQSDkbs8zJsnTLeU
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 3phLKQp3qpMsGAuoyrQ7B37Hg1ZehgARDtKuWANJrgpg
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3phLKQp3qpMsGAuoyrQ7B37Hg1ZehgARDtKuWANJrgpg
+│     [0m
+
+
+New account <kai.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 0.25 NEAR to <kai.canonhq-demo.testnet> successfully.
+Added access key = ed25519:64zW7k6kbxmhyXyzWAvcbCJ2bQoHWxSEsb24gJXJLLPV to kai.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/kai.canonhq-demo.testnet/ed25519_64zW7k6kbxmhyXyzWAvcbCJ2bQoHWxSEsb24gJXJLLPV.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/kai.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself kai.canonhq-demo.testnet '0.25 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  eve.canonhq-demo.testnet
+│    actions:
+│       -- create account:      eve.canonhq-demo.testnet
+│       -- transfer deposit:    1.3 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:9ZafTEYF3uhy5wm7FXxnoPSKK21aVPX9DdhaxdpZ62sL
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:pyYBM9XfgyLdgyUKMJJw7DeJqCux6LTVwdxfqH4UVjXqTqpX7fwLYV3TMgEYWptHxkYRYqLq9DWnw9UTTPgxodT
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 9HJq7rybYTX7enCpDsirry8EtLynL7FtyJQbdivvimRq
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9HJq7rybYTX7enCpDsirry8EtLynL7FtyJQbdivvimRq
+│     [0m
+
+
+New account <eve.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 1.3 NEAR to <eve.canonhq-demo.testnet> successfully.
+Added access key = ed25519:9ZafTEYF3uhy5wm7FXxnoPSKK21aVPX9DdhaxdpZ62sL to eve.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/eve.canonhq-demo.testnet/ed25519_9ZafTEYF3uhy5wm7FXxnoPSKK21aVPX9DdhaxdpZ62sL.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/eve.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself eve.canonhq-demo.testnet '1.3 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+├  Unsigned transaction:
+│    signer_id:    canonhq-demo.testnet
+│    receiver_id:  studio.canonhq-demo.testnet
+│    actions:
+│       -- create account:      studio.canonhq-demo.testnet
+│       -- transfer deposit:    2.7 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BhFW36KcUZMgo3jbG8DvyDGLSHKtYegSKxPxqehiDt7K
+│    Signature:  ed25519:2NULZtmSKFrhQdpivAz1VshPcrb7egr7q2HP4PT1h9cm1ViNx6umRKtBX45HjMXounAiqE2Kv3AcXiEPhRYnD89h
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 7tdMeSecB6Xo7Zr9ece2rTs5D1r4V893WZMdPKoGknrq
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7tdMeSecB6Xo7Zr9ece2rTs5D1r4V893WZMdPKoGknrq
+│     [0m
+
+
+New account <studio.canonhq-demo.testnet> has been successfully created.
+<canonhq-demo.testnet> has transferred 2.7 NEAR to <studio.canonhq-demo.testnet> successfully.
+Added access key = ed25519:7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8 to studio.canonhq-demo.testnet.
+
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/studio.canonhq-demo.testnet/ed25519_7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8.json
+The data for the access key is saved in a file /home/kingzeye/.near-credentials/testnet/studio.canonhq-demo.testnet.json
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear account create-account fund-myself studio.canonhq-demo.testnet '2.7 NEAR' autogenerate-new-keypair --signature-scheme ed25519 save-to-legacy-keychain sign-as canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+── ada registers **Ember Field**
+├  Unsigned transaction:
+│    signer_id:    ada.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A generative flow field of 1,100 strokes, released for licensed derivatives.",
+│                                       "file_hash": "genome:ember",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-base.jpg?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "400000000000000000000000",
+│                                         "upstream_bps": 2000
+│                                       },
+│                                       "title": "Ember Field",
+│                                       "token_id": "ember"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│    Signature:  ed25519:3yCD8Uf3SAtdyRCvzGaabLwYoqEesnsXfjhH4c5kqBXDPHemaYhDQCNNuH2jZmczvZFzYbps7yRaeUMbE9gKZAyT
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"ember","title":"Ember Field","description":"A generative flow field of 1,100 strokes, released for licensed derivatives.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-base.jpg?kind=Original%20artwork","file_hash":"genome:ember","terms":{"derivatives":true,"commercial":true,"upstream_bps":2000,"price":"400000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ada.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <ada.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.250922059413308 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── ben registers **Ember Field — Relief** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    ben.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "cy.canonhq-demo.testnet",
+│                                           "bps": 3000,
+│                                           "role": "Materials"
+│                                         }
+│                                       ],
+│                                       "description": "The flow field rebuilt as sculpted relief.",
+│                                       "file_hash": "genome:ember-relief",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-relief.jpg?kind=3D%20relief",
+│                                       "owner_bps": 7000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "1000000000000000000000000",
+│                                         "upstream_bps": 2500
+│                                       },
+│                                       "title": "Ember Field — Relief",
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa
+│    Signature:  ed25519:4QfbhrZn26GSBzwojhihRkEYU4ie4ZPVtUDXrBxexrmqnatAuK9BYpK8fdwdPYKRuU1G7FjKh65y1i82CU5Ar2Nf
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"ember-relief","title":"Ember Field — Relief","description":"The flow field rebuilt as sculpted relief.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-relief.jpg?kind=3D%20relief","file_hash":"genome:ember-relief","terms":{"derivatives":true,"commercial":true,"upstream_bps":2500,"price":"1000000000000000000000000"},"owner_bps":7000,"contributors":[{"account_id":"cy.canonhq-demo.testnet","role":"Materials","bps":3000}],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ben.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <ben.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509224726673325 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── ada approves Relief into canon
+├  Unsigned transaction:
+│    signer_id:    ada.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│    Signature:  ed25519:XLDXAgMh3kEN7B5njZ1o9YipxRSoed4vHeSQudURgLrHDgnUoTV79Wg1icMXQ8kLmJDA9zN75wrmSwNz1xFWnZh
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774704455654 NEAR
+│    Transaction ID: GZjf3kch8uJcYsQgeiRf3Xh6qRSbxooziv3JCqWPHwnN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GZjf3kch8uJcYsQgeiRf3Xh6qRSbxooziv3JCqWPHwnN
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"ember-relief"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── dee registers **Ember Field — Motion** as a derivative of `ember-relief`
+├  Unsigned transaction:
+│    signer_id:    dee.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "fay.canonhq-demo.testnet",
+│                                           "bps": 2000,
+│                                           "role": "Score"
+│                                         }
+│                                       ],
+│                                       "description": "The relief set in motion, with an original score.",
+│                                       "file_hash": "genome:ember-motion",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-relief_motion.jpg?kind=Motion%20loop",
+│                                       "owner_bps": 8000,
+│                                       "parent_id": "ember-relief",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "1500000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Ember Field — Motion",
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:C6swejjRWRtJWGbQEpgmR6CZYop7tjfTpsEZJ8VrcETt
+│    Signature:  ed25519:91boKJcp99sQHBfHPWppMwsnxcRoM1V45AxyUFqEiXr9PvL6MfPEVoUaWvdBEP9RH3vi8WZQ6x7r7z6kzbr8cm1
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"ember-motion","title":"Ember Field — Motion","description":"The relief set in motion, with an original score.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-relief_motion.jpg?kind=Motion%20loop","file_hash":"genome:ember-motion","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"1500000000000000000000000"},"owner_bps":8000,"contributors":[{"account_id":"fay.canonhq-demo.testnet","role":"Score","bps":2000}],"parent_id":"ember-relief"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as dee.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <dee.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509225987448315 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── 🛡️ ada (not the parent's owner) tries to approve Motion
+├  Unsigned transaction:
+│    signer_id:    ada.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│    Signature:  ed25519:2zKK2WLeeCbLUGR1ejGJCLwT4aRKQfJST2tozD3JLk95mnia5CDcYV7AR8HiMup3Ta352rjcDKnHLYgHbPre9mcx
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774704455654 NEAR
+│    Transaction ID: 4t1gpzcdejeFmXoMSYR5DGfnHPkTqon5tMB3Jwv2KNzu
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4t1gpzcdejeFmXoMSYR5DGfnHPkTqon5tMB3Jwv2KNzu
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"ember-motion"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ studio tries to license Motion before it is approved
+├  Unsigned transaction:
+│    signer_id:    studio.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "ember-motion",
+│                                       "use_case": "Games & interactive"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      1.6 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8
+│    Signature:  ed25519:4XL5pecXE2kcbGbtU7An8fWpnMNvTTpA7KmRLrZ9sUu3BHA7pRFfGYgJnGMTcowqdDZqEtdGmTVasK5NAFkUNiwo
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001776528256511 NEAR
+│    Transaction ID: CnhM2iB436HwNrRhBkFffHLbfF7U7cTi9aUhwHYB1HZB
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CnhM2iB436HwNrRhBkFffHLbfF7U7cTi9aUhwHYB1HZB
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet buy_license json-args '{"token_id":"ember-motion","use_case":"Games & interactive"}' prepaid-gas '150.0 Tgas' attached-deposit '1.6 NEAR' sign-as studio.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── ben approves Motion into canon
+├  Unsigned transaction:
+│    signer_id:    ben.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-motion"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa
+│    Signature:  ed25519:6rxffpeBSpXEj9YQvSKePg7tsE68FB44TrZ68vom53qkn2Mt7vB9efd7xwbFFLUjokPSv9a1eM7dfdM2bhRPZjT
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774704455654 NEAR
+│    Transaction ID: FGPSiPibdVm62xefzjmy1YUQXiou9AXT4LZK2nMq6uMo
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FGPSiPibdVm62xefzjmy1YUQXiou9AXT4LZK2nMq6uMo
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ben.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"ember-motion"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── gil registers **Ember Field — Nocturne** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    gil.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "The same field at night.",
+│                                       "file_hash": "genome:ember-nocturne",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-nocturne-recolor.jpg?kind=Colourway",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "300000000000000000000000",
+│                                         "upstream_bps": 1000
+│                                       },
+│                                       "title": "Ember Field — Nocturne",
+│                                       "token_id": "ember-nocturne"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HVgK6QBTUazByXRxKyfMdTStCp5XfghfnTegM1dpaJ1U
+│    Signature:  ed25519:Xo2jcftg39YA6GvHC33EhquTkwjbq3mhmcayYZGw72eypvYrSZ8PHT6bBTZwqL9Q91XvvZ6tLkg8fy3aMLLizmG
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"ember-nocturne","title":"Ember Field — Nocturne","description":"The same field at night.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-nocturne-recolor.jpg?kind=Colourway","file_hash":"genome:ember-nocturne","terms":{"derivatives":true,"commercial":true,"upstream_bps":1000,"price":"300000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as gil.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <gil.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509219123228925 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── ada approves Nocturne
+├  Unsigned transaction:
+│    signer_id:    ada.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "ember-nocturne"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│    Signature:  ed25519:3so8Ds8JK77JqvjFuWLdX4218CojC1TwnGiewKcKAoAoLLGmEca3XSijo7DE223ckJt4j3W67n6CnWPTdEXCyY6W
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774956786416 NEAR
+│    Transaction ID: 5u52aVHGi1cnPBNkZYMHyRCdJAJnPi5KeJkSVwLSpXx2
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/5u52aVHGi1cnPBNkZYMHyRCdJAJnPi5KeJkSVwLSpXx2
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ada.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"ember-nocturne"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ada.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── hal registers **Ember Field — Pixel** as a derivative of `ember`
+├  Unsigned transaction:
+│    signer_id:    hal.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A 48×48 pixel edition, awaiting review.",
+│                                       "file_hash": "genome:ember-pixel",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-pixel.jpg?kind=Pixel%20edition",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "ember",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "250000000000000000000000",
+│                                         "upstream_bps": 1000
+│                                       },
+│                                       "title": "Ember Field — Pixel",
+│                                       "token_id": "ember-pixel"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:6FU1kJXEskr4VeZn7c5ZUT8mi9hoZHJLHnP4NSkVuLcA
+│    Signature:  ed25519:2juMfWVSAb2FyR8Wxhe2XErmQLv5jvbhdogr75u9PpTebaUykKsuzbkPT8jC9yDu9Q9BzKDXHUkmBeoiJf7jL9oW
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"ember-pixel","title":"Ember Field — Pixel","description":"A 48×48 pixel edition, awaiting review.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/4127-flow-ember-pixel.jpg?kind=Pixel%20edition","file_hash":"genome:ember-pixel","terms":{"derivatives":true,"commercial":true,"upstream_bps":1000,"price":"250000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"ember"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as hal.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <hal.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509219683573365 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── ivy registers **Moth Light**
+├  Unsigned transaction:
+│    signer_id:    ivy.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "Concentric orbits. Fan works welcome; commercial use reserved.",
+│                                       "file_hash": "genome:moth-light",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/913-rings-violet-base.jpg?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": false,
+│                                         "derivatives": true,
+│                                         "price": "0",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Moth Light",
+│                                       "token_id": "moth-light"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7zF7KU4MxBT9vA3mwBiWharqYVrYKdNmLaXa4948kAq8
+│    Signature:  ed25519:3TKPi6k5DcPKtrTDjZvp2MAwyN5n87dvcYWY5MVqGL1YhQiYSdjEADhGQJPGr5H262xfr8uRXZsLryGCMZT7cyzY
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"moth-light","title":"Moth Light","description":"Concentric orbits. Fan works welcome; commercial use reserved.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/913-rings-violet-base.jpg?kind=Original%20artwork","file_hash":"genome:moth-light","terms":{"derivatives":true,"commercial":false,"upstream_bps":0,"price":"0"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ivy.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <ivy.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509218562884485 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── jun registers **Moth Light — Fragments** as a derivative of `moth-light`
+├  Unsigned transaction:
+│    signer_id:    jun.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A tiled remix of Moth Light.",
+│                                       "file_hash": "genome:moth-fragments",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/913-rings-violet-fragment.jpg?kind=Remix",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "moth-light",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "200000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Moth Light — Fragments",
+│                                       "token_id": "moth-fragments"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:B26t5zzmBmqZuhHnxffbsUWiwuHUZa5EBHjMHvhSDhBN
+│    Signature:  ed25519:XquxQp6xSzUooENxSbgVR9998jbugNyU7ePT4BusBhFULghCTp2LcUpVPxPgi38K2KBkrwNioRr1wPZ4uHzR5oz
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"moth-fragments","title":"Moth Light — Fragments","description":"A tiled remix of Moth Light.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/913-rings-violet-fragment.jpg?kind=Remix","file_hash":"genome:moth-fragments","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"200000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"moth-light"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as jun.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <jun.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.2509219263315035 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── ivy approves Fragments
+├  Unsigned transaction:
+│    signer_id:    ivy.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "moth-fragments"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7zF7KU4MxBT9vA3mwBiWharqYVrYKdNmLaXa4948kAq8
+│    Signature:  ed25519:xTVZcVU4AcPcK7umguakfwiBoixSXnnQFcwTamKwDzHDiZPuzRdTUHELo1wCYfbNLLmJQFD7rRRR5vt1e63mb9C
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774956786416 NEAR
+│    Transaction ID: djU9Uj9amxjPsPsqV4J2Cf4HVWCtNnErepqs1QZD6qW
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/djU9Uj9amxjPsPsqV4J2Cf4HVWCtNnErepqs1QZD6qW
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ivy.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"moth-fragments"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ivy.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ studio tries to license Fragments (parent forbids commercial use)
+├  Unsigned transaction:
+│    signer_id:    studio.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "moth-fragments",
+│                                       "use_case": "Brand & merchandise"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.3 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8
+│    Signature:  ed25519:2pPvgJjGxFznVRjJRbsSzXrmnKrkzLkGjtLP9YiMAuHmuPftT1HcbwYXPtQ6kKBRqFmdwXMC1SLUfDdzj5eLTKmj
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001776854635313 NEAR
+│    Transaction ID: Aavh6XL6Hf5itv1evghY3ChUFEuxNsASE31HqRPqQZeC
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Aavh6XL6Hf5itv1evghY3ChUFEuxNsASE31HqRPqQZeC
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet buy_license json-args '{"token_id":"moth-fragments","use_case":"Brand & merchandise"}' prepaid-gas '150.0 Tgas' attached-deposit '0.3 NEAR' sign-as studio.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── lea registers **Tidal**
+├  Unsigned transaction:
+│    signer_id:    lea.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [
+│                                         {
+│                                           "account_id": "max.canonhq-demo.testnet",
+│                                           "bps": 1500,
+│                                           "role": "Art direction"
+│                                         }
+│                                       ],
+│                                       "description": "Fourteen layers of sea-floor strata under a low sun.",
+│                                       "file_hash": "genome:tidal",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/2203-strata-tidal-base.jpg?kind=Original%20artwork",
+│                                       "owner_bps": 8500,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "600000000000000000000000",
+│                                         "upstream_bps": 1500
+│                                       },
+│                                       "title": "Tidal",
+│                                       "token_id": "tidal"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46
+│    Signature:  ed25519:3mzRHZbE9Q6cAU339AbE5FuANp1bWZWk59j2CQqqaqaG5yghyZcpyJ8rsb8zgCoWg6toJGeAKBji5Z24mcmGKgxM
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"tidal","title":"Tidal","description":"Fourteen layers of sea-floor strata under a low sun.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/2203-strata-tidal-base.jpg?kind=Original%20artwork","file_hash":"genome:tidal","terms":{"derivatives":true,"commercial":true,"upstream_bps":1500,"price":"600000000000000000000000"},"owner_bps":8500,"contributors":[{"account_id":"max.canonhq-demo.testnet","role":"Art direction","bps":1500}],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as lea.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <lea.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.250922381611361 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── nox registers **Tidal — Neon Remix** as a derivative of `tidal`
+├  Unsigned transaction:
+│    signer_id:    nox.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "A neon, tiled reinterpretation of Tidal.",
+│                                       "file_hash": "genome:tidal-neon",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/2203-strata-neon-recolor_fragment.jpg?kind=Remix",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "tidal",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "350000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Tidal — Neon Remix",
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:H3gxWbsC4gDRuUXoo8qhif68dE6ZHZyFcX5UQTaDbTo
+│    Signature:  ed25519:4CjZPp4AoRtbbEto5d2us7ewzWWNU8R22ofKB1oxbAESG2t12w6giPBTszJu2NuNnTJnUdNDbU8C5t1N9F9fGSwN
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"tidal-neon","title":"Tidal — Neon Remix","description":"A neon, tiled reinterpretation of Tidal.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/2203-strata-neon-recolor_fragment.jpg?kind=Remix","file_hash":"genome:tidal-neon","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"350000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"tidal"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as nox.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <nox.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.25092194734442 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── lea approves Neon Remix
+├  Unsigned transaction:
+│    signer_id:    lea.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  approve
+│                       args:         {
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46
+│    Signature:  ed25519:qMM2LhDN51gVm7F1hYH8E4hYf7fUhTRiZv1RSv3gxEaqfm3ZCBexyw3uMxYG9PQwakgwR3a1M2LVKPjbJArXs2n
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.000177453275498 NEAR
+│    Transaction ID: GFG1Ude42YPmXr2zNfGW69u4iqWXnD1mGJP5sqGfdcRT
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GFG1Ude42YPmXr2zNfGW69u4iqWXnD1mGJP5sqGfdcRT
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [lea.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet approve json-args '{"token_id":"tidal-neon"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as lea.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── lea revokes Neon Remix
+├  Unsigned transaction:
+│    signer_id:    lea.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  revoke
+│                       args:         {
+│                                       "token_id": "tidal-neon"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:B4Z728xktoBRCqare8Lidr1by5GY4sSHZNpes2J5it46
+│    Signature:  ed25519:5dtor1uUYNvCuutGWmohJ5QZZ3kZYWH538a9dCfLVbmPJExjypM9wDXgyKTpbnEoN6ZtUSPAXsGEwtUErbxLUPvc
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001774482835331 NEAR
+│    Transaction ID: 28ZawEfJxghaT54XMJtEc3j96FFjizr43mjU89zwBcfG
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/28ZawEfJxghaT54XMJtEc3j96FFjizr43mjU89zwBcfG
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [lea.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [lea.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet revoke json-args '{"token_id":"tidal-neon"}' prepaid-gas '30.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as lea.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── 🛡️ studio tries to license the revoked Neon Remix
+├  Unsigned transaction:
+│    signer_id:    studio.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "tidal-neon",
+│                                       "use_case": "Film & motion"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.5 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7HDknHYJyZ93gBmWck4r1czMNr68z4W7hQhzHobPYTE8
+│    Signature:  ed25519:UXZGfwaKgk4UAPAzEaJTGQHMuahoxqQrDaMMeNZAQ8ynDtNLn5mZDNCqVb24xFhHYbAMxfwSLVAumsiiZxc6w7y
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001776210414431 NEAR
+│    Transaction ID: EjEcnu6J2YyYG64VDuE6e3EBTKXFSHdjf54SCrXcJN84
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EjEcnu6J2YyYG64VDuE6e3EBTKXFSHdjf54SCrXcJN84
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [studio.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet buy_license json-args '{"token_id":"tidal-neon","use_case":"Film & motion"}' prepaid-gas '150.0 Tgas' attached-deposit '0.5 NEAR' sign-as studio.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── kai registers **Quarry**
+├  Unsigned transaction:
+│    signer_id:    kai.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": "Cut stone in relief. Licensable as-is; derivatives closed.",
+│                                       "file_hash": "genome:quarry",
+│                                       "media": "https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/77-strata-quarry-relief.jpg?kind=Original%20artwork",
+│                                       "owner_bps": 10000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "800000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Quarry",
+│                                       "token_id": "quarry"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:64zW7k6kbxmhyXyzWAvcbCJ2bQoHWxSEsb24gJXJLLPV
+│    Signature:  ed25519:4dp7gp4wcB7cAKsCVXaF2QeqkSuyte7AgNuG3oNH6fbi3STv3xRAFapvtMx2Tkaf74K13StyNTfxGw8AcwAVxB8E
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"quarry","title":"Quarry","description":"Cut stone in relief. Licensable as-is; derivatives closed.","media":"https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art/77-strata-quarry-relief.jpg?kind=Original%20artwork","file_hash":"genome:quarry","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"800000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as kai.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <kai.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.250921919327198 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── 🛡️ hal tries to derive from Quarry (derivatives closed)
+├  Unsigned transaction:
+│    signer_id:    hal.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": null,
+│                                       "file_hash": "x",
+│                                       "media": null,
+│                                       "owner_bps": 10000,
+│                                       "parent_id": "quarry",
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": false,
+│                                         "price": "100000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Quarry Remix",
+│                                       "token_id": "quarry-remix"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:6FU1kJXEskr4VeZn7c5ZUT8mi9hoZHJLHnP4NSkVuLcA
+│    Signature:  ed25519:38ook7yMJ7Pq6pgJTyTr5X9ns7XjUQptnZceuspRQZSw3A3DXcRwLzUzrDzT3HarqrQVYrBoWCYKFNqV22yjZUfy
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"quarry-remix","title":"Quarry Remix","description":null,"media":null,"file_hash":"x","terms":{"derivatives":false,"commercial":true,"upstream_bps":0,"price":"100000000000000000000000"},"owner_bps":10000,"contributors":[],"parent_id":"quarry"}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as hal.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <hal.canonhq-demo.testnet> does not have enough balance (0.25 NEAR) to cover TX cost (0.250920742603874 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── 🛡️ ada registers splits totalling 90%
+├  Unsigned transaction:
+│    signer_id:    ada.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  register_work
+│                       args:         {
+│                                       "contributors": [],
+│                                       "description": null,
+│                                       "file_hash": "x",
+│                                       "media": null,
+│                                       "owner_bps": 9000,
+│                                       "parent_id": null,
+│                                       "terms": {
+│                                         "commercial": true,
+│                                         "derivatives": true,
+│                                         "price": "100000000000000000000000",
+│                                         "upstream_bps": 0
+│                                       },
+│                                       "title": "Bad",
+│                                       "token_id": "bad-splits"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:BMoBVjYjTm9rvZic9FGxApzBvinv5PB2vxA93rPUnVAS
+│    Signature:  ed25519:3j2s9Dey4Ge5x2bxHRznsSdTgjnVK9oRWipryLLjdQ58wkJN41ihMGfi5H8t3c8zR9QbUYLj9Xk3gohSSrtk2Hdm
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet register_work json-args '{"token_id":"bad-splits","title":"Bad","description":null,"media":null,"file_hash":"x","terms":{"derivatives":true,"commercial":true,"upstream_bps":0,"price":"100000000000000000000000"},"owner_bps":9000,"contributors":[],"parent_id":null}' prepaid-gas '150.0 Tgas' attached-deposit '0.1 NEAR' sign-as ada.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: Account <ada.canonhq-demo.testnet> does not have enough balance (0.2494675634302276 NEAR) to cover TX cost (0.2509206235306805 NEAR).[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/send/mod.rs[0m:[35m185[0m
+── studio licenses **Ember Field — Motion** for 1.5 Ⓝ (splits: dee vault 0.9, fay 0.225, ben vault 0.21, cy 0.09, ada vault 0.075)
+├  Unsigned transaction:
+│    signer_id:    studio.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "ember-motion",
+│                                       "use_case": "Games & interactive"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      1.6 NEAR
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet buy_license json-args '{"token_id":"ember-motion","use_case":"Games & interactive"}' prepaid-gas '150.0 Tgas' attached-deposit '1.6 NEAR' sign-as studio.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mCannot sign a transaction due to an error while fetching the most recent nonce value on network <testnet>[0m
+   1: [91mthis client has exceeded the rate limit[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/mod.rs[0m:[35m301[0m
+── studio licenses **Quarry** for 0.8 Ⓝ
+├  Unsigned transaction:
+│    signer_id:    studio.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  buy_license
+│                       args:         {
+│                                       "token_id": "quarry",
+│                                       "use_case": "Brand & merchandise"
+│                                     }
+│                       gas:          150.0 Tgas
+│                       deposit:      0.9 NEAR
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet buy_license json-args '{"token_id":"quarry","use_case":"Brand & merchandise"}' prepaid-gas '150.0 Tgas' attached-deposit '0.9 NEAR' sign-as studio.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mFailed to fetch access KeyList for studio.canonhq-demo.testnet[0m
+   1: [91mthis client has exceeded the rate limit[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/sign_with_legacy_keychain/mod.rs[0m:[35m91[0m
+── 🛡️ eve (not the owner) tries to withdraw Relief's vault
+├  Unsigned transaction:
+│    signer_id:    eve.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as eve.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mCannot sign a transaction due to an error while fetching the most recent nonce value on network <testnet>[0m
+   1: [91mthis client has exceeded the rate limit[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/mod.rs[0m:[35m301[0m
+── ben lists Relief on a marketplace (nft_approve)
+├  Unsigned transaction:
+│    signer_id:    ben.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  nft_approve
+│                       args:         {
+│                                       "account_id": "eve.canonhq-demo.testnet",
+│                                       "msg": null,
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0.01 NEAR
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet nft_approve json-args '{"token_id":"ember-relief","account_id":"eve.canonhq-demo.testnet","msg":null}' prepaid-gas '30.0 Tgas' attached-deposit '0.01 NEAR' sign-as ben.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mFailed to fetch access KeyList for ben.canonhq-demo.testnet[0m
+   1: [91mthis client has exceeded the rate limit[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/transaction_signature_options/sign_with_legacy_keychain/mod.rs[0m:[35m91[0m
+── 🛡️ ben tries to drain Relief's vault while it is listed
+├  Unsigned transaction:
+│    signer_id:    ben.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  withdraw
+│                       args:         {
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          60.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FPcbPRThN35ZqAKQDTir2b84X5x9fTxCQRThYWtaobSa
+│    Signature:  ed25519:hJ2ynPQ3nVDY92G2FHphak9ksMUQadCUh9iM3ZF4u4amzRLmuo2KD8nRDXo45tR9dZqK4CbCoJ9UdwEHHYpXkP2
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001772644204277 NEAR
+│    Transaction ID: DGkTuu54dYPHQfP9rG2gbkThcPNVmSJZgjYCG6aBy4RC
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/DGkTuu54dYPHQfP9rG2gbkThcPNVmSJZgjYCG6aBy4RC
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ben.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ben.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet withdraw json-args '{"token_id":"ember-relief"}' prepaid-gas '60.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as ben.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_WORK")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── eve's marketplace sells Relief for 1 Ⓝ via NEP-199 nft_transfer_payout: payout = ben 0.8, ember vault 0.2 (resale royalty)
+├  Unsigned transaction:
+│    signer_id:    eve.canonhq-demo.testnet
+│    receiver_id:  canonhq.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  nft_transfer_payout
+│                       args:         {
+│                                       "approval_id": null,
+│                                       "balance": "1000000000000000000000000",
+│                                       "max_len_payout": 10,
+│                                       "memo": null,
+│                                       "receiver_id": "eve.canonhq-demo.testnet",
+│                                       "token_id": "ember-relief"
+│                                     }
+│                       gas:          50.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9ZafTEYF3uhy5wm7FXxnoPSKK21aVPX9DdhaxdpZ62sL
+│    Signature:  ed25519:5SwxrFHLFZ4JtVQHSSb3SY5y1VnTgm3ZBji9SLCeErP9LFrvYYz8s1JoFxJyDrMc2cbSkxHAVaobsAvo8VYVr9WD
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.3 Tgas
+│    Transaction fee: 0.0001845904766374 NEAR
+│    Transaction ID: 4JufTq3zBq8ptKHtHHFqUjnYSXcrPFrrRhrfHQ37uvCr
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4JufTq3zBq8ptKHtHHFqUjnYSXcrPFrrRhrfHQ37uvCr
+│     [0m
+├  Function execution logs:
+│    [31mLogs [canonhq.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [eve.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [eve.canonhq-demo.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33mnear contract call-function as-transaction canonhq.testnet nft_transfer_payout json-args '{"receiver_id":"eve.canonhq-demo.testnet","token_id":"ember-relief","approval_id":null,"memo":null,"balance":"1000000000000000000000000","max_len_payout":10}' prepaid-gas '50.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as eve.canonhq-demo.testnet network-config testnet sign-with-legacy-keychain send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: ERR_NO_TOKEN")[0m
+
+Location:
+   [35m/home/kingzeye/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/near-cli-rs-0.31.1/src/common.rs[0m:[35m1864[0m
+── marketplace pays the seller ben 0.8 Ⓝ
+├  Unsigned transaction:
+│    signer_id:    eve.canonhq-demo.testnet
+│    receiver_id:  ben.canonhq-demo.testnet
+│    actions:
+│       -- transfer deposit:    0.8 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9ZafTEYF3uhy5wm7FXxnoPSKK21aVPX9DdhaxdpZ62sL
+│    Signature:  ed25519:ephE6GFweqhskCcFxSb8UZxvwSQwkcLC25AHYQKWmwzvEBr8S34UBUrD6LbhcNTk7TcocE9gdTzAjjsw5WuiLoa
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.670 Tgas
+│    Transaction fee: 0.0000446365125 NEAR
+│    Transaction ID: A6xqnQYFtgxf62wJx3i7dyA2z5KsxiddKDY5eDeQDFyu
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/A6xqnQYFtgxf62wJx3i7dyA2z5KsxiddKDY5eDeQDFyu
+│     [0m
+
+
+<eve.canonhq-demo.testnet> has transferred 0.8 NEAR to <ben.canonhq-demo.testnet> successfully.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33mnear tokens eve.canonhq-demo.testnet send-near ben.canonhq-demo.testnet '0.8 NEAR' network-config testnet sign-with-legacy-keychain send[39m
