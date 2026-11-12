@@ -20,6 +20,7 @@ import {
   licenceWorkId,
   nftExplorerUrl,
   tokensForOwner,
+  vaultAvailable,
   view,
   yoctoToNear,
   type NftToken,
@@ -251,7 +252,14 @@ function TransferBox({ onTransfer }: { onTransfer: (to: string) => void }) {
 
 function WorkNft({ token, mine, onWithdraw, onTransfer }: { token: NftToken; mine: boolean; onWithdraw: () => void; onTransfer: (to: string) => void }) {
   const work = getWork(token.token_id);
+  const [live, setLive] = useState<number | null>(null);
+  useEffect(() => {
+    vaultAvailable(vaultAccount(token.token_id))
+      .then(setLive)
+      .catch(() => setLive(null));
+  }, [token.token_id]);
   if (!work) return null;
+  const balance = live ?? work.vaultNear;
   const listed = Object.keys(token.approved_account_ids ?? {}).length > 0;
   return (
     <div className="panel overflow-hidden">
@@ -268,7 +276,7 @@ function WorkNft({ token, mine, onWithdraw, onTransfer }: { token: NftToken; min
         </div>
         <div className="flex items-center justify-between rounded-xl border border-line bg-bg-2 px-3 py-2.5">
           <span className="text-xs text-fg-3">Vault balance</span>
-          <span className="num text-sm text-fg">{formatNear(work.vaultNear, 3)} Ⓝ</span>
+          <span className="num text-sm text-fg">{formatNear(balance, 3)} Ⓝ</span>
         </div>
         <div className="flex flex-wrap gap-1.5">
           <Chip tone={work.status === "approved" ? "ok" : "neutral"}>{work.status}</Chip>
@@ -279,7 +287,7 @@ function WorkNft({ token, mine, onWithdraw, onTransfer }: { token: NftToken; min
         </div>
         {mine && (
           <div className="flex flex-wrap items-center gap-2 border-t border-line pt-3">
-            <Button size="sm" variant="secondary" disabled={work.vaultNear <= 0 || listed} onClick={onWithdraw} title={listed ? "Withdrawals are blocked while the NFT is listed" : undefined}>
+            <Button size="sm" variant="secondary" disabled={balance <= 0.0005 || listed} onClick={onWithdraw} title={listed ? "Withdrawals are blocked while the NFT is listed" : undefined}>
               Withdraw
             </Button>
             <TransferBox onTransfer={onTransfer} />

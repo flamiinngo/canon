@@ -5,7 +5,7 @@ every way we could think of for a seller (or anyone else) to take money or right
 should not have, the defence in the contracts, and the test that proves it.
 
 Contracts: `contracts/registry` (NEP-171 registry) and `contracts/vault` (per-work vault).
-Tests: `cargo test -p canon-registry` in `contracts/` (33 unit tests) plus the testnet ledger in [JUDGES.md](JUDGES.md), where every attack below that can be sent as a transaction is sent, and refused.
+Tests: `cargo test -p canon-registry` in `contracts/` (41 unit tests) plus the testnet ledger in [JUDGES.md](JUDGES.md), where every attack below that can be sent as a transaction is sent, and refused.
 
 ## Trust model
 
@@ -49,13 +49,15 @@ the account, so nobody can initialise a vault first.
 | 21 | Squatting the licence token namespace | Work ids may not start with `licence-` | `ERR_BAD_TOKEN_ID` | `licence_namespace_is_reserved` |
 | 22 | Swapping an approved file for a different one | No method can change a work's file hash or terms after registration | — | (no setter exists) |
 | 23 | Unbounded lineage exhausts gas on payout | Depth capped at 6; contributors capped at 8 | `ERR_TOO_DEEP`, `ERR_TOO_MANY_CONTRIBUTORS` | — |
+| 24 | Marketplace sells a work mid-withdrawal via NEP-199 | `nft_transfer_payout` also refuses while locked | `ERR_TOKEN_LOCKED` | `cannot_sell_through_marketplace_mid_withdrawal` |
+| 25 | Unapproved account sells the NFT through `nft_transfer_payout` | NEP-178 approval required | `Sender not approved` | `unapproved_marketplace_cannot_sell` |
+| 26 | Resale payout leaks or creates money | Integer cascade up the lineage; `Σ payout == balance` asserted; length capped | `ERR_INVARIANT_SUM`, `ERR_PAYOUT_TOO_LONG` | `payout_sums_exactly_for_awkward_amounts`, `payout_respects_max_len` |
+| 27 | Royalties paid straight to a vault get stuck because the registry never tracked them | `withdraw` asks the vault to release **everything available**, not a tracked figure | — | testnet ledger: royalty → `ember` vault → withdrawn by its owner |
 
 ## What the contracts do not solve
 
 * **Copyright truth.** A registration is the creator's declaration plus a file hash. It is
   evidence, not a copyright registration. Disputes need legal process; the UI says so.
-* **Secondary-sale royalties (NEP-199).** Not implemented in this MVP; licence income is the
-  revenue path. Marketplace sales move the NFT and its vault, but pay no royalty.
 * **Key loss.** If an owner loses their account keys, their vault balance is unreachable
   until they recover the account (e.g. via their wallet's recovery). There is deliberately
   no admin override.

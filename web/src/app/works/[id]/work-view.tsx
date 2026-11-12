@@ -13,7 +13,7 @@ import type { EventKind } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { useCanonData } from "@/components/canon-data";
 import { useWallet } from "@/components/wallet";
-import { EXPLORER, LIVE, view } from "@/lib/near";
+import { EXPLORER, LIVE, vaultAvailable, view } from "@/lib/near";
 import { ButtonLink } from "@/components/ui";
 import { TokenPanel } from "@/components/token-panel";
 
@@ -78,6 +78,14 @@ function WorkDetail({ id }: { id: string }) {
     } catch {}
   }, [id, accountId]);
 
+  const [vaultLive, setVaultLive] = useState<number | null>(null);
+  useEffect(() => {
+    if (!LIVE) return;
+    vaultAvailable(vaultAccount(id))
+      .then(setVaultLive)
+      .catch(() => setVaultLive(null));
+  }, [id, work.vaultNear]);
+  const balance = vaultLive ?? work.vaultNear;
   const isOwner = !!accountId && accountId === work.owner;
   const withdraw = async () => {
     setWithdrawing(true);
@@ -86,6 +94,7 @@ function WorkDetail({ id }: { id: string }) {
       const r = await call("withdraw", { token_id: id }, "1", 60);
       setNotice({ ok: r.value !== false, text: r.value === false ? "The vault refused the release. Your balance is unchanged." : "Withdrawn to your account.", hash: r.hash });
       await refresh();
+      vaultAvailable(vaultAccount(id)).then(setVaultLive).catch(() => {});
     } catch (e) {
       setNotice({ ok: false, text: e instanceof Error ? e.message : String(e) });
     } finally {
@@ -226,13 +235,13 @@ function WorkDetail({ id }: { id: string }) {
             <dl className="mt-3 divide-y divide-line rounded-2xl border border-line px-4 text-[13.5px]">
               <Row k="Vault" v={<CopyMono text={vaultAccount(work.id)} />} />
               <Row k="Owner" v={<Mono>{work.owner}</Mono>} />
-              <Row k="Balance" v={<span className="num text-fg">{formatNear(work.vaultNear)} Ⓝ</span>} />
-              {LIVE && work.vaultNear > 0 && (
+              <Row k={LIVE ? "Vault balance (live)" : "Balance"} v={<span className="num text-fg">{formatNear(balance, 3)} Ⓝ</span>} />
+              {LIVE && balance > 0.0005 && (
                 <div className="flex items-center justify-between gap-3 py-3">
                   <span className="text-xs text-fg-3">{isOwner ? "You own this work." : "Only the current NFT owner can withdraw."}</span>
                   {isOwner ? (
                     <Button size="sm" variant="secondary" onClick={withdraw} disabled={withdrawing}>
-                      {withdrawing ? "Withdrawing…" : `Withdraw ${formatNear(work.vaultNear)} Ⓝ`}
+                      {withdrawing ? "Withdrawing…" : `Withdraw ${formatNear(balance, 3)} Ⓝ`}
                     </Button>
                   ) : !accountId ? (
                     <Button size="sm" variant="ghost" onClick={connect}>

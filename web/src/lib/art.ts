@@ -185,11 +185,22 @@ function drawStrata(ctx: Ctx, S: number, pal: readonly string[], rand: () => num
   }
 }
 
+// ── Canvas factory (browser by default; Node scripts can swap in @napi-rs/canvas) ──
+type AnyCanvas = { width: number; height: number; getContext(t: "2d"): unknown };
+let makeCanvas = (w: number, h: number): AnyCanvas => {
+  const c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  return c;
+};
+export function setCanvasFactory(f: (w: number, h: number) => AnyCanvas) {
+  makeCanvas = f;
+}
+
 // ── Post-process transforms ─────────────────────────────────────────────
 function applyFragment(ctx: Ctx, S: number, rand: () => number) {
-  const src = document.createElement("canvas");
-  src.width = src.height = S;
-  src.getContext("2d")!.drawImage(ctx.canvas, 0, 0);
+  const src = makeCanvas(S, S);
+  (src.getContext("2d") as Ctx).drawImage(ctx.canvas, 0, 0);
   const n = 6;
   const t = S / n;
   for (let i = 0; i < n; i++)
@@ -200,7 +211,7 @@ function applyFragment(ctx: Ctx, S: number, rand: () => number) {
       ctx.save();
       ctx.translate(i * t + t / 2, j * t + t / 2);
       ctx.rotate(Math.floor(rand() * 4) * (Math.PI / 2));
-      ctx.drawImage(src, si * t, sj * t, t, t, -t / 2, -t / 2, t, t);
+      ctx.drawImage(src as unknown as CanvasImageSource, si * t, sj * t, t, t, -t / 2, -t / 2, t, t);
       ctx.restore();
       if (rand() < 0.18) {
         ctx.globalCompositeOperation = "difference";
@@ -225,22 +236,20 @@ function applyFragment(ctx: Ctx, S: number, rand: () => number) {
 
 function applyPixel(ctx: Ctx, S: number) {
   const g = 48;
-  const small = document.createElement("canvas");
-  small.width = small.height = g;
-  const sctx = small.getContext("2d")!;
+  const small = makeCanvas(g, g);
+  const sctx = small.getContext("2d") as Ctx;
   sctx.drawImage(ctx.canvas, 0, 0, g, g);
   ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, S, S);
-  ctx.drawImage(small, 0, 0, S, S);
+  ctx.drawImage(small as unknown as CanvasImageSource, 0, 0, S, S);
   ctx.imageSmoothingEnabled = true;
 }
 
 function applyMotionStreak(ctx: Ctx, S: number) {
-  const src = document.createElement("canvas");
-  src.width = src.height = S;
-  src.getContext("2d")!.drawImage(ctx.canvas, 0, 0);
+  const src = makeCanvas(S, S);
+  (src.getContext("2d") as Ctx).drawImage(ctx.canvas, 0, 0);
   ctx.globalAlpha = 0.16;
-  for (let k = 1; k <= 6; k++) ctx.drawImage(src, k * 4 * (S / 640), -k * 2 * (S / 640));
+  for (let k = 1; k <= 6; k++) ctx.drawImage(src as unknown as CanvasImageSource, k * 4 * (S / 640), -k * 2 * (S / 640));
   ctx.globalAlpha = 1;
 }
 

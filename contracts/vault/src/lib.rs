@@ -8,8 +8,9 @@
 //! * `new()`: records the caller as the registry. The registry calls it in the
 //!   same batch that creates the account, so nobody else can get in first.
 //! * `release(to, amount)`: registry only. Borsh args `(String, u128)`. Sends
-//!   `amount` yoctoNEAR to `to` and returns that transfer as its result, so the
-//!   registry's callback sees whether it succeeded.
+//!   `amount` yoctoNEAR to `to` (`u128::MAX` = everything available: licence
+//!   income plus NEP-199 resale royalties paid straight to the vault) and returns
+//!   that transfer as its result, so the registry's callback sees whether it succeeded.
 //! * `available()` / `registry()`: views for anyone to verify the vault.
 #![no_std]
 
@@ -131,14 +132,17 @@ mod wasm {
         }
         let mut amt = [0u8; 16];
         amt.copy_from_slice(&args[4 + to_len..4 + to_len + 16]);
-        let amount = u128::from_le_bytes(amt);
+        let requested = u128::from_le_bytes(amt);
         // 3. Never break storage staking.
+        let avail = available();
+        let amount = if requested == u128::MAX { avail } else { requested };
         if amount == 0 {
-            fail("ERR_ZERO_AMOUNT");
+            fail("ERR_NOTHING_TO_WITHDRAW");
         }
-        if amount > available() {
+        if amount > avail {
             fail("ERR_INSUFFICIENT_BALANCE");
         }
+        let amt = amount.to_le_bytes();
         // 4. Pay and hand the transfer's result back to the registry.
         unsafe {
             let p = sys::promise_batch_create(to_len as u64, args[4..].as_ptr() as u64);

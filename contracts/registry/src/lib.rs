@@ -498,8 +498,9 @@ impl Canon {
 
     // ───────────────────────────── Money out ────────────────────────────────
 
-    /// Moves the vault's balance to the work's current NFT owner.
-    /// The token is locked until the vault has answered, so it cannot be sold mid-withdrawal.
+    /// Moves everything in the work's vault (licence income and NEP-199 resale royalties)
+    /// to the work's current NFT owner. The token is locked until the vault has answered,
+    /// so it cannot be sold mid-withdrawal.
     #[payable]
     pub fn withdraw(&mut self, token_id: TokenId) -> Promise {
         assert_one_yocto();
@@ -517,9 +518,9 @@ impl Canon {
         let work = self.works.get_mut(&token_id).unwrap_or_else(|| env::panic_str("ERR_NO_WORK"));
         require!(!work.locked, "ERR_TOKEN_LOCKED");
         require!(!listed, "ERR_TOKEN_LISTED");
-        require!(work.vault_balance > 0, "ERR_NOTHING_TO_WITHDRAW");
         work.locked = true;
-        let amount = work.vault_balance;
+        // u128::MAX asks the vault to release everything it can (see contracts/vault).
+        let amount = u128::MAX;
 
         // The vault takes Borsh args (String to, u128 amount); see contracts/vault.
         let args = near_sdk::borsh::to_vec(&(owner.to_string(), amount)).unwrap_or_else(|_| env::panic_str("ERR_ARGS"));
@@ -533,11 +534,12 @@ impl Canon {
         let ok = env::promise_result_checked(0, 256).is_ok();
         let work = self.works.get_mut(&token_id).unwrap_or_else(|| env::panic_str("ERR_NO_WORK"));
         work.locked = false;
+        let _ = amount;
         if ok {
-            work.vault_balance = work.vault_balance.saturating_sub(amount.0);
-            event("withdraw", json!({ "token_id": token_id, "to": to, "amount": amount }));
+            work.vault_balance = 0;
+            event("withdraw", json!({ "token_id": token_id, "to": to }));
         } else {
-            event("withdraw_failed", json!({ "token_id": token_id, "to": to, "amount": amount }));
+            event("withdraw_failed", json!({ "token_id": token_id, "to": to }));
         }
         ok
     }
@@ -719,6 +721,83 @@ impl Canon {
             depth: w.depth,
             created_at_ms: w.created_at_ms,
         }
+    }
+}
+
+// ─────────────────────────────── NEP-199 ───────────────────────────────
+
+pub const MAX_PAYOUT_LEN: u32 = 10;
+
+/// NEP-199 payout: who a marketplace must pay when this token sells for `balance`.
+#[near(serializers = [json])]
+#[derive(Debug, PartialEq)]
+pub struct NepPayout {
+    pub payout: HashMap<AccountId, U128>,
+}
+
+impl Canon {
+    /// Resale royalties follow the lineage: each ancestor takes its `upstream_bps` of what
+    /// reaches it and the remainder lands in that ancestor's vault. The seller keeps the rest.
+    /// Licence NFTs pay 100% to their seller.
+    fn compute_payout(&self, token_id: &TokenId, balance: u128, max_len_payout: Option<u32>) -> NepPayout {
+        let seller = self.tokens.owner_by_id.get(token_id).unwrap_or_else(|| env::panic_str("ERR_NO_TOKEN"));
+        let mut payout: HashMap<AccountId, U128> = HashMap::new();
+        let mut add = |acc: AccountId, amt: u128| {
+            if amt > 0 {
+                let cur = payout.get(&acc).map(|v| v.0).unwrap_or(0);
+                payout.insert(acc, U128(cur + amt));
+            }
+        };
+        if !self.works.contains_key(token_id) {
+            add(seller, balance);
+        } else {
+            let chain = self.chain(token_id);
+            let mut incoming = balance;
+            for (i, (id, _)) in chain.iter().enumerate() {
+                let upstream = match chain.get(i + 1) {
+                    Some((_, parent)) => incoming * parent.terms.upstream_bps as u128 / BPS,
+                    None => 0,
+                };
+                let kept = incoming - upstream;
+                let to = if i == 0 { seller.clone() } else { self.vault_id(id) };
+                add(to, kept);
+                incoming = upstream;
+            }
+        }
+        let max = max_len_payout.unwrap_or(MAX_PAYOUT_LEN).min(MAX_PAYOUT_LEN);
+        require!(payout.len() as u32 <= max, "ERR_PAYOUT_TOO_LONG");
+        let total: u128 = payout.values().map(|v| v.0).sum();
+        require!(total == balance, "ERR_INVARIANT_SUM");
+        NepPayout { payout }
+    }
+}
+
+#[near]
+impl Canon {
+    /// NEP-199: payout for a sale of `token_id` at `balance` yoctoNEAR.
+    pub fn nft_payout(&self, token_id: TokenId, balance: U128, max_len_payout: Option<u32>) -> NepPayout {
+        self.compute_payout(&token_id, balance.0, max_len_payout)
+    }
+
+    /// NEP-199: transfer (by the owner or an approved marketplace) and return the payout
+    /// the marketplace must honour. Refused while a withdrawal is in flight.
+    #[payable]
+    pub fn nft_transfer_payout(
+        &mut self,
+        receiver_id: AccountId,
+        token_id: TokenId,
+        approval_id: Option<u64>,
+        memo: Option<String>,
+        balance: U128,
+        max_len_payout: Option<u32>,
+    ) -> NepPayout {
+        assert_one_yocto();
+        self.assert_not_locked(&token_id);
+        let payout = self.compute_payout(&token_id, balance.0, max_len_payout);
+        let sender = env::predecessor_account_id();
+        self.tokens.internal_transfer(&sender, &receiver_id, &token_id, approval_id, memo);
+        event("sale", json!({ "token_id": token_id, "to": receiver_id, "balance": balance, "payout": payout.payout }));
+        payout
     }
 }
 

@@ -95,9 +95,10 @@ fi
 N() { echo "$1.$FUNDER"; }
 Y() { python3 -c "from decimal import Decimal as D;print(int(D('$1')*10**24))"; }
 terms() { echo "{\"derivatives\":$1,\"commercial\":$2,\"upstream_bps\":$3,\"price\":\"$(Y "$4")\"}"; }
-reg() { # reg <who> <id> <title> <kind> <genome media> <terms> <owner_bps> <contributors json> <parent or null> <description>
+ART_BASE="${ART_BASE:-https://raw.githubusercontent.com/flamiinngo/canon/master/docs/art}"
+reg() { # reg <who> <id> <title> <kind> <art slug> <terms> <owner_bps> <contributors json> <parent or null> <description>
   local parent="null"; [[ "$9" != "null" ]] && parent="\"$9\""
-  local json="{\"token_id\":\"$2\",\"title\":\"$3\",\"description\":\"${10}\",\"media\":\"$5?kind=$4\",\"file_hash\":\"genome:$2\",\"terms\":$6,\"owner_bps\":$7,\"contributors\":$8,\"parent_id\":$parent}"
+  local json="{\"token_id\":\"$2\",\"title\":\"$3\",\"description\":\"${10}\",\"media\":\"$ART_BASE/$5.jpg?kind=$4\",\"file_hash\":\"genome:$2\",\"terms\":$6,\"owner_bps\":$7,\"contributors\":$8,\"parent_id\":$parent}"
   local what="$1 registers **$3**"
   [[ "$9" != "null" ]] && what="$what as a derivative of \`$9\`"
   txc "$what" ok "$(N "$1")" register_work "$json" "0.1 NEAR"
@@ -105,34 +106,35 @@ reg() { # reg <who> <id> <title> <kind> <genome media> <terms> <owner_bps> <cont
 
 if [[ -z "${SKIP_SEED:-}" ]]; then
   say "Creating demo accounts under $FUNDER"
-  for a in ada ben cy dee fay gil hal ivy jun lea max nox kai eve; do
-    near account create-account fund-myself "$(N $a)" "0.35 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N $a)"
+  for a in ada ben cy dee fay gil hal ivy jun lea max nox kai; do
+    near account create-account fund-myself "$(N $a)" "0.25 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N $a)"
   done
-  near account create-account fund-myself "$(N studio)" "3 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N studio)"
+  near account create-account fund-myself "$(N eve)" "1.3 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N eve)"
+  near account create-account fund-myself "$(N studio)" "2.7 NEAR" autogenerate-new-keypair save-to-legacy-keychain sign-as "$FUNDER" $NET $SIGN >> "$LOG" 2>&1 && echo "  $(N studio)"
 
   say "Registering the Ember Field lineage"
-  reg ada ember "Ember Field" "Original%20artwork" "canon:genome/4127/flow/ember/-" "$(terms true true 2000 0.4)" 10000 "[]" null "A generative flow field of 1,100 strokes, released for licensed derivatives."
-  reg ben ember-relief "Ember Field — Relief" "3D%20relief" "canon:genome/4127/flow/ember/relief" "$(terms true true 2500 1)" 7000 "[{\"account_id\":\"$(N cy)\",\"role\":\"Materials\",\"bps\":3000}]" ember "The flow field rebuilt as sculpted relief."
+  reg ada ember "Ember Field" "Original%20artwork" "4127-flow-ember-base" "$(terms true true 2000 0.4)" 10000 "[]" null "A generative flow field of 1,100 strokes, released for licensed derivatives."
+  reg ben ember-relief "Ember Field — Relief" "3D%20relief" "4127-flow-ember-relief" "$(terms true true 2500 1)" 7000 "[{\"account_id\":\"$(N cy)\",\"role\":\"Materials\",\"bps\":3000}]" ember "The flow field rebuilt as sculpted relief."
   txc "ada approves Relief into canon" ok "$(N ada)" approve '{"token_id":"ember-relief"}' "1 yoctoNEAR" "30 Tgas"
-  reg dee ember-motion "Ember Field — Motion" "Motion%20loop" "canon:genome/4127/flow/ember/relief+motion" "$(terms false true 0 1.5)" 8000 "[{\"account_id\":\"$(N fay)\",\"role\":\"Score\",\"bps\":2000}]" ember-relief "The relief set in motion, with an original score."
+  reg dee ember-motion "Ember Field — Motion" "Motion%20loop" "4127-flow-ember-relief_motion" "$(terms false true 0 1.5)" 8000 "[{\"account_id\":\"$(N fay)\",\"role\":\"Score\",\"bps\":2000}]" ember-relief "The relief set in motion, with an original score."
   txc "🛡️ ada (not the parent's owner) tries to approve Motion" ERR_NOT_PARENT_OWNER "$(N ada)" approve '{"token_id":"ember-motion"}' "1 yoctoNEAR" "30 Tgas"
   txc "🛡️ studio tries to license Motion before it is approved" ERR_NOT_CLEARED "$(N studio)" buy_license '{"token_id":"ember-motion","use_case":"Games & interactive"}' "1.6 NEAR"
   txc "ben approves Motion into canon" ok "$(N ben)" approve '{"token_id":"ember-motion"}' "1 yoctoNEAR" "30 Tgas"
-  reg gil ember-nocturne "Ember Field — Nocturne" "Colourway" "canon:genome/4127/flow/nocturne/recolor" "$(terms true true 1000 0.3)" 10000 "[]" ember "The same field at night."
+  reg gil ember-nocturne "Ember Field — Nocturne" "Colourway" "4127-flow-nocturne-recolor" "$(terms true true 1000 0.3)" 10000 "[]" ember "The same field at night."
   txc "ada approves Nocturne" ok "$(N ada)" approve '{"token_id":"ember-nocturne"}' "1 yoctoNEAR" "30 Tgas"
-  reg hal ember-pixel "Ember Field — Pixel" "Pixel%20edition" "canon:genome/4127/flow/ember/pixel" "$(terms true true 1000 0.25)" 10000 "[]" ember "A 48×48 pixel edition, awaiting review."
+  reg hal ember-pixel "Ember Field — Pixel" "Pixel%20edition" "4127-flow-ember-pixel" "$(terms true true 1000 0.25)" 10000 "[]" ember "A 48×48 pixel edition, awaiting review."
 
   say "Other families: non-commercial, revoked, closed"
-  reg ivy moth-light "Moth Light" "Original%20artwork" "canon:genome/913/rings/violet/-" "$(terms true false 0 0)" 10000 "[]" null "Concentric orbits. Fan works welcome; commercial use reserved."
-  reg jun moth-fragments "Moth Light — Fragments" "Remix" "canon:genome/913/rings/violet/fragment" "$(terms false true 0 0.2)" 10000 "[]" moth-light "A tiled remix of Moth Light."
+  reg ivy moth-light "Moth Light" "Original%20artwork" "913-rings-violet-base" "$(terms true false 0 0)" 10000 "[]" null "Concentric orbits. Fan works welcome; commercial use reserved."
+  reg jun moth-fragments "Moth Light — Fragments" "Remix" "913-rings-violet-fragment" "$(terms false true 0 0.2)" 10000 "[]" moth-light "A tiled remix of Moth Light."
   txc "ivy approves Fragments" ok "$(N ivy)" approve '{"token_id":"moth-fragments"}' "1 yoctoNEAR" "30 Tgas"
   txc "🛡️ studio tries to license Fragments (parent forbids commercial use)" ERR_NOT_CLEARED "$(N studio)" buy_license '{"token_id":"moth-fragments","use_case":"Brand & merchandise"}' "0.3 NEAR"
-  reg lea tidal "Tidal" "Original%20artwork" "canon:genome/2203/strata/tidal/-" "$(terms true true 1500 0.6)" 8500 "[{\"account_id\":\"$(N max)\",\"role\":\"Art direction\",\"bps\":1500}]" null "Fourteen layers of sea-floor strata under a low sun."
-  reg nox tidal-neon "Tidal — Neon Remix" "Remix" "canon:genome/2203/strata/neon/recolor+fragment" "$(terms false true 0 0.35)" 10000 "[]" tidal "A neon, tiled reinterpretation of Tidal."
+  reg lea tidal "Tidal" "Original%20artwork" "2203-strata-tidal-base" "$(terms true true 1500 0.6)" 8500 "[{\"account_id\":\"$(N max)\",\"role\":\"Art direction\",\"bps\":1500}]" null "Fourteen layers of sea-floor strata under a low sun."
+  reg nox tidal-neon "Tidal — Neon Remix" "Remix" "2203-strata-neon-recolor_fragment" "$(terms false true 0 0.35)" 10000 "[]" tidal "A neon, tiled reinterpretation of Tidal."
   txc "lea approves Neon Remix" ok "$(N lea)" approve '{"token_id":"tidal-neon"}' "1 yoctoNEAR" "30 Tgas"
   txc "lea revokes Neon Remix" ok "$(N lea)" revoke '{"token_id":"tidal-neon"}' "1 yoctoNEAR" "30 Tgas"
   txc "🛡️ studio tries to license the revoked Neon Remix" ERR_NOT_CLEARED "$(N studio)" buy_license '{"token_id":"tidal-neon","use_case":"Film & motion"}' "0.5 NEAR"
-  reg kai quarry "Quarry" "Original%20artwork" "canon:genome/77/strata/quarry/relief" "$(terms false true 0 0.8)" 10000 "[]" null "Cut stone in relief. Licensable as-is; derivatives closed."
+  reg kai quarry "Quarry" "Original%20artwork" "77-strata-quarry-relief" "$(terms false true 0 0.8)" 10000 "[]" null "Cut stone in relief. Licensable as-is; derivatives closed."
   txc "🛡️ hal tries to derive from Quarry (derivatives closed)" ERR_DERIVATIVES_CLOSED "$(N hal)" register_work "{\"token_id\":\"quarry-remix\",\"title\":\"Quarry Remix\",\"description\":null,\"media\":null,\"file_hash\":\"x\",\"terms\":$(terms false true 0 0.1),\"owner_bps\":10000,\"contributors\":[],\"parent_id\":\"quarry\"}" "0.1 NEAR"
   txc "🛡️ ada registers splits totalling 90%" ERR_BAD_SPLITS "$(N ada)" register_work "{\"token_id\":\"bad-splits\",\"title\":\"Bad\",\"description\":null,\"media\":null,\"file_hash\":\"x\",\"terms\":$(terms true true 0 0.1),\"owner_bps\":9000,\"contributors\":[],\"parent_id\":null}" "0.1 NEAR"
 
@@ -144,12 +146,15 @@ if [[ -z "${SKIP_SEED:-}" ]]; then
   txc "🛡️ eve (not the owner) tries to withdraw Relief's vault" ERR_NOT_OWNER "$(N eve)" withdraw '{"token_id":"ember-relief"}' "1 yoctoNEAR" "60 Tgas"
   txc "ben lists Relief on a marketplace (nft_approve)" ok "$(N ben)" nft_approve "{\"token_id\":\"ember-relief\",\"account_id\":\"$(N eve)\",\"msg\":null}" "0.01 NEAR" "30 Tgas"
   txc "🛡️ ben tries to drain Relief's vault while it is listed" ERR_TOKEN_LISTED "$(N ben)" withdraw '{"token_id":"ember-relief"}' "1 yoctoNEAR" "60 Tgas"
-  txc "ben sells Relief to eve (nft_transfer)" ok "$(N ben)" nft_transfer "{\"receiver_id\":\"$(N eve)\",\"token_id\":\"ember-relief\",\"approval_id\":null,\"memo\":null}" "1 yoctoNEAR" "30 Tgas"
+  txc "eve's marketplace sells Relief for 1 Ⓝ via NEP-199 nft_transfer_payout: payout = ben 0.8, ember vault 0.2 (resale royalty)" ok "$(N eve)" nft_transfer_payout "{\"receiver_id\":\"$(N eve)\",\"token_id\":\"ember-relief\",\"approval_id\":null,\"memo\":null,\"balance\":\"$(Y 1)\",\"max_len_payout\":10}" "1 yoctoNEAR" "50 Tgas"
+  tx "marketplace pays the seller ben 0.8 Ⓝ" ok tokens "$(N eve)" send-near "$(N ben)" "0.8 NEAR" $NET $SIGN
+  tx "marketplace pays the 0.2 Ⓝ royalty straight into Ember's vault" ok tokens "$(N eve)" send-near "ember.$REGISTRY" "0.2 NEAR" $NET $SIGN
   txc "🛡️ ben (the seller) tries to withdraw after the sale" ERR_NOT_OWNER "$(N ben)" withdraw '{"token_id":"ember-relief"}' "1 yoctoNEAR" "60 Tgas"
   tx "🛡️ eve calls Relief's vault \`release\` directly, bypassing the registry" ERR_ONLY_REGISTRY     contract call-function as-transaction "ember-relief.$REGISTRY" release json-args '{}' prepaid-gas "30 Tgas" attached-deposit "0 NEAR" sign-as "$(N eve)" $NET $SIGN
   txc "eve (the buyer) withdraws 0.21 Ⓝ earned before she bought it" ok "$(N eve)" withdraw '{"token_id":"ember-relief"}' "1 yoctoNEAR" "60 Tgas"
   txc "cy claims 0.09 Ⓝ: her credit did not move with the sale" ok "$(N cy)" claim '{}' "0 NEAR" "30 Tgas"
   txc "dee withdraws Motion's vault (0.9 Ⓝ)" ok "$(N dee)" withdraw '{"token_id":"ember-motion"}' "1 yoctoNEAR" "60 Tgas"
+  txc "ada withdraws Ember's vault: 0.075 Ⓝ licence share + 0.2 Ⓝ resale royalty" ok "$(N ada)" withdraw '{"token_id":"ember"}' "1 yoctoNEAR" "60 Tgas"
   txc "fay claims her 0.225 Ⓝ score share" ok "$(N fay)" claim '{}' "0 NEAR" "30 Tgas"
   txc "🛡️ fay tries to claim twice" ERR_NOTHING_TO_CLAIM "$(N fay)" claim '{}' "0 NEAR" "30 Tgas"
 fi

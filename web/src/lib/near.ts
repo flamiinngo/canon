@@ -28,7 +28,12 @@ function b64(s: string) {
   return typeof window === "undefined" ? Buffer.from(s).toString("base64") : btoa(unescape(encodeURIComponent(s)));
 }
 
-export async function view<T>(method: string, args: Record<string, unknown> = {}): Promise<T> {
+/** Live, withdrawable balance of a work's vault (licence income + resale royalties), from the vault itself. */
+export async function vaultAvailable(vaultId: string): Promise<number> {
+  return yoctoToNear(await view<string>("available_balance", {}, vaultId));
+}
+
+export async function view<T>(method: string, args: Record<string, unknown> = {}, accountId: string = CONTRACT): Promise<T> {
   const res = await fetch(RPC_URL, {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -36,7 +41,7 @@ export async function view<T>(method: string, args: Record<string, unknown> = {}
       jsonrpc: "2.0",
       id: "canon",
       method: "query",
-      params: { request_type: "call_function", finality: "optimistic", account_id: CONTRACT, method_name: method, args_base64: b64(JSON.stringify(args)) },
+      params: { request_type: "call_function", finality: "optimistic", account_id: accountId, method_name: method, args_base64: b64(JSON.stringify(args)) },
     }),
     cache: "no-store",
   });
@@ -53,6 +58,14 @@ export function encodeGenome(g: Genome, kind: string) {
 }
 
 export function decodeGenome(media: string | null | undefined, tokenId: string): { genome: Genome; kind: string } {
+  // Hosted image form (what wallets display): …/art/<seed>-<style>-<palette>-<t1_t2|base>.jpg?kind=<kind>
+  const u = media?.match(/\/art\/(\d+)-(\w+?)-(\w+?)-([a-z_]+)\.(?:jpg|png)(?:\?kind=(.*))?$/);
+  if (u) {
+    return {
+      genome: { seed: Number(u[1]), style: u[2] as Style, palette: u[3] as PaletteName, transforms: u[4] === "base" ? [] : (u[4].split("_") as Transform[]) },
+      kind: u[5] ? decodeURIComponent(u[5]) : "Artwork",
+    };
+  }
   const m = media?.match(/^canon:genome\/(\d+)\/(\w+)\/(\w+)\/([\w+-]+)(?:\?kind=(.*))?$/);
   if (m) {
     return {

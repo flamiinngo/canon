@@ -411,3 +411,89 @@ fn cannot_claim_what_you_are_not_owed() {
     ctx("eve.testnet", 0);
     let _ = k.claim();
 }
+
+// ───────────────────────── NEP-199 resale royalties ─────────────────────────
+
+fn payout_of(p: &NepPayout, who: &str) -> u128 {
+    p.payout.get(&acc(who)).map(|v| v.0).unwrap_or(0)
+}
+
+#[test]
+fn resale_royalties_flow_up_the_lineage() {
+    let k = ember_family();
+    // dee sells Motion for 10 NEAR: 25% to Relief's lineage, of which 20% goes on to Ember.
+    let p = k.nft_payout("ember-motion".into(), U128(10 * NEAR), None);
+    assert_eq!(payout_of(&p, "dee.testnet"), 75 * NEAR / 10); // seller keeps 7.5
+    assert_eq!(payout_of(&p, "ember-relief.canon.testnet"), 2 * NEAR); // relief vault 2.0
+    assert_eq!(payout_of(&p, "ember.canon.testnet"), NEAR / 2); // ember vault 0.5
+    let total: u128 = p.payout.values().map(|v| v.0).sum();
+    assert_eq!(total, 10 * NEAR);
+}
+
+#[test]
+fn original_resale_pays_the_seller_in_full() {
+    let k = ember_family();
+    let p = k.nft_payout("ember".into(), U128(3 * NEAR), None);
+    assert_eq!(p.payout.len(), 1);
+    assert_eq!(payout_of(&p, "ada.testnet"), 3 * NEAR);
+}
+
+#[test]
+fn payout_sums_exactly_for_awkward_amounts() {
+    let k = ember_family();
+    for b in [1u128, 3, 99, 10_007, 7 * NEAR / 3, 123_456_789_012_345] {
+        let p = k.nft_payout("ember-motion".into(), U128(b), None);
+        assert_eq!(p.payout.values().map(|v| v.0).sum::<u128>(), b, "balance {b}");
+    }
+}
+
+#[test]
+#[should_panic(expected = "ERR_PAYOUT_TOO_LONG")]
+fn payout_respects_max_len() {
+    let k = ember_family();
+    k.nft_payout("ember-motion".into(), U128(NEAR), Some(2));
+}
+
+#[test]
+fn marketplace_sale_transfers_and_returns_payout() {
+    let mut k = ember_family();
+    ctx("dee.testnet", NEAR / 100);
+    k.nft_approve("ember-motion".into(), acc("market.testnet"), None);
+    ctx("market.testnet", 1);
+    let p = k.nft_transfer_payout(acc("eve.testnet"), "ember-motion".into(), None, None, U128(4 * NEAR), None);
+    assert_eq!(k.nft_token("ember-motion".into()).unwrap().owner_id, acc("eve.testnet"));
+    assert_eq!(payout_of(&p, "dee.testnet"), 3 * NEAR);
+    assert!(get_logs().iter().any(|l| l.contains("\"event\":\"sale\"")));
+}
+
+#[test]
+#[should_panic(expected = "Sender not approved")]
+fn unapproved_marketplace_cannot_sell() {
+    let mut k = ember_family();
+    ctx("market.testnet", 1);
+    k.nft_transfer_payout(acc("eve.testnet"), "ember-motion".into(), None, None, U128(NEAR), None);
+}
+
+#[test]
+#[should_panic(expected = "ERR_TOKEN_LOCKED")]
+fn cannot_sell_through_marketplace_mid_withdrawal() {
+    let mut k = ember_family();
+    buy(&mut k, "studio.testnet", "ember-motion");
+    ctx("dee.testnet", NEAR / 100);
+    k.nft_approve("ember-motion".into(), acc("market.testnet"), None);
+    ctx("dee.testnet", 1);
+    k.nft_revoke_all("ember-motion".into());
+    ctx("dee.testnet", 1);
+    let _ = k.withdraw("ember-motion".into());
+    ctx("dee.testnet", 1);
+    k.nft_transfer_payout(acc("eve.testnet"), "ember-motion".into(), None, None, U128(NEAR), None);
+}
+
+#[test]
+fn licence_resale_pays_the_holder_in_full() {
+    let mut k = ember_family();
+    let licence = buy(&mut k, "studio.testnet", "ember-motion");
+    let p = k.nft_payout(licence, U128(2 * NEAR), None);
+    assert_eq!(p.payout.len(), 1);
+    assert_eq!(payout_of(&p, "studio.testnet"), 2 * NEAR);
+}
