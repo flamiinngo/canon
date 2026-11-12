@@ -25,7 +25,7 @@ Built at **NEAR HACKATHON 2026** for **Track 10 · NFTs That Do Something** by B
 | **Vault code** | 3.5 KB `no_std` contract, published as an immutable NEP-591 global contract · hash `Anq6HuuCn243gdRdBjudqvR1uCe8NB8JQzTD5DF9KKtw` |
 | **Proof** | [JUDGES.md](JUDGES.md): 41 real testnet transactions, including **11 attacks the contract refused** |
 | **Security** | [THREAT_MODEL.md](THREAT_MODEL.md): 27 attacks → defence → error code → test |
-| **App** | Next.js 16 · reads and writes the live registry · [run it in 2 commands](#run-it) |
+| **Live app** | **[canon.bootstate.xyz](https://canon.bootstate.xyz)** · Next.js 16 on Netlify · reads and writes the live registry · or [run it in 2 commands](#run-it) |
 
 ---
 
@@ -83,7 +83,7 @@ sequenceDiagram
 
 | Do | See |
 |---|---|
-| `cd web && pnpm i && pnpm dev`, open `localhost:3000` | Live hero: one licence splitting across three generations with a synced transaction log |
+| Open **[canon.bootstate.xyz](https://canon.bootstate.xyz)** (or `cd web && pnpm i && pnpm dev`) | Live hero: one licence splitting across three generations with a synced transaction log |
 | **Explore** → **Ember Field — Motion** | Clearance across 3 generations · contributor splits · **The NFT** panel (contract, token ID, holder, raw `nft_token` metadata) · licences issued and who holds them · lineage graph |
 | **Collection** → *Studio* demo collector | The studio's two **licence NFTs**, read with `nft_tokens_for_owner` |
 | **Proof** | All 41 testnet transactions with explorer links; refused attacks highlighted |

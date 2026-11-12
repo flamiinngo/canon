@@ -36,6 +36,9 @@ importers:
       '@napi-rs/canvas':
         specifier: ^1.1.1
         version: 1.1.1
+      '@netlify/plugin-nextjs':
+        specifier: 5.16.6
+        version: 5.16.6
       '@tailwindcss/turbopack':
         specifier: 4.3.3
         version: 4.3.3
@@ -615,6 +618,10 @@ packages:
   '@napi-rs/canvas@1.1.1':
     resolution: {integrity: sha512-UyNspnx0rXclATMOBXiWgy1xtWUSUDm4UOO6+YO8xzyVKaZRpvK+SlJSCtRoSI9J/mEqklJiPYtroN1B+hgLXg==}
     engines: {node: '>= 10'}
+
+  '@netlify/plugin-nextjs@5.16.6':
+    resolution: {integrity: sha512-BXy5WhogsaQOKz+C+KMlWrQupdGkV1a6TmJ6RLF6RwUMz6Oi419RejMD8yB8ttBKqImQDkOE4MmNLx3uEEKxPw==}
+    engines: {node: '>=18.0.0'}
 
   '@next/env@16.4.6':
     resolution: {integrity: sha512-SunBjJ6t+oBtecS3dTjdVuMhUogP5wD/vrGL5EVuQYM1iS4O5ilL51HkiJ3sPjMzRHiCChvr4dbaSJbR7F3lxA==}
@@ -2728,6 +2735,8 @@ snapshots:
       '@napi-rs/canvas-linux-x64-musl': 1.1.1
       '@napi-rs/canvas-win32-arm64-msvc': 1.1.1
       '@napi-rs/canvas-win32-x64-msvc': 1.1.1
+
+  '@netlify/plugin-nextjs@5.16.6': {}
 
   '@next/env@16.4.6': {}
 

@@ -2,9 +2,12 @@
 [build]
   base = "web"
   command = "pnpm build"
-  publish = ".next"
+  publish = "web/.next"
 
 [build.environment]
   NODE_VERSION = "24"
   NEXT_PUBLIC_CANON_CONTRACT = "canonhq.testnet"
   NEXT_PUBLIC_NEAR_NETWORK = "testnet"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
