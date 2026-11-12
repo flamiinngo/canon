@@ -1,0 +1,10 @@
+# Canon web app on Netlify (Next.js 16 via the Netlify Next.js runtime).
+[build]
+  base = "web"
+  command = "pnpm build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NEXT_PUBLIC_CANON_CONTRACT = "canonhq.testnet"
+  NEXT_PUBLIC_NEAR_NETWORK = "testnet"
