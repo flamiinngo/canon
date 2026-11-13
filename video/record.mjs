@@ -28,7 +28,9 @@ const CURSOR = `
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
 const offsets = {};
 
+const ONLY = process.argv.slice(2);
 async function clip(name, fn) {
+  if (ONLY.length && !ONLY.includes(name)) return;
   const dir = join(OUT, "_" + name);
   rmSync(dir, { recursive: true, force: true });
   const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, recordVideo: { dir, size: { width: 1920, height: 1080 } } });
@@ -185,13 +187,14 @@ await clip("blocked", async (page, mark) => {
 });
 
 await clip("explorer", async (page, mark) => {
-  await page.goto("https://testnet.nearblocks.io/txns/HrgXySX1m4uHA21ynYgLrCvCBxJNg2n8syFSWGAm8U2a", { waitUntil: "domcontentloaded", timeout: 60000 });
-  await page.waitForTimeout(5000);
+  await ready(page, "/proof", "The whole story, as transactions.");
+  await scrollToText(page, "The whole story, as transactions.", 100, 10);
+  await page.waitForTimeout(500);
   mark();
-  await glide(page, 760, 420, 30);
-  await page.waitForTimeout(800);
-  await smoothScroll(page, 360, 1800);
-  await glide(page, 980, 600, 30);
+  await glide(page, 1180, 420, 30);
+  await page.waitForTimeout(500);
+  await smoothScroll(page, 520, 2200);
+  await glide(page, 1500, 560, 30);
   await page.waitForTimeout(2600);
 });
 
@@ -205,5 +208,7 @@ await clip("hero", async (page, mark) => {
 });
 
 await browser.close();
-writeFileSync("src/clips.json", JSON.stringify(offsets, null, 1));
+let prev = {};
+try { prev = JSON.parse((await import("node:fs")).readFileSync("src/clips.json", "utf8")); } catch {}
+writeFileSync("src/clips.json", JSON.stringify({ ...prev, ...offsets }, null, 1));
 console.log("done");

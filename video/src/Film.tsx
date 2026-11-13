@@ -1,4 +1,6 @@
-import { AbsoluteFill, Easing, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Easing, Img, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import VO from "./vo-durations.json";
+import CLIPS from "./clips.json";
 import { loadFont } from "@remotion/google-fonts/Geist";
 import { loadFont as loadMono } from "@remotion/google-fonts/GeistMono";
 
@@ -50,18 +52,10 @@ const ART = {
 };
 
 // ── Timing ───────────────────────────────────────────────────────────────
-const SCENES = [
-  ["intro", 120],
-  ["statement", 180],
-  ["problem", 210],
-  ["meet", 270],
-  ["payment", 330],
-  ["product", 300],
-  ["security", 270],
-  ["proof", 210],
-  ["royalty", 210],
-  ["end", 210],
-] as const;
+type SceneKey = keyof typeof VO;
+const ORDER: SceneKey[] = ["intro", "statement", "meet", "explore", "clearance", "payout", "checkout", "collection", "register", "blocked", "explorer", "security", "proof", "end"];
+const VO_LEAD = 10; // frames of picture before the voice starts
+const SCENES = ORDER.map((k) => [k, Math.ceil((VO[k] + (k === "end" ? 2.4 : 0.9)) * 30) + VO_LEAD] as const);
 export const FILM_FRAMES = SCENES.reduce((a, [, d]) => a + d, 0);
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
@@ -179,45 +173,66 @@ const Intro: React.FC<{ d: number }> = ({ d }) => {
 
 const Statement: React.FC<{ d: number }> = ({ d }) => {
   const f = useCurrentFrame();
+  const cards = [
+    { src: ART.fragments, label: "Fans remix it" },
+    { src: ART.relief, label: "Sculptors rebuild it" },
+    { src: ART.motion, label: "Studios license it" },
+  ];
+  const gapAt = 150;
   return (
     <AbsoluteFill style={{ opacity: sceneFade(f, d) }}>
       <Backdrop />
-      <AbsoluteFill style={{ justifyContent: "center", padding: "0 180px", gap: 30 }}>
-        <Headline text="Creative work doesn't end with its creator." delay={6} size={104} />
-        <Headline text="Neither should the money." delay={70} size={104} gradient />
+      <AbsoluteFill style={{ padding: "120px 170px", gap: 56 }}>
+        <div style={{ display: "flex", gap: 48 }}>
+          {cards.map((c, i) => {
+            const st = 6 + i * 34;
+            return (
+              <div key={c.label} style={{ flex: 1, opacity: fadeIn(f, st), transform: `translateY(${rise(f, st, 60, 30)}px)` }}>
+                <Img src={staticFile(c.src)} style={{ width: "100%", height: 400, objectFit: "cover", borderRadius: 28, filter: `brightness(${1 - fadeIn(f, gapAt, 30) * 0.45})` }} />
+                <div style={{ marginTop: 28, fontFamily: SANS, fontSize: 42, fontWeight: 600, letterSpacing: "-0.035em", color: C.fg }}>{c.label}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <Headline text="Permission and payment never follow the work." delay={gapAt} size={64} stagger={3} gradient />
+        </div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
 
-const Problem: React.FC<{ d: number }> = ({ d }) => {
+/** Real footage of the live app, framed like a product launch. */
+const CAPTIONS: Partial<Record<SceneKey, [string, string]>> = {
+  explore: ["Explore", "Every derivative, approved on-chain"],
+  clearance: ["Clearance", "One verdict across every ancestor"],
+  payout: ["Payout", "One payment. Every generation."],
+  checkout: ["Checkout", "Exactly who gets paid, before you pay"],
+  collection: ["Licence NFT", "Hold it, and the source files unlock"],
+  register: ["Submit", "Only the original's owner can approve"],
+  blocked: ["Protection", "No clearance, no licence"],
+  explorer: ["Proof", "Every step is a real NEAR transaction"],
+};
+const ClipScene: React.FC<{ d: number; k: SceneKey }> = ({ d, k }) => {
   const f = useCurrentFrame();
-  const cards = [
-    { src: ART.fragments, label: "Built without asking", x: 0 },
-    { src: ART.nocturne, label: "Impossible to clear", x: 1 },
-    { src: ART.pixel, label: "Contributors forgotten", x: 2 },
-  ];
+  const clip = (CLIPS as Record<string, { start: number; length: number }>)[k];
+  const scene = d / 30;
+  const rate = Math.min(1, clip.length / scene);
+  const push = interpolate(f, [0, d], [0.86, 0.9]);
+  const tilt = interpolate(f, [0, 24], [6, 0], { extrapolateRight: "clamp", easing: ease });
+  const [kicker, line] = CAPTIONS[k] ?? ["", ""];
   return (
     <AbsoluteFill style={{ opacity: sceneFade(f, d) }}>
-      <Backdrop glow="rgba(255,93,108,0.10)" />
-      <AbsoluteFill style={{ padding: "130px 180px", gap: 70 }}>
-        <Kicker delay={4}>The problem</Kicker>
-        <div style={{ display: "flex", gap: 56 }}>
-          {cards.map((c, i) => {
-            const s = 14 + i * 26;
-            const strike = interpolate(f, [s + 40, s + 58], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
-            return (
-              <div key={c.label} style={{ flex: 1, opacity: fadeIn(f, s), transform: `translateY(${rise(f, s, 60, 30)}px)` }}>
-                <Img src={staticFile(c.src)} style={{ width: "100%", height: 420, objectFit: "cover", borderRadius: 28, filter: `grayscale(${strike * 0.7}) brightness(${1 - strike * 0.35})` }} />
-                <div style={{ position: "relative", display: "inline-block", marginTop: 34 }}>
-                  <div style={{ fontFamily: SANS, fontSize: 44, fontWeight: 600, letterSpacing: "-0.035em", color: C.fg }}>{c.label}</div>
-                  <div style={{ position: "absolute", left: 0, top: "52%", height: 4, width: `${strike * 100}%`, background: C.bad, borderRadius: 4 }} />
-                </div>
-              </div>
-            );
-          })}
+      <Backdrop glow="rgba(169,139,255,0.10)" at="50% 110%" />
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", perspective: 2600 }}>
+        <div style={{ width: 1920, height: 1080, transform: `translateY(-46px) scale(${push}) rotateX(${tilt}deg)`, borderRadius: 26, overflow: "hidden", boxShadow: "0 90px 180px -50px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08)" }}>
+          <OffthreadVideo src={staticFile(`clips/${k}.mp4`)} startFrom={Math.round(clip.start * 30)} playbackRate={rate} muted style={{ width: 1920, height: 1080 }} />
         </div>
       </AbsoluteFill>
+      <div style={{ position: "absolute", left: 140, bottom: 54, display: "flex", alignItems: "baseline", gap: 22, opacity: fadeIn(f, 8), transform: `translateY(${rise(f, 8, 18)}px)` }}>
+        <span style={{ fontFamily: MONO, fontSize: 20, letterSpacing: "0.2em", textTransform: "uppercase", color: C.ember }}>{kicker}</span>
+        <span style={{ fontFamily: SANS, fontSize: 40, fontWeight: 600, letterSpacing: "-0.03em", color: C.fg }}>{line}</span>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -366,40 +381,6 @@ const Payment: React.FC<{ d: number }> = ({ d }) => {
   );
 };
 
-const Product: React.FC<{ d: number }> = ({ d }) => {
-  const f = useCurrentFrame();
-  const shots = [
-    { src: "shots/work-top.png", cap: "Clearance across every ancestor" },
-    { src: "shots/checkout.png", cap: "See exactly who gets paid, before you pay" },
-    { src: "shots/collection.png", cap: "Licence NFTs that unlock source files" },
-    { src: "shots/proof.png", cap: "Every claim is a transaction" },
-  ];
-  const per = d / shots.length;
-  return (
-    <AbsoluteFill style={{ opacity: sceneFade(f, d) }}>
-      <Backdrop glow="rgba(82,214,255,0.10)" at="50% 100%" />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 70, textAlign: "center" }}>
-        <Kicker delay={2}>The product</Kicker>
-      </div>
-      {shots.map((s, i) => {
-        const st = i * per;
-        const local = f - st;
-        const vis = interpolate(local, [0, 16, per - 12, per], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-        if (vis <= 0) return null;
-        const zoom = interpolate(local, [0, per], [1.0, 1.06]);
-        const tilt = interpolate(local, [0, per], [8, 2]);
-        return (
-          <AbsoluteFill key={s.src} style={{ alignItems: "center", justifyContent: "center", opacity: vis, perspective: 2400 }}>
-            <div style={{ transform: `rotateX(${tilt}deg) scale(${zoom * 0.74}) translateY(-30px)`, borderRadius: 26, overflow: "hidden", boxShadow: "0 80px 160px -40px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.08)" }}>
-              <Img src={staticFile(s.src)} style={{ width: 1920, height: 1080, display: "block" }} />
-            </div>
-            <div style={{ position: "absolute", bottom: 90, fontFamily: SANS, fontWeight: 600, fontSize: 46, letterSpacing: "-0.03em", color: C.fg, transform: `translateY(${rise(local, 6, 20)}px)` }}>{s.cap}</div>
-          </AbsoluteFill>
-        );
-      })}
-    </AbsoluteFill>
-  );
-};
 
 const Security: React.FC<{ d: number }> = ({ d }) => {
   const f = useCurrentFrame();
@@ -531,16 +512,12 @@ const End: React.FC<{ d: number }> = ({ d }) => {
   );
 };
 
-const COMPONENTS: Record<(typeof SCENES)[number][0], React.FC<{ d: number }>> = {
+const MOTION: Partial<Record<SceneKey, React.FC<{ d: number }>>> = {
   intro: Intro,
   statement: Statement,
-  problem: Problem,
   meet: Meet,
-  payment: Payment,
-  product: Product,
   security: Security,
   proof: Proof,
-  royalty: Royalty,
   end: End,
 };
 
@@ -548,11 +525,15 @@ export const CanonFilm: React.FC = () => {
   let from = 0;
   return (
     <AbsoluteFill style={{ background: C.bg }}>
+      <Audio src={staticFile("music/bed.mp3")} volume={(fr) => interpolate(fr, [0, 45, FILM_FRAMES - 75, FILM_FRAMES], [0, 0.16, 0.16, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} />
       {SCENES.map(([name, dur]) => {
-        const S = COMPONENTS[name];
+        const S = MOTION[name];
         const el = (
           <Sequence key={name} from={from} durationInFrames={dur} name={name}>
-            <S d={dur} />
+            {S ? <S d={dur} /> : <ClipScene d={dur} k={name} />}
+            <Sequence from={VO_LEAD}>
+              <Audio src={staticFile(`vo/${name}.mp3`)} volume={1} />
+            </Sequence>
           </Sequence>
         );
         from += dur;
