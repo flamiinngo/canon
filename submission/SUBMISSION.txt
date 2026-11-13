@@ -1,40 +1,76 @@
-CANON — SUBMISSION FORM ANSWERS
-Form: https://nearhackathon.com   (corrections: https://nearhackathon.com/request-changes)
-Deadline: 14 Nov 2026, 23:59 UTC
+CANON — FULL SUBMISSION
+=======================
+Form:        https://nearhackathon.com
+Corrections: https://nearhackathon.com/request-changes
+Deadline:    14 Nov 2026, 23:59 UTC   (judging 16–18 Nov)
+Video file:  C:\Users\eobi6\nearhackathon\submission\canon-film.mp4   (1:56, 1080p, 66 MB)
 
+
+STEP 1 — POST ON X (from @Bootstate)
+------------------------------------
+Post 1 (attach canon-film.mp4):
+
+Today we're introducing Canon.
+
+Every artwork is an NFT with its own wallet. Derivatives need the creator's approval, and one licence pays everyone who contributed.
+
+Built at NEAR HACKATHON. Live on testnet.
+
+canon.bootstate.xyz
+@NEARProtocol #NEARHackathon
+
+Reply 2 (add to the thread with +):
+
+Creative work rarely stays with one creator. It gets remixed, rebuilt in 3D and animated, but the original artist is seldom asked and rarely paid.
+
+Canon records who made what and who approved it, and splits every licence across the whole chain.
+
+Reply 3:
+
+No admin keys. Approvals happen on-chain, and every payment and licence can be verified on NEAR.
+
+Open source: github.com/flamiinngo/canon
+
+-> After posting, copy the link to Post 1 and pin it to the profile.
+
+
+STEP 2 — FILL THE FORM
+----------------------
 Project name:
 Canon
+
+Team lead:
+(your full name)
+
+Email:
+(your email)
+
+Team size:
+(number of people)
 
 Tracks:
 NFTs That Do Something
 
+NEAR wallet (prize payout, must be MAINNET, e.g. yourname.near):
+(your mainnet account)
+
 Repository:
 https://github.com/flamiinngo/canon
 
-Live app:
-https://canon.bootstate.xyz
+Demo post link:
+(the link to Post 1 on X)
 
-NEAR wallet (for the prize): YOUR MAINNET ACCOUNT, e.g. yourname.near
-
-Demo post link: the URL of your X post (see X POST below)
-
-
-===== WHAT DID YOU BUILD? (copy everything between the lines) =====
+What did you build? (copy everything between the lines)
 ------------------------------------------------------------------
 Canon is the rights layer for creative IP on NEAR. Every work is a NEP-171 NFT that owns its own keyless vault: a sub-account with zero access keys running a 3.5 KB vault published as an immutable NEP-591 global contract. Derivatives join a work's lineage only when the parent's current owner approves them on-chain. A studio gets one clearance verdict across every ancestor, then a single buy_license transaction splits the payment up the whole family tree: each work's vault and every contributor is paid, and the studio receives a licence NFT that unlocks the source files. Resales pay royalties to every ancestor through NEP-199. Control follows the token: a seller cannot withdraw after a sale, cannot sell mid-withdrawal, and cannot drain a listed vault. The registry has no admin, pause or upgrade method, and its keys are deleted. Proof: 41 contract tests plus 41 real testnet transactions, including 11 refused attacks, all linked in LEDGER.md and on the Proof page. Live app: https://canon.bootstate.xyz. Contract: canonhq.testnet.
 ------------------------------------------------------------------
 
 
-===== X POST (copy everything between the lines, attach the video) =====
-------------------------------------------------------------------
-Creative IP that pays its whole family tree.
-
-We built Canon at NEAR HACKATHON: every artwork is an NFT that owns its own keyless wallet. Derivatives need the original's approval, and one licence payment splits across every generation and contributor in a single transaction.
-
-0 admin keys. 41 tests. 11 attacks refused on-chain.
-
-Live: https://canon.bootstate.xyz
-Code: https://github.com/flamiinngo/canon
-
-@NEARProtocol #NEARHackathon
-------------------------------------------------------------------
+STEP 3 — BEFORE YOU PRESS SUBMIT
+--------------------------------
+[ ] canon.bootstate.xyz opens and shows works
+[ ] github.com/flamiinngo/canon opens while logged out (public)
+[ ] X post is public, has the video, tags @NEARProtocol and #NEARHackathon
+[ ] Wallet field is a MAINNET .near account you control
+[ ] Netlify badge turned off (app.netlify.com/projects/canon-bootstate > Project configuration > General)
+[ ] Only submit once per repository; use the corrections link for changes
