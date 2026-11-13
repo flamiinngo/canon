@@ -1,0 +1,38 @@
+{
+ "explore": {
+  "start": 11.03,
+  "length": 11.77
+ },
+ "clearance": {
+  "start": 7.12,
+  "length": 8.13
+ },
+ "payout": {
+  "start": 9.41,
+  "length": 8.38
+ },
+ "checkout": {
+  "start": 8.59,
+  "length": 7.37
+ },
+ "collection": {
+  "start": 12.05,
+  "length": 6.2
+ },
+ "register": {
+  "start": 5.26,
+  "length": 8.76
+ },
+ "blocked": {
+  "start": 9.79,
+  "length": 6.61
+ },
+ "explorer": {
+  "start": 5.97,
+  "length": 6.2
+ },
+ "hero": {
+  "start": 9.97,
+  "length": 9.16
+ }
+}

@@ -279,7 +279,7 @@ function Node({
               transition={{ type: "spring", bounce: 0.35, duration: 0.5 }}
               className="num absolute left-full top-1/2 z-10 ml-2 -translate-y-1/2 whitespace-nowrap rounded-full bg-fg px-2 py-0.5 text-[11px] font-medium text-bg shadow-[0_8px_24px_-6px_rgba(0,0,0,0.8)]"
             >
-              +{formatNear(credit)} Ⓝ
+              +{formatNear(credit, credit < 10 ? 3 : 2)} Ⓝ
             </motion.span>
           )}
         </AnimatePresence>
