@@ -27,14 +27,15 @@ export default function AboutPage() {
       {/* Problem */}
       <section className="mt-28">
         <SectionHead label="The problem" title="Derivative work is everywhere. Permission and payment aren't." />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
           {[
             ["Built without asking", "Fan art, 3D models and remixes are made every day with no record of permission. Originals can't say yes, so the best work stays unofficial."],
             ["Impossible to clear", "A studio that finds a great derivative can't tell who contributed, which ancestors allow commercial use, or who to pay. So it walks away."],
             ["Contributors forgotten", "When money finally moves, it goes to whoever holds the file. The sculptor, the colourist and the original artist rarely see a share."],
-          ].map(([t, b]) => (
-            <div key={t} className="panel p-6">
-              <p className="text-[19px] font-medium tracking-[-0.025em] text-fg">{t}</p>
+          ].map(([t, b], i) => (
+            <div key={t}>
+              <p className="font-mono text-sm text-ember">0{i + 1}</p>
+              <p className="mt-4 text-[21px] font-medium tracking-[-0.03em] text-fg">{t}</p>
               <p className="mt-3 text-[15px] leading-relaxed text-fg-2">{b}</p>
             </div>
           ))}
@@ -44,7 +45,7 @@ export default function AboutPage() {
       {/* Who it's for */}
       <section className="mt-28">
         <SectionHead label="Who it's for" title="Three sides of one market." />
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
+        <div className="mt-14 grid gap-14 lg:grid-cols-3 lg:gap-10">
           <Audience
             icon={<Users className="size-5" />}
             who="IP owners & communities"
@@ -73,7 +74,7 @@ export default function AboutPage() {
           title="Creators get paid first. Canon earns on top, transparently."
           body="Today the protocol takes no fee: every yoctoNEAR of a licence reaches creators, as the testnet ledger shows. These are the revenue lines we plan to add, each disclosed on-chain or in a public price list."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
           <Plan tag="Protocol" title="Licence fee" body="A small, fixed protocol share of each licence, written into a future contract version and visible in every quote before you pay." />
           <Plan tag="SaaS" title="Canon Programs" body="Hosted derivative programs for brands and NFT collections: branded submission portals, review tooling, analytics and payout reports." />
           <Plan tag="API" title="Clearance API" body="For studios and marketplaces: query any work's lineage, clearance and licence status before you publish, at volume." />
@@ -83,7 +84,7 @@ export default function AboutPage() {
       {/* Roadmap */}
       <section className="mt-28">
         <SectionHead label="Roadmap" title="From working protocol to production rights layer." />
-        <ol className="mt-12 grid gap-4 lg:grid-cols-3">
+        <ol className="mt-14 grid gap-12 lg:grid-cols-3 lg:gap-10">
           <Phase
             when="Now · November 2026"
             state="Shipped"
@@ -111,7 +112,7 @@ export default function AboutPage() {
       {/* Principles */}
       <section className="mt-28">
         <SectionHead label="Principles" title="How we build." />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <Principle icon={<KeyRound className="size-5" />} title="No master key" body="No admin, pause or upgrade method. The registry's keys are deleted after deploy; vault code is fixed by hash." />
           <Principle icon={<BadgeCheck className="size-5" />} title="Proof over claims" body="Every claim on this site links to a test or a transaction. The attacks we defend against are published." />
           <Principle icon={<Code2 className="size-5" />} title="Open source" body="Contracts, app and deploy scripts are public under MIT. Anyone can verify, fork or build on Canon." />
@@ -122,7 +123,7 @@ export default function AboutPage() {
       {/* FAQ */}
       <section className="mt-28 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
         <SectionHead label="FAQ" title="Questions people ask first." />
-        <dl className="divide-y divide-line border-y border-line">
+        <dl className="space-y-9">
           {[
             ["Who holds the money?", "Each work's own vault: a NEAR sub-account with no access keys. Only the work's current NFT owner can withdraw from it, through the registry. Contributor shares are held for the contributor to claim."],
             ["What happens when a work NFT is sold?", "The vault and all future income move to the buyer. The seller can't withdraw afterwards, can't sell mid-withdrawal and can't drain the vault while it's listed. Marketplaces that support NEP-199 also pay every ancestor a resale royalty."],
@@ -130,7 +131,7 @@ export default function AboutPage() {
             ["Why NEAR?", "Named accounts and sub-accounts let every work be a real account; global contracts let thousands of vaults share one immutable 3.5 KB program; and fees are low enough for small licences."],
             ["What does it cost to use?", "Registering costs about 0.1 Ⓝ of refundable storage. Licences cost whatever the creator sets. Canon currently takes no fee."],
           ].map(([q, a]) => (
-            <div key={q} className="py-5">
+            <div key={q}>
               <dt className="text-[17px] font-medium tracking-[-0.02em] text-fg">{q}</dt>
               <dd className="mt-2 text-[15px] leading-relaxed text-fg-2">{a}</dd>
             </div>
@@ -140,8 +141,8 @@ export default function AboutPage() {
 
       {/* Team */}
       <section className="mt-28">
-        <div className="panel noise relative overflow-hidden p-8 sm:p-12">
-          <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_90%_at_100%_0%,rgba(169,139,255,0.16),transparent_70%)]" />
+        <div className="relative overflow-hidden py-6">
+          <div aria-hidden className="absolute -right-40 -top-40 size-[520px] bg-[radial-gradient(closest-side,rgba(169,139,255,0.14),transparent)]" />
           <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
             <div>
               <Label>Built by Bootstate</Label>
@@ -170,11 +171,11 @@ export default function AboutPage() {
 
 function Audience({ icon, who, what, points }: { icon: React.ReactNode; who: string; what: string; points: string[] }) {
   return (
-    <div className="panel p-7">
-      <span className="flex size-10 items-center justify-center rounded-xl bg-white/[0.04] text-ember ring-1 ring-line-2">{icon}</span>
+    <div>
+      <span className="text-ember">{icon}</span>
       <p className="mt-5 text-[21px] font-medium tracking-[-0.03em] text-fg">{who}</p>
       <p className="mt-2 text-[15px] text-fg-2">{what}</p>
-      <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
+      <ul className="mt-6 space-y-2.5">
         {points.map((p) => (
           <li key={p} className="flex gap-2.5 text-sm text-fg-2">
             <Check className="mt-0.5 size-4 shrink-0 text-ok" />
@@ -188,11 +189,10 @@ function Audience({ icon, who, what, points }: { icon: React.ReactNode; who: str
 
 function Plan({ tag, title, body }: { tag: string; title: string; body: string }) {
   return (
-    <div className="panel p-7">
-      <div className="flex items-center justify-between">
-        <span className="rounded-full bg-white/[0.04] px-2.5 py-0.5 font-mono text-[11px] text-fg-2 ring-1 ring-line-2">{tag}</span>
-        <span className="font-mono text-[11px] text-fg-3">planned</span>
-      </div>
+    <div>
+      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-fg-3">
+        {tag} <span className="text-fg-3/60">· planned</span>
+      </p>
       <p className="mt-5 text-[21px] font-medium tracking-[-0.03em] text-fg">{title}</p>
       <p className="mt-2 text-[15px] leading-relaxed text-fg-2">{body}</p>
     </div>
@@ -202,8 +202,9 @@ function Plan({ tag, title, body }: { tag: string; title: string; body: string }
 function Phase({ when, state, items }: { when: string; state: "Shipped" | "Planned"; items: string[] }) {
   const shipped = state === "Shipped";
   return (
-    <li className={`panel p-7 ${shipped ? "ring-1 ring-ok/20" : ""}`}>
-      <div className="flex items-center justify-between gap-3">
+    <li>
+      <span className={`block h-px w-full ${shipped ? "bg-gradient-to-r from-ok to-transparent" : "bg-gradient-to-r from-white/25 to-transparent"}`} />
+      <div className="mt-5 flex items-center justify-between gap-3">
         <p className="font-mono text-[12px] text-fg-2">{when}</p>
         <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ring-1 ${shipped ? "bg-ok/10 text-ok ring-ok/25" : "bg-white/[0.03] text-fg-3 ring-line-2"}`}>{state}</span>
       </div>
@@ -221,7 +222,7 @@ function Phase({ when, state, items }: { when: string; state: "Shipped" | "Plann
 
 function Principle({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className="panel p-6">
+    <div>
       <span className="text-violet">{icon}</span>
       <p className="mt-4 text-[17px] font-medium tracking-[-0.02em] text-fg">{title}</p>
       <p className="mt-2 text-sm leading-relaxed text-fg-2">{body}</p>

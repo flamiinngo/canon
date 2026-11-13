@@ -54,7 +54,6 @@ export function HowItWorks() {
       <div className="hidden lg:block">
         <div className="sticky top-28">
           <div className="panel noise relative aspect-[5/4] overflow-hidden">
-            <div className="hairline-grid absolute inset-0 opacity-50 fade-mask-y" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -84,12 +83,12 @@ export function HowItWorks() {
               refs.current[i] = el;
             }}
             data-i={i}
-            className="flex min-h-0 flex-col justify-center border-t border-line py-10 lg:min-h-[62vh] lg:py-0"
+            className="flex min-h-0 flex-col justify-center py-10 lg:min-h-[62vh] lg:py-0"
           >
             <p className={cn("font-mono text-sm transition-colors duration-500", active === i ? "text-ember" : "text-ember lg:text-fg-3")}>{s.k}</p>
             <h3 className={cn("mt-3 text-[28px] font-medium tracking-[-0.035em] transition-colors duration-500 sm:text-[34px]", active === i ? "text-fg" : "text-fg lg:text-fg-3")}>{s.title}</h3>
             <p className="mt-4 max-w-md text-[16px] leading-relaxed text-fg-2">{s.body}</p>
-            <div className="panel mt-8 flex items-center justify-center overflow-hidden p-6 lg:hidden">
+            <div className="mt-8 flex items-center justify-center lg:hidden">
               <StepVisual i={i} />
             </div>
           </div>
@@ -107,7 +106,7 @@ function StepVisual({ i }: { i: number }) {
 }
 
 function MiniPanel({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("w-full max-w-[380px] rounded-2xl border border-line-2 bg-surface-2/90 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur", className)}>{children}</div>;
+  return <div className={cn("w-full max-w-[380px] rounded-[20px] bg-surface-2 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]", className)}>{children}</div>;
 }
 
 function RegisterVisual() {
@@ -325,7 +324,7 @@ export function AccountBento() {
 
 function BentoCell({ label, title, children, className }: { label: string; title: string; children: ReactNode; className?: string }) {
   return (
-    <div className={cn("panel noise relative overflow-hidden p-6 sm:p-7", className)}>
+    <div className={cn("panel relative overflow-hidden p-7 sm:p-8", className)}>
       <Label>{label}</Label>
       <p className="mt-3 max-w-md text-[22px] font-medium leading-tight tracking-[-0.03em] text-fg">{title}</p>
       {children}
@@ -420,14 +419,14 @@ const REFUSALS: [string, string][] = [
 
 export function RefusalTerminal() {
   return (
-    <div className="panel noise overflow-hidden">
-      <div className="flex items-center gap-2 border-b border-line px-4 py-3">
+    <div className="overflow-hidden rounded-[24px] bg-[#0b0d10] shadow-[0_40px_100px_-40px_rgba(0,0,0,0.9)]">
+      <div className="flex items-center gap-2 px-5 pb-1 pt-4">
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="size-2.5 rounded-full bg-white/10" />
         <span className="ml-3 truncate font-mono text-[11px] text-fg-3">cargo test -p canon-registry · 41 passed</span>
       </div>
-      <ul className="divide-y divide-line font-mono text-[12.5px]">
+      <ul className="px-1 pb-3 font-mono text-[12.5px]">
         {REFUSALS.map(([a, code], i) => (
           <motion.li
             key={code}
@@ -435,7 +434,7 @@ export function RefusalTerminal() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.08 * i }}
-            className="flex items-center justify-between gap-4 px-4 py-3.5 sm:px-5"
+            className="flex items-center justify-between gap-4 px-4 py-3 sm:px-5"
           >
             <span className="flex min-w-0 items-center gap-3">
               <KeyRound className="size-3.5 shrink-0 text-fg-3" />

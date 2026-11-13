@@ -9,8 +9,8 @@
   --fg: #eef0f3;
   --fg-2: #a3a9b4;
   --fg-3: #6b717c;
-  --line: rgb(255 255 255 / 0.07);
-  --line-2: rgb(255 255 255 / 0.12);
+  --line: rgb(255 255 255 / 0.055);
+  --line-2: rgb(255 255 255 / 0.1);
   --line-3: rgb(255 255 255 / 0.2);
 
   --ember: #ff6a3d;
@@ -98,10 +98,9 @@ body {
 /* Panels: hairline border with a lit top edge */
 .panel {
   position: relative;
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01));
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 30px 80px -40px rgb(0 0 0 / 0.8);
+  background: rgb(255 255 255 / 0.028);
+  border: 1px solid transparent;
+  border-radius: 24px;
 }
 
 .hairline-grid {
