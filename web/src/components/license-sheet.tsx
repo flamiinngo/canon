@@ -135,7 +135,7 @@ export function LicenseSheet({ open, workId, onClose, onPaid }: { open: boolean;
                             {p.gen === 0 ? "This work" : `Ancestor −${p.gen}`} · {p.role} · {p.toVault ? "vault, follows NFT" : "personal credit"}
                           </p>
                         </div>
-                        <span className="num text-sm text-fg">{formatNear(p.amountNear)}</span>
+                        <span className="num text-sm text-fg">{formatNear(p.amountNear, p.amountNear < 1 ? 3 : 2)}</span>
                       </li>
                     ))}
                     <li className="flex items-center justify-between bg-white/[0.03] px-4 py-3">

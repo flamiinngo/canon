@@ -26,7 +26,7 @@ export function HeroScene({ className }: { className?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const start = useRef(0);
-  const cascade = useMemo(() => computeCascade("ember-motion", 150, DEMO_WORKS), []);
+  const cascade = useMemo(() => computeCascade("ember-motion", 1.5, DEMO_WORKS), []);
   const [tick, setTick] = useState(0);
 
   // Log clock
@@ -269,7 +269,7 @@ export function HeroScene({ className }: { className?: string }) {
         // amount badge
         if (hitAt >= 0 && since >= 0 && since < CYCLE - hitAt - 600) {
           const step = cascade[hitIdx];
-          const txt = `+${formatNear(step.keptNear)} Ⓝ`;
+          const txt = `+${formatNear(step.keptNear, 3)} Ⓝ`;
           ctx.font = `600 ${W < 640 ? 10 : 11.5}px ${MONO}`;
           const bw = ctx.measureText(txt).width + 16;
           const appear = Math.min(1, since / 250);
@@ -302,13 +302,13 @@ export function HeroScene({ className }: { className?: string }) {
   const t = tick ? (tick - start.current) % CYCLE : 0;
   const [m, r, e] = cascade;
   const lines: { at: number; node: React.ReactNode }[] = [
-    { at: 0, node: <><span className="text-fg">buy_license</span><span className="text-fg-3">(</span><span className="text-cyan">&quot;ember-motion&quot;</span><span className="text-fg-3">)</span> <span className="text-fg-3">·</span> <span className="text-ember">150.00 Ⓝ</span></> },
+    { at: 0, node: <><span className="text-fg">buy_license</span><span className="text-fg-3">(</span><span className="text-cyan">&quot;ember-motion&quot;</span><span className="text-fg-3">)</span> <span className="text-fg-3">·</span> <span className="text-ember">1.50 Ⓝ</span></> },
     { at: 350, node: <><span className="text-ok">✓</span> clearance <span className="text-fg-3">3/3 generations</span></> },
     { at: 300 + HOP, node: <><Arrow /> {vaultAccount("ember-motion")} <Amt v={m.payees[0].amountNear} /> <span className="hidden sm:inline"><span className="text-fg-3">· fay.near</span> <Amt v={m.payees[1].amountNear} /></span></> },
     { at: 300 + (HOP + 120) + HOP, node: <><Arrow /> {vaultAccount("ember-relief")} <Amt v={r.payees[0].amountNear} /> <span className="hidden sm:inline"><span className="text-fg-3">· cy.near</span> <Amt v={r.payees[1].amountNear} /></span></> },
     { at: 300 + 2 * (HOP + 120) + HOP, node: <><Arrow /> {vaultAccount("ember")} <Amt v={e.payees[0].amountNear} /></> },
     { at: 300 + 3 * (HOP + 120) + 300, node: <><span className="text-violet">◆</span> licence NFT <span className="text-fg">#0042</span> <span className="text-fg-3">→ studio.near</span></> },
-    { at: 300 + 3 * (HOP + 120) + 700, node: <><span className="text-ok">✓</span> Σ <span className="text-fg">150.00 Ⓝ</span> <span className="text-fg-3">= price · 1 transaction</span></> },
+    { at: 300 + 3 * (HOP + 120) + 700, node: <><span className="text-ok">✓</span> Σ <span className="text-fg">1.500 Ⓝ</span> <span className="text-fg-3">= price · 1 transaction</span></> },
   ];
 
   return (
@@ -319,7 +319,7 @@ export function HeroScene({ className }: { className?: string }) {
       <div className="panel noise relative z-10 mx-auto -mt-4 w-full max-w-[520px] overflow-hidden bg-surface/80 backdrop-blur-xl sm:absolute sm:bottom-6 sm:right-6 sm:mt-0 sm:w-[440px] lg:bottom-10 lg:right-8">
         <div className="flex items-center justify-between border-b border-line px-4 py-2.5">
           <span className="flex items-center gap-2 font-mono text-[11px] text-fg-3">
-            <span className="size-1.5 animate-pulse rounded-full bg-ok" /> tx · canon.near
+            <span className="size-1.5 animate-pulse rounded-full bg-ok" /> tx · canonhq.testnet
           </span>
           <span className="font-mono text-[11px] text-fg-3">1 transaction</span>
         </div>
@@ -339,7 +339,7 @@ function Arrow() {
   return <span className="text-fg-3">→</span>;
 }
 function Amt({ v }: { v: number }) {
-  return <span className="text-fg">+{formatNear(v)}</span>;
+  return <span className="text-fg">+{formatNear(v, 3)}</span>;
 }
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {

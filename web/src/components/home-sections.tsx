@@ -205,13 +205,13 @@ function ClearVisual() {
 }
 
 function PayVisual() {
-  const cascade = computeCascade("ember-motion", 150, DEMO_WORKS);
+  const cascade = computeCascade("ember-motion", 1.5, DEMO_WORKS);
   const payees = cascade.flatMap((s) => s.payees.map((p) => ({ ...p, gen: s.generation, id: s.work.id })));
   return (
     <MiniPanel>
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
         <span className="text-[13px] text-fg">Licence · Ember Field — Motion</span>
-        <span className="num text-[13px] text-ember">150.00 Ⓝ</span>
+        <span className="num text-[13px] text-ember">1.50 Ⓝ</span>
       </div>
       <ul className="space-y-0.5 p-2">
         {payees.map((p, i) => (
@@ -226,7 +226,7 @@ function PayVisual() {
               <span className="size-1.5 shrink-0 rounded-full" style={{ background: ["#52d6ff", "#a98bff", "#ff6a3d"][2 - p.gen] }} />
               <span className="truncate font-mono text-[11.5px] text-fg-2">{p.toVault ? vaultAccount(p.id) : p.account}</span>
             </span>
-            <span className="num text-[12.5px] text-fg">{formatNear(p.amountNear)}</span>
+            <span className="num text-[12.5px] text-fg">{formatNear(p.amountNear, 3)}</span>
           </motion.li>
         ))}
       </ul>
@@ -242,7 +242,7 @@ function PayVisual() {
 // Bento: the NFT is the account
 // ─────────────────────────────────────────────────────────────────────
 export function AccountBento() {
-  const cascade = computeCascade("ember-motion", 150, DEMO_WORKS);
+  const cascade = computeCascade("ember-motion", 1.5, DEMO_WORKS);
   return (
     <div className="mt-14 grid gap-4 md:grid-cols-6 lg:mt-20">
       <BentoCell className="md:col-span-4" label="Vault" title="Every work has a wallet. Nobody holds its keys.">
@@ -256,7 +256,7 @@ export function AccountBento() {
               </div>
             </div>
             <p className="num mt-6 text-[44px] leading-none text-fg">
-              <CountUp to={21} /> <span className="text-[22px] text-fg-3">Ⓝ</span>
+              <CountUp to={0.21} /> <span className="text-[22px] text-fg-3">Ⓝ</span>
             </p>
             <p className="mt-1 text-xs text-fg-3">vault balance · follows the NFT</p>
           </div>
@@ -285,8 +285,8 @@ export function AccountBento() {
         <ol className="mt-7 space-y-2.5 font-mono text-[12px]">
           <TransferRow ok text="nft_transfer  ben.near → eve.near" />
           <TransferRow ok={false} text="ben.near  withdraw(ember-relief)" code="ERR_NOT_OWNER" />
-          <TransferRow ok text="eve.near  withdraw(ember-relief)  21.00 Ⓝ" />
-          <TransferRow ok text="cy.near  claim()  9.00 Ⓝ  · credit stays with the person" />
+          <TransferRow ok text="eve.near  withdraw(ember-relief)  0.21 Ⓝ" />
+          <TransferRow ok text="cy.near  claim()  0.09 Ⓝ  · credit stays with the person" />
         </ol>
       </BentoCell>
 
@@ -296,14 +296,14 @@ export function AccountBento() {
             <div key={s.work.id}>
               <div className="mb-1.5 flex items-center justify-between text-[12px]">
                 <span className="text-fg-2">{s.work.title}</span>
-                <span className="num text-fg">{formatNear(s.keptNear)} Ⓝ</span>
+                <span className="num text-fg">{formatNear(s.keptNear, 3)} Ⓝ</span>
               </div>
               <div className="flex h-2 overflow-hidden rounded-full bg-white/[0.05]">
                 {s.payees.map((p, j) => (
                   <motion.div
                     key={p.account}
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${(p.amountNear / 150) * 100}%` }}
+                    whileInView={{ width: `${(p.amountNear / 1.5) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.1 * j, ease: [0.16, 1, 0.3, 1] }}
                     className={cn("h-full", p.toVault ? "bg-fg" : "bg-violet")}
